@@ -1,0 +1,82 @@
+[22/07/2020-16:08:46] Speedtest initiated. (PHONE: 0681384869, SIZE: 20MB)  
+[22/07/2020-16:08:51] Download started. (PHONE: 0681384869, SIZE: 20MB)  
+[22/07/2020-16:08:52] File download finished. (PHONE: 0681384869, SIZE: 20MB) 
+[22/07/2020-16:08:53] Could not delete the downloaded file from phone storage. (PHONE: 0681384869, SIZE: 20MB) 
+Average speed: 15.45MB/sec. (note: Chrome seems to keep past downloaded files cached even when deleted from storage,
+which makes some results false, like here.)
+
+[22/07/2020-16:11:14] Speedtest initiated. (PHONE: 0644503010, SIZE: 20MB)  
+[22/07/2020-16:11:15] Download started. (PHONE: 0644503010, SIZE: 20MB)  
+[22/07/2020-16:11:22] File download finished. (PHONE: 0644503010, SIZE: 20MB) 
+[22/07/2020-16:11:22] File deleted from phone storage. (PHONE: 0644503010, SIZE: 20MB)   
+[22/07/2020-16:11:25] Speedtest successful. (PHONE: 0644503010, SIZE: 20MB) 
+Average speed: 2.574MB/sec.
+
+[22/07/2020-16:15:12] Speedtest initiated. (PHONE: 0681384869, SIZE: 20MB)  
+[22/07/2020-16:15:13] Download started. (PHONE: 0681384869, SIZE: 20MB)  
+[22/07/2020-16:15:35] File download finished. (PHONE: 0681384869, SIZE: 20MB) 
+[22/07/2020-16:15:35] File deleted from phone storage. (PHONE: 0681384869, SIZE: 20MB)   
+[22/07/2020-16:15:38] Speedtest successful. (PHONE: 0681384869, SIZE: 20MB) 
+Average speed: 0.909MB/sec.
+
+[22/07/2020-16:15:41] Speedtest initiated. (PHONE: 0681384869, SIZE: 100MB)  
+[22/07/2020-16:15:51] Download started. (PHONE: 0681384869, SIZE: 100MB)  
+[22/07/2020-16:17:04] File download finished. (PHONE: 0681384869, SIZE: 100MB) 
+[22/07/2020-16:17:04] File deleted from phone storage. (PHONE: 0681384869, SIZE: 100MB)   
+[22/07/2020-16:17:06] Speedtest successful. (PHONE: 0681384869, SIZE: 100MB) 
+Average speed: 1.364MB/sec.
+
+[22/07/2020-16:29:16] Speedtest initiated. (PHONE: 0644503010, SIZE: 20MB)  
+[22/07/2020-16:29:18] Download started. (PHONE: 0644503010, SIZE: 20MB)  
+[22/07/2020-16:29:18] File download finished. (PHONE: 0644503010, SIZE: 20MB) 
+[22/07/2020-16:29:18] File deleted from phone storage. (PHONE: 0644503010, SIZE: 20MB)   
+[22/07/2020-16:29:21] Speedtest successful. (PHONE: 0644503010, SIZE: 20MB) 
+Average speed: 36.36MB/sec.
+
+[03/08/2020-14:46:32] Speedtest initiated. (PHONE: 0644503010, SIZE: 50MB)  
+[03/08/2020-14:46:43] Download started. (PHONE: 0644503010, SIZE: 50MB)  
+[03/08/2020-14:47:09] File download finished. (PHONE: 0644503010, SIZE: 50MB) 
+[03/08/2020-14:47:09] File deleted from phone storage. (PHONE: 0644503010, SIZE: 50MB)   
+[03/08/2020-14:47:11] Speedtest successful. (PHONE: 0644503010, SIZE: 50MB) 
+Average speed: 1.93MB/sec.
+
+[03/08/2020-15:04:39] Speedtest initiated. (PHONE: 0644503010, SIZE: 10MB)  
+[03/08/2020-15:04:40] Download started. (PHONE: 0644503010, SIZE: 10MB)  
+[03/08/2020-15:04:46] File download finished. (PHONE: 0644503010, SIZE: 10MB) 
+[03/08/2020-15:04:46] File deleted from phone storage. (PHONE: 0644503010, SIZE: 10MB)   
+[03/08/2020-15:04:48] Speedtest successful. (PHONE: 0644503010, SIZE: 10MB) 
+Average speed: 1.62MB/sec.
+
+[03/08/2020-15:06:26] Speedtest initiated. (PHONE: 0644503010, SIZE: 10MB)  
+[03/08/2020-15:06:27] Download started. (PHONE: 0644503010, SIZE: 10MB)  
+[03/08/2020-15:06:41] File download finished. (PHONE: 0644503010, SIZE: 10MB) 
+[03/08/2020-15:06:41] File deleted from phone storage. (PHONE: 0644503010, SIZE: 10MB)   
+[03/08/2020-15:06:43] Speedtest successful. (PHONE: 0644503010, SIZE: 10MB) 
+Average speed: 0.75MB/sec.
+
+[03/08/2020-15:08:05] Speedtest initiated. (PHONE: 0644503010, SIZE: 10MB)  
+[03/08/2020-15:08:20] Download started. (PHONE: 0644503010, SIZE: 10MB)  
+[03/08/2020-15:08:30] File download finished. (PHONE: 0644503010, SIZE: 10MB) 
+[03/08/2020-15:08:30] File deleted from phone storage. (PHONE: 0644503010, SIZE: 10MB)   
+[03/08/2020-15:08:32] Speedtest successful. (PHONE: 0644503010, SIZE: 10MB) 
+Average speed: 1.0MB/sec.
+
+[03/08/2020-15:12:43] Speedtest initiated. (PHONE: 0644503010, SIZE: 10MB)  
+[03/08/2020-15:12:46] Download started. (PHONE: 0644503010, SIZE: 10MB)
+[03/08/2020-15:12:49] File download finished. (PHONE: 0644503010, SIZE: 10MB) 
+[03/08/2020-15:12:49] Could not delete the downloaded file from phone storage. (PHONE: 0644503010, SIZE: 10MB) 
+Average speed: 4.02MB/sec.
+
+[06/08/2020-11:54:08] Speedtest initiated. (PHONE: 0644503010, SIZE: 10MB)  
+[06/08/2020-11:54:11] Download started. (PHONE: 0644503010, SIZE: 10MB)
+[06/08/2020-11:54:15] File download finished. (PHONE: 0644503010, SIZE: 10MB) 
+[06/08/2020-11:54:15] File deleted from phone storage. (PHONE: 0644503010, SIZE: 10MB)   
+[06/08/2020-11:54:17] Speedtest successful. (PHONE: 0644503010, SIZE: 10MB) 
+Average speed: 2.4MB/sec.
+
+[07/08/2020-14:17:57] Speedtest initiated. (PHONE: +33671647962, SIZE: 20MB)  
+[07/08/2020-14:17:58] Download started. (PHONE: +33671647962, SIZE: 20MB)
+[07/08/2020-14:18:40] File download finished. (PHONE: +33671647962, SIZE: 20MB) 
+[07/08/2020-14:18:40] Could not delete the downloaded file from phone storage. (PHONE: +33671647962, SIZE: 20MB) 
+Average speed: 0.48MB/sec.
+

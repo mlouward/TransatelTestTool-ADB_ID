@@ -1,0 +1,70 @@
+[22/07/2020-16:23:13] Data test initiated. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2)
+[22/07/2020-16:23:18] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 1)
+[22/07/2020-16:23:18] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2)
+[22/07/2020-16:23:23] Data test successful. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2)
+
+[22/07/2020-16:29:24] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 4) 
+[22/07/2020-16:29:30] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[22/07/2020-16:29:30] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 2)  
+[22/07/2020-16:29:30] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 3)  
+[22/07/2020-16:29:30] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 4)  
+[22/07/2020-16:29:38] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 4) 
+
+[24/07/2020-11:14:30] Data test initiated. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+[24/07/2020-11:14:34] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 1)  
+[24/07/2020-11:14:34] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 2)  
+[24/07/2020-11:14:37] Data test successful. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+
+[24/07/2020-11:36:39] Data test initiated. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+[24/07/2020-11:36:43] Could not open browser. (PHONE: 0681384869, URL: http://www.google.com) 
+
+[24/07/2020-11:39:04] Data test initiated. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+[24/07/2020-11:39:08] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 1)  
+[24/07/2020-11:39:08] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 2)  
+[24/07/2020-11:39:12] Data test successful. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+
+[24/07/2020-11:39:25] Data test initiated. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+[24/07/2020-11:39:28] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 1)  
+[24/07/2020-11:39:28] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 2)  
+[24/07/2020-11:39:31] Data test successful. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+
+[24/07/2020-11:41:25] Data test initiated. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+[24/07/2020-11:41:29] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 1)  
+[24/07/2020-11:41:29] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 2)  
+[24/07/2020-11:41:32] Data test successful. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+
+[24/07/2020-11:42:22] Data test initiated. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+[24/07/2020-11:42:25] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 1)  
+[24/07/2020-11:42:25] Browser opened. (PHONE: 0681384869, URL: http://www.google.com, NB: 2)  
+[24/07/2020-11:42:28] Data test successful. (PHONE: 0681384869, URL: http://www.google.com, NB: 2) 
+
+[03/08/2020-11:17:03] Data test initiated. (PHONE: , URL: , NB: ) 
+[03/08/2020-11:17:05] Data test successful. (PHONE: , URL: , NB: ) 
+
+[03/08/2020-16:45:23] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+[03/08/2020-16:45:28] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[03/08/2020-16:45:32] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+
+[06/08/2020-11:54:18] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+[06/08/2020-11:54:22] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[06/08/2020-11:54:24] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+
+[06/08/2020-15:49:34] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+[06/08/2020-15:49:41] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[06/08/2020-15:49:45] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+
+[06/08/2020-15:50:33] Data test initiated. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2) 
+[06/08/2020-15:50:40] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 1)  
+[06/08/2020-15:50:40] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2)  
+[06/08/2020-15:50:45] Data test successful. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2) 
+
+[06/08/2020-15:50:46] Data test initiated. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2) 
+[06/08/2020-15:50:53] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 1)  
+[06/08/2020-15:50:53] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2)  
+[06/08/2020-15:50:58] Data test successful. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2) 
+
+[06/08/2020-15:50:58] Data test initiated. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2) 
+[06/08/2020-15:51:06] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 1)  
+[06/08/2020-15:51:06] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2)  
+[06/08/2020-15:51:12] Data test successful. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2) 
+

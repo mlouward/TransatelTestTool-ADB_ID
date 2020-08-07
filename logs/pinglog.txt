@@ -1,0 +1,53 @@
+[03/08/2020-11:43:46] Ping test initiated. (PHONE: 0644503010, ADDRESS: google.com, NB: 5) 
+[03/08/2020-11:43:52] 5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+[03/08/2020-11:43:53] rtt min/avg/max/mdev = 29.724/36.313/51.595/7.926 ms
+[03/08/2020-11:43:53] Ping test successful. (PHONE: 0644503010, ADDRESS: google.com, NB: 5) 
+
+[03/08/2020-11:44:50] Ping test initiated. (PHONE: 0644503010, ADDRESS: google.com, NB: 5) 
+[03/08/2020-11:44:51] adb.exe: device '5200f36e43e2b5f5' not found (PHONE: 0644503010, URL: google.com) 
+[03/08/2020-11:44:51] Ping test unsuccessful (PHONE: 0644503010, ADDRESS: google.com, NB: 5) 
+
+[03/08/2020-11:45:15] Ping test initiated. (PHONE: 0644503010, ADDRESS: google.com, NB: 5) 
+[03/08/2020-11:45:18] ping: unknown host google.com (PHONE: 0644503010, URL: google.com) 
+[03/08/2020-11:45:18] Ping test unsuccessful (PHONE: 0644503010, ADDRESS: google.com, NB: 5) 
+
+[03/08/2020-11:45:28] Ping test initiated. (PHONE: 0644503010, ADDRESS: google.com, NB: 5) 
+[03/08/2020-11:45:35] 5 packets transmitted, 1 received, 80% packet loss, time 4007ms
+[03/08/2020-11:45:35] rtt min/avg/max/mdev = 27.432/27.432/27.432/0.000 ms
+[03/08/2020-11:45:36] Ping test successful. (PHONE: 0644503010, ADDRESS: google.com, NB: 5) 
+
+[03/08/2020-14:17:33] Ping test initiated. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 1, SIZE: 32) 
+[03/08/2020-14:17:37] 1 packets transmitted, 1 received, 0% packet loss, time 0ms
+[03/08/2020-14:17:37] rtt min/avg/max/mdev = 30.070/30.070/30.070/0.000 ms
+[03/08/2020-14:17:37] Ping test successful. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 1, SIZE: 32) 
+
+[03/08/2020-14:34:27] Ping test initiated. (PHONE: 0644503010, ADDRESS: 1.1.1.1, NB: 5, SIZE: 32) 
+[03/08/2020-14:34:33] 5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+[03/08/2020-14:34:33] rtt min/avg/max/mdev = 33.776/76.075/214.401/69.303 ms
+[03/08/2020-14:34:33] Ping test successful. (PHONE: 0644503010, ADDRESS: 1.1.1.1, NB: 5, SIZE: 32) 
+
+[03/08/2020-14:37:18] Ping test initiated. (PHONE: 0644503010, ADDRESS: 1.0.0.1, NB: 10, SIZE: 16) 
+[03/08/2020-14:37:30] 10 packets transmitted, 10 received, 0% packet loss, time 9017ms
+[03/08/2020-14:37:30] rtt min/avg/max/mdev = 25.458/49.549/140.114/31.601 ms
+[03/08/2020-14:37:30] Ping test successful. (PHONE: 0644503010, ADDRESS: 1.0.0.1, NB: 10, SIZE: 16) 
+
+[06/08/2020-11:53:56] Ping test initiated. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 4, SIZE: 32) 
+[06/08/2020-11:54:01] 4 packets transmitted, 4 received, 0% packet loss, time 3003ms
+[06/08/2020-11:54:01] rtt min/avg/max/mdev = 70.802/98.489/173.047/43.170 ms
+[06/08/2020-11:54:01] Ping test successful. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 4, SIZE: 32) 
+
+[06/08/2020-12:00:48] Ping test initiated. (PHONE: 0644503010, ADDRESS: 1.1.1.1, NB: 6, SIZE: 16) 
+[06/08/2020-12:00:56] 6 packets transmitted, 6 received, 0% packet loss, time 5009ms
+[06/08/2020-12:00:56] rtt min/avg/max/mdev = 36.518/50.611/59.945/7.849 ms
+[06/08/2020-12:00:56] Ping test successful. (PHONE: 0644503010, ADDRESS: 1.1.1.1, NB: 6, SIZE: 16) 
+
+[06/08/2020-12:01:02] Ping test initiated. (PHONE: 0644503010, ADDRESS: 1.1.1.1, NB: 6, SIZE: 16) 
+[06/08/2020-12:01:09] 6 packets transmitted, 6 received, 0% packet loss, time 5006ms
+[06/08/2020-12:01:09] rtt min/avg/max/mdev = 28.856/48.654/57.703/9.614 ms
+[06/08/2020-12:01:09] Ping test successful. (PHONE: 0644503010, ADDRESS: 1.1.1.1, NB: 6, SIZE: 16) 
+
+[06/08/2020-12:01:16] Ping test initiated. (PHONE: 0644503010, ADDRESS: 1.1.1.1, NB: 6, SIZE: 16) 
+[06/08/2020-12:01:23] 6 packets transmitted, 6 received, 0% packet loss, time 5011ms
+[06/08/2020-12:01:23] rtt min/avg/max/mdev = 45.709/52.811/61.367/5.933 ms
+[06/08/2020-12:01:23] Ping test successful. (PHONE: 0644503010, ADDRESS: 1.1.1.1, NB: 6, SIZE: 16) 
+
