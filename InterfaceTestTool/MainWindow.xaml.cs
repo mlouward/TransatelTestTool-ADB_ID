@@ -105,6 +105,10 @@ namespace InterfaceTestTool
                             tests.Add(new Ping(int.Parse(l[1]), int.Parse(l[2]), l[3], int.Parse(l[4]), int.Parse(l[5])));
                             break;
 
+                        case "airplane":
+                            tests.Add(new Airplane(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3])));
+                            break;
+
                         default:
                             // To add a test, add a 'case' before default.
                             MessageBox.Show($"Unrecognized test '{l[0]}'.");
@@ -260,9 +264,15 @@ namespace InterfaceTestTool
                         MessageBox.Show(@"URL must be a valid address (e.g. 'https://www.example.com' or '8.8.8.8')");
                         return false;
                     }
-                    if (PacketSize.Text == "")
+
+                    if (PacketSize.Text == "") PacketSize.Text = "32";
+
+                    if (int.Parse(PacketSize.Text.Trim()) < 16)
                     {
-                        PacketSize.Text = "32";
+                        var res = MessageBox.Show("A packet size less than 16 will not display RTT statistics. " +
+                            "Are you sure you want to add this test?", "Attention", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        if (res == MessageBoxResult.Yes) break;
+                        return false;
                     }
                     break;
 
@@ -292,6 +302,12 @@ namespace InterfaceTestTool
                     if (!int.TryParse(Duration.Text.Trim(), out _))
                     {
                         MessageBox.Show("Duration field must be a valid integer.");
+                        return false;
+                    }
+                    if (!(From.SelectedItem as Phone).IsRooted)
+                    {
+                        MessageBox.Show("Only rooted phones can use airplane mode.");
+                        return false;
                     }
                     break;
 
@@ -431,6 +447,21 @@ namespace InterfaceTestTool
                     Size.SelectedIndex = -1;
                     break;
 
+                case 6:
+                    NbTests.IsEnabled = false;
+                    Duration.IsEnabled = true;
+                    Duration.Text = "";
+                    To.IsEnabled = false;
+                    To.Text = "";
+                    Message.IsEnabled = false;
+                    Message.Text = "";
+                    URL.IsEnabled = false;
+                    URL.Text = "";
+                    PacketSize.IsEnabled = false;
+                    Size.IsEnabled = false;
+                    Size.SelectedIndex = -1;
+                    break;
+
                 default:
                     break;
             }
@@ -441,7 +472,7 @@ namespace InterfaceTestTool
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Delay_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void Delay_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !IsTextAllowed(e.Text);
         }
@@ -671,22 +702,21 @@ namespace InterfaceTestTool
             Mouse.OverrideCursor = Cursors.Wait;
             ProcessStartInfo start = new ProcessStartInfo("python.exe", @"Test_Tool.py")
             {
-                //UseShellExecute = false,
-                //RedirectStandardOutput = true,
-                //RedirectStandardError = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
                 CreateNoWindow = true
             };
-            //var errors = "--------------ERRORS--------------\n";
-            //var res = "";
-            Process.Start(start);
-            //using (var process = Process.Start(start))
-            //{
-            //    errors = process.StandardError.ReadToEnd();
-            //    res = process.StandardOutput.ReadToEnd();
-            //}
+            Process p = new Process() { StartInfo = start };
+            p.Start();
+            p.WaitForExit();
             Mouse.OverrideCursor = Cursors.Arrow;
-            //if (errors != "--------------ERRORS--------------\n") MessageBox.Show(errors);
-            //if (res != "") MessageBox.Show(res);
+            string errors = "--------------ERRORS--------------\n";
+            string res = "";
+            errors += p.StandardError.ReadToEnd();
+            res += p.StandardOutput.ReadToEnd();
+            if (errors != "--------------ERRORS--------------\n") MessageBox.Show(errors);
+            if (res != "") MessageBox.Show(res);
             MessageBox.Show("All the tests have been run.");
         }
 
@@ -1041,27 +1071,6 @@ namespace InterfaceTestTool
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             File.Delete("apn.csv");
-        }
-
-        /// <summary>
-        /// Allows only phone numbers in the textbox.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PhoneNb_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsPhoneNumberAllowed(e.Text);
-        }
-
-        /// <summary>
-        /// Regex match for phone numbers only.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private bool IsPhoneNumberAllowed(string text)
-        {
-            Regex regex = new Regex(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$");
-            return !regex.IsMatch(text);
         }
     }
 }

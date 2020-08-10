@@ -80,7 +80,10 @@ def moc_routine(n, call_duration, index_a, index_b):
     """
     print("\n[{}] Beginning MOC routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     to = int(n) * int(call_duration) + 20
-    num_a = tuple(number_to_imsi.items())[int(index_a) - 1][0]
+    try:
+        num_a = tuple(number_to_imsi.items())[int(index_a) - 1][0]
+    except:
+        print("Selected phone is not plugged in")
     # If the argument is longer than 2 digits, it is a phone number and not an
     # index, so we call this number.  Else,
     # we assume it is the index of a phone
@@ -88,7 +91,11 @@ def moc_routine(n, call_duration, index_a, index_b):
         num_b = index_b
     else:
         num_b = tuple(number_to_imsi.items())[int(index_b) - 1][0]
-    id_a = imsi_to_id[number_to_imsi[num_a]]
+    try:
+        id_a = imsi_to_id[number_to_imsi[num_a]]
+    except:
+        print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
+        return
     try:
         subprocess.run(["moc.bat", id_a, num_b, num_a, call_duration, str(n)], timeout=to)
     except:
@@ -111,12 +118,16 @@ def mtc_routine(n, call_duration, index_a, index_b):
     to = int(n) * int(call_duration) + 20
     num_a = tuple(number_to_imsi.items())[index_a - 1][0]
     num_b = tuple(number_to_imsi.items())[index_b - 1][0]
-    id_a = imsi_to_id[number_to_imsi[num_a]]
-    id_b = imsi_to_id[number_to_imsi[num_b]]
+    try:
+        id_a = imsi_to_id[number_to_imsi[num_a]]
+        id_b = imsi_to_id[number_to_imsi[num_b]]
+    except:
+        print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
+        return
     for i in range(n):
         try:
             subprocess.run(["mtc.bat", id_a, id_b, num_a, num_b, call_duration, str(i + 1)], timeout=to)
-        except TimeoutExpired:
+        except:
             with open("logs\\MTClog.txt", "a") as f:
                 f.write("[{}] Call unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, DURATION: {}sec.)\n\n".format(
                     str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num_a, num_b, n, call_duration))
@@ -144,11 +155,15 @@ def sms_routine(n, text, index_a, index_b):
         num_b = index_b
     else:
         num_b = tuple(number_to_imsi.items())[int(index_b) - 1][0]
-    id_a = imsi_to_id[number_to_imsi[num_a]]
+    try:
+        id_a = imsi_to_id[number_to_imsi[num_a]]
+    except:
+        print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
+        return
     for i in range(n):
         try:
             subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text], timeout=int(n))
-        except TimeoutExpired:
+        except:
             with open("logs\\SMSlog.txt", "a") as f:
                 f.write("[{}] SMS routine unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, TEXT: {})\n\n".format(
                     str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num_a, num_b, n, text))
@@ -171,15 +186,19 @@ def data_routine(n, url=r"http://www.google.com", index=1):
     # 1 second per request and 10 seconds to unlock phone and open browser.
     to = int(n) + 10
     num = tuple(number_to_imsi.items())[index - 1][0]
-    id = imsi_to_id[number_to_imsi[num]]
+    try:
+        id = imsi_to_id[number_to_imsi[num]]
+    except:
+        print(f"Selected phone is not plugged in ({num})", file=sys.stderr)
+        return
     try:
         subprocess.run(["data.bat", id, url, num, str(n)], timeout=to)
-    except TimeoutExpired:
+    except:
         with open("logs\\datalog.txt", "a") as f:
             f.write("[{}] Data test unsuccessful (process timed out) (PHONE: {}, URL: {})\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, url))
 
-def speedtest_routine(index_a, size='20'):
+def speedtest_routine(index, size='20'):
     """ Performs a speedtest by downloading a 50MB file from phone A.
 
     Args:
@@ -193,14 +212,18 @@ def speedtest_routine(index_a, size='20'):
         return
     to = int(size) * 10 # (100Kio/s is the limit for timeout)
     print("\n[{}] Beginning speedtest...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
-    num_a = tuple(number_to_imsi.items())[index_a - 1][0]
-    id_a = imsi_to_id[number_to_imsi[num_a]]
+    num = tuple(number_to_imsi.items())[index - 1][0]
     try:
-        subprocess.run(["speedtest.bat", id_a, num_a, size], timeout=to)
-    except TimeoutExpired:
+        id = imsi_to_id[number_to_imsi[num]]
+    except:
+        print(f"Selected phone is not plugged in ({num})", file=sys.stderr)
+        return
+    try:
+        subprocess.run(["speedtest.bat", id, num, size], timeout=to)
+    except:
         with open("logs\\speedtestlog.txt", "a") as f:
             f.write("[{}] Speedtest unsuccessful (process timed out) (PHONE: {}, SIZE: {})\n\n".format(
-                str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num_a, size))
+                str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, size))
     format = "%d/%m/%Y-%H:%M:%S,%f"
     try:
         with open("platform-tools\\elapsed.txt") as f:
@@ -211,9 +234,10 @@ def speedtest_routine(index_a, size='20'):
         t = float(s + "." + us) # get precise time with milliseconds
         speed = int(size) / t
         os.remove("platform-tools\\elapsed.txt")
-        print("[{}] Download complete. Average download speed: {}MB/s".format(str(datetime.now().strftime("%H:%M:%S")), round(speed, 2))) 
+        print("[{}] Download complete. Average download speed: {}MB/s".format(
+            str(datetime.now().strftime("%H:%M:%S")), round(speed, 2))) 
     except IOError:
-        print("File not found. The program will be terminated. Please verify the plugged in devices", file=sys.stderr)
+        print("File not found. The program will be terminated. Please verify the plugged in devices.", file=sys.stderr)
         sys.exit(2)
     try:
         with open("logs\\speedtestlog.txt", 'a') as f:
@@ -234,11 +258,15 @@ def ping_routine(index, address, n, size):
     """
     to = int(n) + 10
     num = tuple(number_to_imsi.items())[index - 1][0]
-    id = imsi_to_id[number_to_imsi[num]]
+    try:
+        id = imsi_to_id[number_to_imsi[num]]
+    except:
+        print(f"Selected phone is not plugged in ({num})", file=sys.stderr)
+        return
     print("\n[{}] Beginning Ping routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     try:
         subprocess.run(["ping.bat", id, address, num, n, size], timeout=to)
-    except TimeoutExpired:
+    except:
         with open("logs\\pinglog.txt", "a") as f:
             f.write("[{}] Ping test unsuccessful (process timed out) (PHONE: {}, ADDRESS: {}, NB: {}, SIZE: {})\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, address, n, size))
@@ -246,14 +274,18 @@ def ping_routine(index, address, n, size):
 def airplane_routine(index, duration):
     to = int(duration) + 10
     num = tuple(number_to_imsi.items())[index - 1][0]
-    id = imsi_to_id[number_to_imsi[num]]
+    try:
+        id = imsi_to_id[number_to_imsi[num]]
+    except:
+        print(f"Selected phone is not plugged in ({num})", file=sys.stderr)
+        return
     print("\n[{}] Beginning Airplane routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     try:
-        subprocess.run(["airplane.bat", id, duration], timeout=to)
-    except TimeoutExpired:
-        with open("logs\\pinglog.txt", "a") as f:
-            f.write("[{}] Ping test unsuccessful (process timed out) (PHONE: {}, ADDRESS: {}, NB: {}, SIZE: {})\n\n".format(
-                str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, address, n, size))
+        subprocess.run(["airplane.bat", id, duration, num], timeout=to)
+    except:
+        with open("logs\\airplanelog.txt", "a") as f:
+            f.write("[{}] Airplane test unsuccessful (process timed out) (PHONE: {}, DURATION: {})\n\n".format(
+                str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, duration))
          
 
 def get_test_list(path="testsToPerform.csv", header=True):
@@ -287,8 +319,11 @@ def get_test_list(path="testsToPerform.csv", header=True):
             elif l[0].lower() == "ping":
                 ping_routine(int(l[1]), l[3], l[4], l[5])
                 time.sleep(int(l[4]))
+            elif l[0].lower() == "airplane":
+                airplane_routine(int(l[1]), l[2])
+                time.sleep(int(l[3]))
             else:
-                print("\n'{}' is not a valid test (line {}).".format(l[0], i + 2))
+                print("\n'{}' is not a valid test (line {}).".format(l[0], i + 1))
     print("\nTests are over.")
     return True
 

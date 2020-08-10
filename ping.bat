@@ -5,7 +5,6 @@ setlocal enabledelayedexpansion
 REM Disable WiFi and enable Data
 adb -s %1 shell svc data enable & adb -s %1 shell svc wifi disable && echo [!date!-!time:~0,8!] Ping test initiated. (PHONE: %3, ADDRESS: %2, NB: %4, SIZE: %5) >>..\logs\pinglog.txt
 
-break>pingResults.txt
 adb -s %1 shell "ping -c %4 -s %5 %2">pingResults.txt 2>pingError.txt && goto Success || goto Error
 
 :Success
@@ -26,7 +25,7 @@ echo [!date!-!time:~0,8!] %error% (PHONE: %3, ADDRESS: %2, NB: %4, SIZE: %5) >>.
 echo [!date!-!time:~0,8!] Ping test unsuccessful (PHONE: %3, ADDRESS: %2, NB: %4, SIZE: %5) >>..\logs\pinglog.txt
 
 :End
-REM del pingResults.txt
+del pingResults.txt
 del pingError.txt
 endlocal
 echo.>> ..\logs\pinglog.txt

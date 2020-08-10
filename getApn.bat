@@ -3,7 +3,7 @@ cd platform-tools/
 set "numeric=%2"
 
 REM Get default APN ID
-adb -s %1 shell su -c "content query --uri content://telephony/carriers/preferapn" --projection _id > default.txt
+adb -s %1 shell su -c "content query --uri content://telephony/carriers/preferapn --projection _id" > default.txt
 for /f "tokens=4 delims==, " %%F in (default.txt) do (
 	set "default=%%F"
 )

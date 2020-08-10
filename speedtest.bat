@@ -3,7 +3,7 @@ cd platform-tools\
 setlocal enabledelayedexpansion
 
 REM Turn on screen and unlock if necessary. Disables WiFi to make sure we use mobile data.
-adb -s %1 shell input keyevent KEYCODE_WAKEUP & adb -s %1 shell input keyevent KEYCODE_MENU & adb -s %1 shell svc data enable & adb -s %1 shell svc wifi disable
+adb -s %1 shell input keyevent KEYCODE_WAKEUP & adb -s %1 shell input swipe 100 500 100 0 & adb -s %1 shell input keyevent KEYCODE_MENU & adb -s %1 shell svc data enable & adb -s %1 shell svc wifi disable
 
 REM Download a file of given size
 adb -s %1 shell "am start -a android.intent.action.VIEW -d "http://ipv4.download.thinkbroadband.com/%3MB.zip"" && echo [!date!-!time:~0,8!] Speedtest initiated. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt || goto ErrorDownload

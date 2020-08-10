@@ -68,3 +68,15 @@
 [06/08/2020-15:51:06] Browser opened. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2)  
 [06/08/2020-15:51:12] Data test successful. (PHONE: 0644503010, URL: http://www.stackoverflow.com, NB: 2) 
 
+[10/08/2020-12:13:54] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+[10/08/2020-12:13:54] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[10/08/2020-12:13:57] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+
+[10/08/2020-12:16:15] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+[10/08/2020-12:16:15] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[10/08/2020-12:16:18] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+
+[10/08/2020-12:17:26] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+[10/08/2020-12:17:26] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[10/08/2020-12:17:29] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+

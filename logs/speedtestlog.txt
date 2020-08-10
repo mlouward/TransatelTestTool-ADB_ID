@@ -80,3 +80,10 @@ Average speed: 2.4MB/sec.
 [07/08/2020-14:18:40] Could not delete the downloaded file from phone storage. (PHONE: +33671647962, SIZE: 20MB) 
 Average speed: 0.48MB/sec.
 
+[10/08/2020-12:13:39] Speedtest initiated. (PHONE: 0644503010, SIZE: 10MB)  
+[10/08/2020-12:13:42] Download started. (PHONE: 0644503010, SIZE: 10MB)
+[10/08/2020-12:13:46] File download finished. (PHONE: 0644503010, SIZE: 10MB) 
+[10/08/2020-12:13:46] File deleted from phone storage. (PHONE: 0644503010, SIZE: 10MB)   
+[10/08/2020-12:13:47] Speedtest successful. (PHONE: 0644503010, SIZE: 10MB) 
+Average speed: 2.82MB/sec.
+
