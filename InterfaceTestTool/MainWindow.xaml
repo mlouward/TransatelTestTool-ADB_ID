@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterfaceTestTool" WindowStartupLocation="CenterScreen"
         mc:Ignorable="d" FontSize="15" FontFamily="{StaticResource Roboto}" FontWeight="Medium"
-        Title="Test Tool" MinHeight="750" MinWidth="1100" Height="750" Width="1100"
+        Title="Test Tool" MinHeight="850" MinWidth="1100" Height="850" Width="1100"
         Closing="Window_Closing">
 
     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -18,6 +18,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="1.6*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -118,14 +119,20 @@
                     </Grid>
                 </DockPanel>
 
-                <Button x:Name="Add" Content="Add to List" Grid.Row="9" Click="Add_Click"
+                <DockPanel Margin="10" Grid.Row="9" LastChildFill="True" Grid.ColumnSpan="3">
+                    <TextBlock Text="Default APN:" DockPanel.Dock="Top" />
+                    <ComboBox x:Name="APN" Height="25" DockPanel.Dock="Top" SelectedIndex="-1" SelectionChanged="APN_SelectionChanged"
+                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="4" />
+                </DockPanel>
+
+                <Button x:Name="Add" Content="Add to List" Grid.Row="12" Click="Add_Click"
                 Margin="10" MinWidth="100" Grid.ColumnSpan="3" Style="{StaticResource BlueButton}"
                 FontSize="20" TabIndex="12" />
 
-                <TextBlock Text="List of tests" Grid.Column="3" Margin="10,-1,10,59"
-                   FontSize="22" VerticalAlignment="Center" Grid.RowSpan="2" />
+                <TextBlock Text="List of tests" Grid.Column="3" Margin="10,0"
+                   FontSize="22" VerticalAlignment="Center" />
 
-                <ListView Grid.RowSpan="8" Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="1"
+                <ListView Grid.RowSpan="9" Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="1"
                           Margin="10" Name="TestsList" SelectionMode="Extended" KeyDown="TestsList_KeyDown"
                           ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <ListView.ItemTemplate>
@@ -135,11 +142,11 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <Button x:Name="Delete" Content="Delete Selected Tests" Grid.Row="9" Click="Delete_Click"
+                <Button x:Name="Delete" Content="Delete Selected Tests" Grid.Row="12" Click="Delete_Click"
                 Margin="10" Grid.Column="3" Style="{StaticResource BlueButton}"
                 FontSize="18" TabIndex="13" />
 
-                <Button x:Name="Reset" Content="Delete All" Grid.Row="9" Click="Reset_Click"
+                <Button x:Name="Reset" Content="Delete All" Grid.Row="12" Click="Reset_Click"
                 Margin="10" Grid.Column="4" Style="{StaticResource BlueButton}"
                 FontSize="20" TabIndex="14" />
 
@@ -147,11 +154,11 @@
                 Click="Execute_Click" Margin="10, 0" Style="{StaticResource BlueButton}"
                 FontSize="20" TabIndex="15" />
 
-                <Button x:Name="Save" Content="Save Test File" Grid.Column="5" Grid.Row="9"
+                <Button x:Name="Save" Content="Save Test File" Grid.Column="5" Grid.Row="12"
                 Click="Save_Click" Margin="5, 5, 10, 0" VerticalAlignment="Top"
                 Style="{StaticResource BlueButton}" FontSize="18" TabIndex="16" />
 
-                <Button x:Name="Load" Content="Load Test File" Grid.Column="5" Grid.Row="9"
+                <Button x:Name="Load" Content="Load Test File" Grid.Column="5" Grid.Row="12"
                 Click="Load_Click" Margin="5, 0, 10, 5" Style="{StaticResource BlueButton}"
                 VerticalAlignment="Bottom" FontSize="18" TabIndex="17" />
             </Grid>

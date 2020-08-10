@@ -7,7 +7,7 @@ from datetime import datetime
 
 def check_adb():
     if not os.path.isdir("platform-tools"):
-        subprocess.run(["DL_Adb.bat"])
+        subprocess.run(["getAdb.bat"])
 
 def get_number_to_imsi(path="simInfos.csv", sep=';'):
     """ Reads the file with sim infos and creates a dictionary

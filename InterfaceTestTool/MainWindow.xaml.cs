@@ -39,6 +39,7 @@ namespace InterfaceTestTool
             // Read test file and add tests to listview
             GetTestsFromFile(@"testsToPerform.csv");
             TestsList.ItemsSource = tests;
+            RefreshApnList(validIndexes[0], "208", "22");
         }
 
         /// <summary>
@@ -375,6 +376,7 @@ namespace InterfaceTestTool
                     URL.Text = "";
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
+                    APN.IsEnabled = false;
                     break;
 
                 case 1:
@@ -388,6 +390,7 @@ namespace InterfaceTestTool
                     URL.Text = "";
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
+                    APN.IsEnabled = false;
                     break;
 
                 case 2:
@@ -401,6 +404,7 @@ namespace InterfaceTestTool
                     URL.Text = "";
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
+                    APN.IsEnabled = false;
                     break;
 
                 case 3:
@@ -415,6 +419,7 @@ namespace InterfaceTestTool
                     PacketSize.IsEnabled = false;
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
+                    APN.IsEnabled = true;
                     break;
 
                 case 4:
@@ -430,6 +435,7 @@ namespace InterfaceTestTool
                     URL.Text = "";
                     PacketSize.IsEnabled = false;
                     Size.IsEnabled = true;
+                    APN.IsEnabled = true;
                     break;
 
                 case 5:
@@ -445,6 +451,7 @@ namespace InterfaceTestTool
                     PacketSize.Text = "32";
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
+                    APN.IsEnabled = true;
                     break;
 
                 case 6:
@@ -460,6 +467,7 @@ namespace InterfaceTestTool
                     PacketSize.IsEnabled = false;
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
+                    APN.IsEnabled = false;
                     break;
 
                 default:
@@ -1071,6 +1079,11 @@ namespace InterfaceTestTool
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             File.Delete("apn.csv");
+        }
+
+        private void APN_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
