@@ -8,6 +8,7 @@ for /f "tokens=4,6,8 delims==: " %%F in (apninfos.txt) do (
 )
 
 adb -s %1 shell su -c "content update --uri content://telephony/carriers/preferapn --bind apn_id:i:%2" && goto Success || goto Failure 
+
 :Success
 echo [!date!-!time:~0,8!] Set default APN. (PHONE: %3, APN ID: %2, !infos!)>>..\logs\APNlog.txt 
 goto End

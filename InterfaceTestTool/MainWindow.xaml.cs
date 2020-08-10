@@ -20,7 +20,8 @@ namespace InterfaceTestTool
         private static List<ITest> tests = new List<ITest>();
         private static List<int> validIndexes = new List<int>();
         private static List<APN> apnList = new List<APN>();
-        private static ITest testCopy;
+        private static List<ITest> testCopy = new List<ITest>();
+        private static bool apnListChanged = false;
 
         public MainWindow()
         {
@@ -33,12 +34,12 @@ namespace InterfaceTestTool
             UpdatePhoneList();
             // Valid indexes are only for plugged in phones (Model != "").
             validIndexes = validPhones.Where(p => p.Model != "").Select(p => p.Index).ToList();
-            From.ItemsSource = validPhones;
             // Only rooted phones are available for apn changes.
             PhonesListAPN.ItemsSource = validPhones.Where(p => p.IsRooted);
             // Read test file and add tests to listview
             GetTestsFromFile(@"testsToPerform.csv");
             TestsList.ItemsSource = tests;
+            // Query APNs for the first valid phone
             RefreshApnList(validIndexes[0], "208", "22");
         }
 
@@ -108,6 +109,10 @@ namespace InterfaceTestTool
 
                         case "airplane":
                             tests.Add(new Airplane(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3])));
+                            break;
+
+                        case "changeapn":
+                            tests.Add(new ChangeApn(int.Parse(l[1]), new APN(int.Parse(l[2]), l[3], l[4]), int.Parse(l[5])));
                             break;
 
                         default:
@@ -312,6 +317,14 @@ namespace InterfaceTestTool
                     }
                     break;
 
+                case "ChangeApn":
+                    if (!(From.SelectedItem as Phone).IsRooted)
+                    {
+                        MessageBox.Show("Only rooted phones can change default APN.");
+                        return false;
+                    }
+                    break;
+
                 default:
                     MessageBox.Show("Wrong test");
                     return false;
@@ -321,7 +334,6 @@ namespace InterfaceTestTool
 
         /// <summary>
         /// Adds the test in parameter to the list of tests n times
-        /// and writes them to the tests file.
         /// </summary>
         /// <param name="t">An ITest object to add. </param>
         /// <param name="n">The number of tests to add. </param>
@@ -419,7 +431,7 @@ namespace InterfaceTestTool
                     PacketSize.IsEnabled = false;
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
-                    APN.IsEnabled = true;
+                    APN.IsEnabled = false;
                     break;
 
                 case 4:
@@ -435,7 +447,7 @@ namespace InterfaceTestTool
                     URL.Text = "";
                     PacketSize.IsEnabled = false;
                     Size.IsEnabled = true;
-                    APN.IsEnabled = true;
+                    APN.IsEnabled = false;
                     break;
 
                 case 5:
@@ -451,7 +463,7 @@ namespace InterfaceTestTool
                     PacketSize.Text = "32";
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
-                    APN.IsEnabled = true;
+                    APN.IsEnabled = false;
                     break;
 
                 case 6:
@@ -468,6 +480,27 @@ namespace InterfaceTestTool
                     Size.IsEnabled = false;
                     Size.SelectedIndex = -1;
                     APN.IsEnabled = false;
+                    break;
+
+                case 7:
+                    NbTests.IsEnabled = false;
+                    Duration.IsEnabled = false;
+                    Duration.Text = "";
+                    To.IsEnabled = false;
+                    To.Text = "";
+                    Message.IsEnabled = false;
+                    Message.Text = "";
+                    URL.IsEnabled = false;
+                    URL.Text = "";
+                    PacketSize.IsEnabled = false;
+                    Size.IsEnabled = false;
+                    Size.SelectedIndex = -1;
+                    APN.IsEnabled = true;
+                    if (apnListChanged)
+                    {
+                        RefreshApnList((From.SelectedItem as Phone).Index, "208", "22");
+                        apnListChanged = false;
+                    }
                     break;
 
                 default:
@@ -512,13 +545,12 @@ namespace InterfaceTestTool
             foreach (var item in validIndexes) s += item.ToString() + " ";
             try
             {
-                Process p = new Process();
                 ProcessStartInfo start = new ProcessStartInfo("python.exe", $"checkRoot.py {s.Trim()}")
                 {
                     CreateNoWindow = true,
                     UseShellExecute = false
                 };
-                p.StartInfo = start;
+                Process p = new Process { StartInfo = start };
                 Mouse.OverrideCursor = Cursors.Wait;
                 p.Start();
                 p.WaitForExit();
@@ -548,7 +580,7 @@ namespace InterfaceTestTool
             // Update item sources
             PhonesList.ItemsSource = validPhones;
             From.ItemsSource = null;
-            From.ItemsSource = validPhones;
+            From.ItemsSource = validPhones.Where(p => p.Model != "");
             From.SelectedIndex = 0;
             PhonesListAPN.ItemsSource = null;
             PhonesListAPN.ItemsSource = validPhones.Where(x => x.IsRooted);
@@ -570,6 +602,12 @@ namespace InterfaceTestTool
                 MessageBox.Show("Repetitions field must be a valid integer.");
                 return;
             }
+            b = int.TryParse(Delay.Text.Trim(), out int d);
+            if (!b)
+            {
+                MessageBox.Show("Delay field must be a valid integer.");
+                return;
+            }
             switch (TestType.SelectedIndex)
             {
                 case -1:
@@ -579,7 +617,7 @@ namespace InterfaceTestTool
                 case 0:
                     if (ValidateForm("MOC"))
                     {
-                        AddTest(new MOC(int.Parse(NbTests.Text), int.Parse(Duration.Text), (From.SelectedItem as Phone).Index, To.Text.Trim(), int.Parse(Delay.Text)), n);
+                        AddTest(new MOC(int.Parse(NbTests.Text), int.Parse(Duration.Text), (From.SelectedItem as Phone).Index, To.Text.Trim(), d), n);
                         break;
                     }
                     return;
@@ -587,7 +625,7 @@ namespace InterfaceTestTool
                 case 1:
                     if (ValidateForm("MTC"))
                     {
-                        AddTest(new MTC(int.Parse(NbTests.Text), int.Parse(Duration.Text), (From.SelectedItem as Phone).Index, int.Parse(To.Text), int.Parse(Delay.Text)), n);
+                        AddTest(new MTC(int.Parse(NbTests.Text), int.Parse(Duration.Text), (From.SelectedItem as Phone).Index, int.Parse(To.Text), d), n);
                         break;
                     }
                     return;
@@ -595,7 +633,7 @@ namespace InterfaceTestTool
                 case 2:
                     if (ValidateForm("SMS"))
                     {
-                        AddTest(new SMS(int.Parse(NbTests.Text), Message.Text.Trim(), (From.SelectedItem as Phone).Index, To.Text.Trim(), int.Parse(Delay.Text)), n);
+                        AddTest(new SMS(int.Parse(NbTests.Text), Message.Text.Trim(), (From.SelectedItem as Phone).Index, To.Text.Trim(), d), n);
                         break;
                     }
                     return;
@@ -603,7 +641,7 @@ namespace InterfaceTestTool
                 case 3:
                     if (ValidateForm("Data"))
                     {
-                        AddTest(new Data(int.Parse(NbTests.Text), URL.Text.Trim(), (From.SelectedItem as Phone).Index, int.Parse(Delay.Text)), n);
+                        AddTest(new Data(int.Parse(NbTests.Text), URL.Text.Trim(), (From.SelectedItem as Phone).Index, d), n);
                         break;
                     }
                     return;
@@ -612,7 +650,7 @@ namespace InterfaceTestTool
                     if (ValidateForm("Speedtest"))
                     {
                         string s = Size.Text.Split(' ')[0];
-                        AddTest(new Speedtest((From.SelectedItem as Phone).Index, int.Parse(s), int.Parse(Delay.Text)), n);
+                        AddTest(new Speedtest((From.SelectedItem as Phone).Index, int.Parse(s), d), n);
                         break;
                     }
                     return;
@@ -620,7 +658,7 @@ namespace InterfaceTestTool
                 case 5:
                     if (ValidateForm("Ping"))
                     {
-                        AddTest(new Ping((From.SelectedItem as Phone).Index, int.Parse(Delay.Text.Trim()), URL.Text.Trim(), int.Parse(NbTests.Text), int.Parse(PacketSize.Text)), n);
+                        AddTest(new Ping((From.SelectedItem as Phone).Index, d, URL.Text.Trim(), int.Parse(NbTests.Text), int.Parse(PacketSize.Text)), n);
                         break;
                     }
                     return;
@@ -628,8 +666,16 @@ namespace InterfaceTestTool
                 case 6:
                     if (ValidateForm("Airplane"))
                     {
-                        AddTest(new Airplane((From.SelectedItem as Phone).Index, int.Parse(Delay.Text.Trim()), int.Parse(Duration.Text.Trim())), n);
+                        AddTest(new Airplane((From.SelectedItem as Phone).Index, d, int.Parse(Duration.Text.Trim())), n);
                         break;
+                    }
+                    return;
+
+                case 7:
+                    if (ValidateForm("ChangeApn"))
+                    {
+                        APN apn = apnList.Where(p => p.Id == (APN.SelectedItem as APN).Id).First();
+                        AddTest(new ChangeApn((From.SelectedItem as Phone).Index, apn, d), n);
                     }
                     return;
 
@@ -666,11 +712,10 @@ namespace InterfaceTestTool
         {
             if (TestsList.SelectedItems != null)
             {
-                var selection = TestsList.SelectedItems;
+                var selection = TestsList.SelectedItems as List<ITest>;
                 foreach (var item in selection)
                 {
-                    var tmp = (ITest)item;
-                    tests.Remove(tmp);
+                    tests.Remove(item);
                 }
                 TestsList.ItemsSource = null;
                 TestsList.ItemsSource = tests;
@@ -689,14 +734,19 @@ namespace InterfaceTestTool
 
             if (e.Key == Key.C && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                testCopy = TestsList.SelectedItem as ITest;
+                testCopy = TestsList.SelectedItems as List<ITest>;
                 return;
             }
 
             if (e.Key == Key.V && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                if (testCopy != null) AddTest(testCopy, 1);
-                return;
+                if (testCopy != null)
+                {
+                    foreach (ITest test in testCopy)
+                    {
+                        AddTest(test, 1);
+                    }
+                }
             }
         }
 
@@ -710,21 +760,24 @@ namespace InterfaceTestTool
             Mouse.OverrideCursor = Cursors.Wait;
             ProcessStartInfo start = new ProcessStartInfo("python.exe", @"Test_Tool.py")
             {
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
+                //UseShellExecute = false,
+                //RedirectStandardOutput = true,
+                //RedirectStandardError = true,
+                //CreateNoWindow = true
             };
+
             Process p = new Process() { StartInfo = start };
             p.Start();
             p.WaitForExit();
             Mouse.OverrideCursor = Cursors.Arrow;
-            string errors = "--------------ERRORS--------------\n";
-            string res = "";
-            errors += p.StandardError.ReadToEnd();
-            res += p.StandardOutput.ReadToEnd();
-            if (errors != "--------------ERRORS--------------\n") MessageBox.Show(errors);
-            if (res != "") MessageBox.Show(res);
+
+            //string errors = "--------------ERRORS--------------\n";
+            //string res = "";
+            //errors += p.StandardError.ReadToEnd();
+            //res += p.StandardOutput.ReadToEnd();
+            //if (errors != "--------------ERRORS--------------\n") MessageBox.Show(errors);
+            //if (res != "") MessageBox.Show(res);
+
             MessageBox.Show("All the tests have been run.");
         }
 
@@ -939,6 +992,8 @@ namespace InterfaceTestTool
                 }
                 ApnListView.ItemsSource = null;
                 ApnListView.ItemsSource = apnList;
+                APN.ItemsSource = null;
+                APN.ItemsSource = apnList;
                 ApnText.Text = $"List of APNs for {validPhones.Find(x => x.Index == index).PhoneNumber} ({mcc}{mnc}): ";
             }
             catch (FileNotFoundException)
@@ -975,6 +1030,7 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void AddApn_Click(object sender, RoutedEventArgs e)
         {
+            apnListChanged = true;
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
@@ -1003,6 +1059,7 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void SetDefault_Click(object sender, RoutedEventArgs e)
         {
+            apnListChanged = true;
             if (ApnListView.SelectedItem == null)
             {
                 MessageBox.Show("Please, select an APN from the list to set as default.");
@@ -1037,6 +1094,7 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void DeleteApn_Click(object sender, RoutedEventArgs e)
         {
+            apnListChanged = true;
             if (ApnListView.SelectedItem == null)
             {
                 MessageBox.Show("Please, select an APN from the list to delete.");
@@ -1081,9 +1139,12 @@ namespace InterfaceTestTool
             File.Delete("apn.csv");
         }
 
-        private void APN_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void From_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (TestType.SelectedIndex == 7)
+            {
+                RefreshApnList((From.SelectedItem as Phone).Index, "208", "22");
+            }
         }
     }
 }

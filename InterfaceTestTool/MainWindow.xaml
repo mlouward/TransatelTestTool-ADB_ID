@@ -43,6 +43,7 @@
                     <ComboBoxItem Content="Speedtest" />
                     <ComboBoxItem Content="Ping" />
                     <ComboBoxItem Content="Airplane" />
+                    <ComboBoxItem Content="Change APN" />
                 </ComboBox>
 
                 <DockPanel Margin="10" Grid.Row="1" LastChildFill="True" Grid.ColumnSpan="3">
@@ -60,7 +61,7 @@
                 <DockPanel Margin="10" Grid.Row="3" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="Phone A:" DockPanel.Dock="Top" />
                     <ComboBox x:Name="From" Height="25" DockPanel.Dock="Top" SelectedIndex="0"
-                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="4" />
+                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="4" SelectionChanged="From_SelectionChanged" />
                 </DockPanel>
 
                 <DockPanel Margin="10" Grid.Row="4" LastChildFill="True" Grid.ColumnSpan="3">
@@ -120,9 +121,9 @@
                 </DockPanel>
 
                 <DockPanel Margin="10" Grid.Row="9" LastChildFill="True" Grid.ColumnSpan="3">
-                    <TextBlock Text="Default APN:" DockPanel.Dock="Top" />
-                    <ComboBox x:Name="APN" Height="25" DockPanel.Dock="Top" SelectedIndex="-1" SelectionChanged="APN_SelectionChanged"
-                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="4" />
+                    <TextBlock Text="APN ID (see APN tab):" DockPanel.Dock="Top" />
+                    <ComboBox x:Name="APN" Height="25" DockPanel.Dock="Top" TabIndex="4"
+                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" />
                 </DockPanel>
 
                 <Button x:Name="Add" Content="Add to List" Grid.Row="12" Click="Add_Click"

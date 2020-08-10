@@ -272,6 +272,14 @@ def ping_routine(index, address, n, size):
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, address, n, size))
 
 def airplane_routine(index, duration):
+    """
+    Activates airplane mode for the phone (needs root) and disables it 
+    after the specified duration.
+
+    Args:
+        index: The index of the phone to use in simInfos.csv
+        duration: The time to wait before deactivating airplane mode.
+    """
     to = int(duration) + 10
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
@@ -286,7 +294,28 @@ def airplane_routine(index, duration):
         with open("logs\\airplanelog.txt", "a") as f:
             f.write("[{}] Airplane test unsuccessful (process timed out) (PHONE: {}, DURATION: {})\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, duration))
-         
+   
+def change_apn(index, apn_id):
+    """ Changes the default APN (for rooted devices).
+
+    Args:
+        index: The index of the phone to use in simInfos.csv
+        apn_id: the ID of the APN to set as default.
+    """
+    to = 15
+    num = tuple(number_to_imsi.items())[index - 1][0]
+    try:
+        id = imsi_to_id[number_to_imsi[num]]
+    except:
+        print(f"Selected phone is not plugged in ({num})", file=sys.stderr)
+        return
+    print("\n[{}] Beginning APN change routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
+    try:
+        subprocess.run(["setDefaultApn.bat", id, apn_id, num], timeout=to)
+    except:
+         with open("logs\\APNlog.txt", "a") as f:
+            f.write("[{}] APN change unsuccessful (process timed out) (PHONE: {}, APN ID: {})\n\n".format(
+                str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, apn_id))
 
 def get_test_list(path="testsToPerform.csv", header=True):
     """ Performs different tests according to a list defined by the user.
@@ -322,6 +351,9 @@ def get_test_list(path="testsToPerform.csv", header=True):
             elif l[0].lower() == "airplane":
                 airplane_routine(int(l[1]), l[2])
                 time.sleep(int(l[3]))
+            elif l[0].lower() == "changeapn":
+                change_apn(int(l[1]), l[2])
+                time.sleep(int(l[5]))
             else:
                 print("\n'{}' is not a valid test (line {}).".format(l[0], i + 1))
     print("\nTests are over.")

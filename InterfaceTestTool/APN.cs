@@ -17,6 +17,13 @@
             IsDefault = isDefault;
         }
 
+        public APN(int id, string name, string apn)
+        {
+            Id = id;
+            Name = name;
+            Apn = apn;
+        }
+
         public override string ToString()
         {
             string def = IsDefault ? " (default) " : "";
