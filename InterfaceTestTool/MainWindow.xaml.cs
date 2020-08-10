@@ -288,6 +288,13 @@ namespace InterfaceTestTool
                     }
                     break;
 
+                case "Airplane":
+                    if (!int.TryParse(Duration.Text.Trim(), out _))
+                    {
+                        MessageBox.Show("Duration field must be a valid integer.");
+                    }
+                    break;
+
                 default:
                     MessageBox.Show("Wrong test");
                     return false;
@@ -451,7 +458,7 @@ namespace InterfaceTestTool
         }
 
         /// <summary>
-        /// Uses validPhones to update the phone list, and gets the model/android version/root status 
+        /// Uses validPhones to update the phone list, and gets the model/android version/root status
         /// of the phones plugged in.
         /// </summary>
         private void UpdatePhoneList()
@@ -518,7 +525,12 @@ namespace InterfaceTestTool
         {
             if (Delay.Text == "") Delay.Text = "0"; // Default delay is 0 sec.
             if (Repetitions.Text == "") Repetitions.Text = "1"; // Default repetitions is 1.
-            int n = int.Parse(Repetitions.Text);
+            bool b = int.TryParse(Repetitions.Text.Trim(), out int n);
+            if (!b)
+            {
+                MessageBox.Show("Repetitions field must be a valid integer.");
+                return;
+            }
             switch (TestType.SelectedIndex)
             {
                 case -1:
@@ -570,6 +582,14 @@ namespace InterfaceTestTool
                     if (ValidateForm("Ping"))
                     {
                         AddTest(new Ping((From.SelectedItem as Phone).Index, int.Parse(Delay.Text.Trim()), URL.Text.Trim(), int.Parse(NbTests.Text), int.Parse(PacketSize.Text)), n);
+                        break;
+                    }
+                    return;
+
+                case 6:
+                    if (ValidateForm("Airplane"))
+                    {
+                        AddTest(new Airplane((From.SelectedItem as Phone).Index, int.Parse(Delay.Text.Trim()), int.Parse(Duration.Text.Trim())), n);
                         break;
                     }
                     return;
@@ -1021,6 +1041,27 @@ namespace InterfaceTestTool
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             File.Delete("apn.csv");
+        }
+
+        /// <summary>
+        /// Allows only phone numbers in the textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PhoneNb_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsPhoneNumberAllowed(e.Text);
+        }
+
+        /// <summary>
+        /// Regex match for phone numbers only.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private bool IsPhoneNumberAllowed(string text)
+        {
+            Regex regex = new Regex(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$");
+            return !regex.IsMatch(text);
         }
     }
 }

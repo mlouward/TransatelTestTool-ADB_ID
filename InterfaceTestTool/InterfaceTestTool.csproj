@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Airplane.cs" />
     <Compile Include="APN.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="ITest.cs" />

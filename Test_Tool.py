@@ -55,8 +55,8 @@ def get_dictionaries():
     """
     number_to_imsi = get_number_to_imsi()
     imsi_to_id = get_imsi_to_id()
-    id_to_number = {imsi_to_id[v]:k for k, v in number_to_imsi.items() if v in imsi_to_id.keys()}
-    return number_to_imsi, imsi_to_id, id_to_number
+    #id_to_number = {imsi_to_id[v]:k for k, v in number_to_imsi.items() if v in imsi_to_id.keys()}
+    return number_to_imsi, imsi_to_id
 
 def get_apn(index, numeric):
     """ Gets the APN list for a phone.
@@ -243,6 +243,19 @@ def ping_routine(index, address, n, size):
             f.write("[{}] Ping test unsuccessful (process timed out) (PHONE: {}, ADDRESS: {}, NB: {}, SIZE: {})\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, address, n, size))
 
+def airplane_routine(index, duration):
+    to = int(duration) + 10
+    num = tuple(number_to_imsi.items())[index - 1][0]
+    id = imsi_to_id[number_to_imsi[num]]
+    print("\n[{}] Beginning Airplane routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
+    try:
+        subprocess.run(["airplane.bat", id, duration], timeout=to)
+    except TimeoutExpired:
+        with open("logs\\pinglog.txt", "a") as f:
+            f.write("[{}] Ping test unsuccessful (process timed out) (PHONE: {}, ADDRESS: {}, NB: {}, SIZE: {})\n\n".format(
+                str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, address, n, size))
+         
+
 def get_test_list(path="testsToPerform.csv", header=True):
     """ Performs different tests according to a list defined by the user.
 
@@ -281,5 +294,5 @@ def get_test_list(path="testsToPerform.csv", header=True):
 
 if __name__ == '__main__':
     check_adb()
-    number_to_imsi, imsi_to_id, id_to_number = get_dictionaries()
+    number_to_imsi, imsi_to_id = get_dictionaries()
     get_test_list(header=False)
