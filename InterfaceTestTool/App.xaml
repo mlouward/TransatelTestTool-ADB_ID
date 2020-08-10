@@ -5,5 +5,13 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/#Roboto</FontFamily>
+        <Style x:Key = "BlueButton" TargetType = "Button">
+            <Setter Property = "Foreground" Value = "White" />
+            <Setter Property="BorderBrush" Value="CornflowerBlue" />
+            <Setter Property = "Background" Value = "CornflowerBlue" />
+            <Setter Property = "MinHeight" Value = "25" />
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+            <Setter Property="MinWidth" Value="100" />
+        </Style>
     </Application.Resources>
 </Application>

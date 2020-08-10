@@ -8,16 +8,6 @@
         Title="Test Tool" MinHeight="750" MinWidth="1100" Height="750" Width="1100"
         Closing="Window_Closing">
 
-    <Window.Resources>
-        <Style x:Key = "BlueButton" TargetType = "Button">
-            <Setter Property = "Foreground" Value = "White" />
-            <Setter Property="BorderBrush" Value="#FF8FA3FF" />
-            <Setter Property = "Background" Value = "#FF5D79FD" />
-            <Setter Property = "MinHeight" Value = "25" />
-            <Setter Property="MinWidth" Value="100" />
-        </Style>
-    </Window.Resources>
-
     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TabItem Header="    Tests    ">
             <Grid Margin="0, 10, 0, 0">
