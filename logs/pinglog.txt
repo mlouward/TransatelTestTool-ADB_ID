@@ -60,3 +60,28 @@
 [10/08/2020-12:43:57] rtt min/avg/max/mdev = 42.471/100.913/240.592/81.071 ms
 [10/08/2020-12:43:57] Ping test successful. (PHONE: 0644503010, ADDRESS: 1.0.0.1, NB: 4, SIZE: 16) 
 
+[10/08/2020-20:10:29] Ping test initiated. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+[10/08/2020-20:10:36] 8 packets transmitted, 8 received, 0% packet loss, time 7017ms
+[10/08/2020-20:10:36] rtt min/avg/max/mdev = 14.906/35.420/48.216/10.035 ms
+[10/08/2020-20:10:36] Ping test successful. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+
+[10/08/2020-20:10:45] Ping test initiated. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+[10/08/2020-20:10:53] 8 packets transmitted, 8 received, 0% packet loss, time 7024ms
+[10/08/2020-20:10:53] rtt min/avg/max/mdev = 20.582/34.631/49.273/7.525 ms
+[10/08/2020-20:10:53] Ping test successful. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+
+[10/08/2020-20:11:02] Ping test initiated. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+[10/08/2020-20:11:09] 8 packets transmitted, 8 received, 0% packet loss, time 7019ms
+[10/08/2020-20:11:09] rtt min/avg/max/mdev = 23.725/33.730/42.210/5.807 ms
+[10/08/2020-20:11:09] Ping test successful. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+
+[10/08/2020-20:11:18] Ping test initiated. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+[10/08/2020-20:11:25] 8 packets transmitted, 8 received, 0% packet loss, time 7012ms
+[10/08/2020-20:11:25] rtt min/avg/max/mdev = 23.392/32.650/39.127/5.550 ms
+[10/08/2020-20:11:25] Ping test successful. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+
+[10/08/2020-20:11:34] Ping test initiated. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+[10/08/2020-20:11:41] 8 packets transmitted, 8 received, 0% packet loss, time 7019ms
+[10/08/2020-20:11:41] rtt min/avg/max/mdev = 24.026/30.137/36.399/3.945 ms
+[10/08/2020-20:11:41] Ping test successful. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
+

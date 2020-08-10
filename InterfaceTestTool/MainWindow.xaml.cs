@@ -263,7 +263,7 @@ namespace InterfaceTestTool
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
-                    m = Regex.Match(URL.Text.Trim(), @"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)");
+                    m = Regex.Match(URL.Text.Trim(), @"(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)");
                     n = Regex.Match(URL.Text.Trim(), @"^(?:[0-9]{1,3}\.){1,3}[0-9]{1,3}$");
                     if (!m.Success && !n.Success)
                     {
@@ -712,10 +712,10 @@ namespace InterfaceTestTool
         {
             if (TestsList.SelectedItems != null)
             {
-                var selection = TestsList.SelectedItems as List<ITest>;
-                foreach (var item in selection)
+                //var selection = TestsList.SelectedItems as List<ITest>;
+                foreach (var item in TestsList.SelectedItems)
                 {
-                    tests.Remove(item);
+                    tests.Remove(item as ITest);
                 }
                 TestsList.ItemsSource = null;
                 TestsList.ItemsSource = tests;
@@ -734,7 +734,11 @@ namespace InterfaceTestTool
 
             if (e.Key == Key.C && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                testCopy = TestsList.SelectedItems as List<ITest>;
+                foreach (var item in TestsList.SelectedItems)
+                {
+                    testCopy.Add(item as ITest);
+                }
+                //testCopy = TestsList.SelectedItems as List<ITest>;
                 return;
             }
 

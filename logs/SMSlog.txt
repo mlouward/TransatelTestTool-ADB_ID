@@ -54,3 +54,12 @@
 [07/08/2020- 9:30:02] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 4, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
 [07/08/2020- 9:30:02] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 5, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
 
+[10/08/2020-20:03:40] SMS Sent. (FROM: 0681384869, TO: 0681384869, NB: 1, TEXT: TestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItems) 
+[10/08/2020-20:03:40] SMS Sent. (FROM: 0681384869, TO: 0681384869, NB: 2, TEXT: TestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItems) 
+
+[10/08/2020-20:04:01] SMS Sent. (FROM: 0681384869, TO: 0681384869, NB: 1, TEXT: TestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItems) 
+[10/08/2020-20:04:01] SMS Sent. (FROM: 0681384869, TO: 0681384869, NB: 2, TEXT: TestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItems) 
+
+[10/08/2020-20:04:21] SMS Sent. (FROM: 0681384869, TO: 0681384869, NB: 1, TEXT: TestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItems) 
+[10/08/2020-20:04:21] SMS Sent. (FROM: 0681384869, TO: 0681384869, NB: 2, TEXT: TestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItems) 
+
