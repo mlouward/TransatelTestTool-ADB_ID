@@ -67,8 +67,7 @@
                 <DockPanel Margin="10" Grid.Row="4" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="Phone B:" DockPanel.Dock="Top" />
                     <TextBox x:Name="To" Height="25" DockPanel.Dock="Top" GotKeyboardFocus="TextBox_GotKeyboardFocus"
-                             Width="Auto" Margin="10, 0" PreviewTextInput="Delay_PreviewTextInput"
-                             VerticalContentAlignment="Center" TabIndex="5" />
+                             Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="5" />
                 </DockPanel>
 
                 <DockPanel Margin="10" Grid.Row="5" LastChildFill="True" Grid.ColumnSpan="3">
@@ -197,7 +196,7 @@
                     <TextBlock Text="Phone Number:" DockPanel.Dock="Top" />
                     <TextBox x:Name="PhoneNumber" Height="25" DockPanel.Dock="Top" GotKeyboardFocus="TextBox_GotKeyboardFocus"
                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center"
-                             PreviewTextInput="Delay_PreviewTextInput" TabIndex="2" />
+                             TabIndex="2" />
                 </DockPanel>
 
                 <Button x:Name="AddPhone" Content="Add a Phone" Grid.Row="8"

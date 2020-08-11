@@ -137,19 +137,13 @@ namespace InterfaceTestTool
             switch (type)
             {
                 case "MOC":
-                    if (!int.TryParse(NbTests.Text, out _))
+                    if (!int.TryParse(NbTests.Text.Trim(), out _))
                     {
                         MessageBox.Show("You must enter an integer in the field 'Number of tests'.",
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
-                    m = Regex.Match(To.Text.Trim(), @"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$");
-                    if (!m.Success)
-                    {
-                        MessageBox.Show("Phone B must be a valid phone number or index in the list");
-                        return false;
-                    }
-                    if (To.Text.Trim().Length <= 2 && !validIndexes.Contains(int.Parse(To.Text)))
+                    if (To.Text.Trim().Length <= 2 && !validIndexes.Contains(int.Parse(To.Text.Trim())))
                     {
                         MessageBox.Show($"{To.Text} is not a valid index for Phone B in 'simInfos.csv'",
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -160,16 +154,25 @@ namespace InterfaceTestTool
                         MessageBox.Show("Phone A and Phone B must be different.");
                         return false;
                     }
+                    m = Regex.Match(To.Text.Trim(), @"^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
+                    if (!m.Success)
+                    {
+                        var q = MessageBox.Show("Phone B is not a valid phone number or index in the list. Would you like to continue?",
+                                        "Wrong number",
+                                        MessageBoxButton.YesNo,
+                                        MessageBoxImage.Question);
+                        if (q == MessageBoxResult.No) return false;
+                    }
                     break;
 
                 case "MTC":
-                    if (!int.TryParse(NbTests.Text, out _))
+                    if (!int.TryParse(NbTests.Text.Trim(), out _))
                     {
                         MessageBox.Show("You must enter an integer in the field 'Number of tests'.",
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
-                    if (!int.TryParse(To.Text, out _))
+                    if (!int.TryParse(To.Text.Trim(), out _))
                     {
                         MessageBox.Show("You must enter an integer in the field 'Phone B'.",
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -207,12 +210,6 @@ namespace InterfaceTestTool
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
-                    m = Regex.Match(To.Text.Trim(), @"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$");
-                    if (!m.Success)
-                    {
-                        MessageBox.Show("Phone B must be a valid phone number");
-                        return false;
-                    }
                     if (Message.Text.Length > 150)
                     {
                         var res = MessageBox.Show($"The message length ({Message.Text.Length}) is greater than 150. Your message" +
@@ -226,17 +223,26 @@ namespace InterfaceTestTool
                         MessageBox.Show($"The message is empty. Your message can not be sent.");
                         return false;
                     }
+                    m = Regex.Match(To.Text.Trim(), @"^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
+                    if (!m.Success)
+                    {
+                        var q = MessageBox.Show("Phone B is not a valid phone number or index in the list. Would you like to continue?",
+                                        "Wrong number",
+                                        MessageBoxButton.YesNo,
+                                        MessageBoxImage.Question);
+                        if (q == MessageBoxResult.No) return false;
+                    }
                     break;
 
                 case "Data":
-                    if (!int.TryParse(NbTests.Text, out _))
+                    if (!int.TryParse(NbTests.Text.Trim(), out _))
                     {
                         MessageBox.Show("You must enter an integer in the field 'Number of tests'.",
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
                     // If left empty, default URL is google.com.
-                    if (URL.Text == "")
+                    if (URL.Text.Trim() == "")
                     {
                         return true;
                     }
@@ -251,13 +257,13 @@ namespace InterfaceTestTool
                     break;
 
                 case "Ping":
-                    if (!int.TryParse(NbTests.Text, out _))
+                    if (!int.TryParse(NbTests.Text.Trim(), out _))
                     {
                         MessageBox.Show("You must enter an integer in the field 'Number of tests'.",
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
-                    if (!int.TryParse(PacketSize.Text, out _))
+                    if (!int.TryParse(PacketSize.Text.Trim(), out _))
                     {
                         MessageBox.Show("You must enter an integer in the field 'Packet Size'.",
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -271,7 +277,7 @@ namespace InterfaceTestTool
                         return false;
                     }
 
-                    if (PacketSize.Text == "") PacketSize.Text = "32";
+                    if (PacketSize.Text.Trim() == "") PacketSize.Text = "32";
 
                     if (int.Parse(PacketSize.Text.Trim()) < 16)
                     {
@@ -296,7 +302,7 @@ namespace InterfaceTestTool
                         MessageBox.Show($"IMSI length must be 14 or 15 digits (Current: {Imsi.Text.Length}).");
                         return false;
                     }
-                    m = Regex.Match(PhoneNumber.Text.Trim(), @"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$");
+                    m = Regex.Match(PhoneNumber.Text.Trim(), @"^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
                     if (!m.Success)
                     {
                         MessageBox.Show("Phone Number is not in a valid format.");
@@ -515,7 +521,7 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void Delay_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !IsTextAllowed(e.Text);
+            e.Handled = IsTextAllowed(e.Text);
         }
 
         /// <summary>
@@ -526,7 +532,7 @@ namespace InterfaceTestTool
         private bool IsTextAllowed(string text)
         {
             Regex regex = new Regex(@"[^0-9]");
-            return !regex.IsMatch(text);
+            return regex.IsMatch(text);
         }
 
         /// <summary>
@@ -594,8 +600,8 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (Delay.Text == "") Delay.Text = "0"; // Default delay is 0 sec.
-            if (Repetitions.Text == "") Repetitions.Text = "1"; // Default repetitions is 1.
+            if (Delay.Text.Trim() == "") Delay.Text = "0"; // Default delay is 0 sec.
+            if (Repetitions.Text.Trim() == "") Repetitions.Text = "1"; // Default repetitions is 1.
             bool b = int.TryParse(Repetitions.Text.Trim(), out int n);
             if (!b)
             {
@@ -617,7 +623,7 @@ namespace InterfaceTestTool
                 case 0:
                     if (ValidateForm("MOC"))
                     {
-                        AddTest(new MOC(int.Parse(NbTests.Text), int.Parse(Duration.Text), (From.SelectedItem as Phone).Index, To.Text.Trim(), d), n);
+                        AddTest(new MOC(int.Parse(NbTests.Text.Trim()), int.Parse(Duration.Text.Trim()), (From.SelectedItem as Phone).Index, To.Text.Trim(), d), n);
                         break;
                     }
                     return;
@@ -625,7 +631,7 @@ namespace InterfaceTestTool
                 case 1:
                     if (ValidateForm("MTC"))
                     {
-                        AddTest(new MTC(int.Parse(NbTests.Text), int.Parse(Duration.Text), (From.SelectedItem as Phone).Index, int.Parse(To.Text), d), n);
+                        AddTest(new MTC(int.Parse(NbTests.Text.Trim()), int.Parse(Duration.Text.Trim()), (From.SelectedItem as Phone).Index, int.Parse(To.Text.Trim()), d), n);
                         break;
                     }
                     return;
@@ -633,7 +639,7 @@ namespace InterfaceTestTool
                 case 2:
                     if (ValidateForm("SMS"))
                     {
-                        AddTest(new SMS(int.Parse(NbTests.Text), Message.Text.Trim(), (From.SelectedItem as Phone).Index, To.Text.Trim(), d), n);
+                        AddTest(new SMS(int.Parse(NbTests.Text.Trim()), Message.Text.Trim(), (From.SelectedItem as Phone).Index, To.Text.Trim(), d), n);
                         break;
                     }
                     return;
@@ -641,7 +647,7 @@ namespace InterfaceTestTool
                 case 3:
                     if (ValidateForm("Data"))
                     {
-                        AddTest(new Data(int.Parse(NbTests.Text), URL.Text.Trim(), (From.SelectedItem as Phone).Index, d), n);
+                        AddTest(new Data(int.Parse(NbTests.Text.Trim()), URL.Text.Trim(), (From.SelectedItem as Phone).Index, d), n);
                         break;
                     }
                     return;
@@ -649,7 +655,7 @@ namespace InterfaceTestTool
                 case 4:
                     if (ValidateForm("Speedtest"))
                     {
-                        string s = Size.Text.Split(' ')[0];
+                        string s = Size.Text.Trim().Split(' ')[0];
                         AddTest(new Speedtest((From.SelectedItem as Phone).Index, int.Parse(s), d), n);
                         break;
                     }
@@ -724,7 +730,7 @@ namespace InterfaceTestTool
         }
 
         /// <summary>
-        /// Shortcut for Del key adn Ctrl+C/Ctrl+V in Tests list.
+        /// Shortcut for Del key and Ctrl+C/Ctrl+V in Tests list.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -734,6 +740,7 @@ namespace InterfaceTestTool
 
             if (e.Key == Key.C && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
+                testCopy.Clear();
                 foreach (var item in TestsList.SelectedItems)
                 {
                     testCopy.Add(item as ITest);
@@ -841,7 +848,6 @@ namespace InterfaceTestTool
         /// Updates simInfos.csv with the list validPhones.
         /// </summary>
         /// <param name="phone"></param>
-
         private void WritePhones()
         {
             using (StreamWriter sw = new StreamWriter("simInfos.csv", false))
@@ -925,7 +931,7 @@ namespace InterfaceTestTool
         private void Airplane_Click(object sender, RoutedEventArgs e)
         {
             // Default duration is 3 seconds
-            if (AirplaneDuration.Text == "") AirplaneDuration.Text = "3";
+            if (AirplaneDuration.Text.Trim() == "") AirplaneDuration.Text = "3";
             if (PhonesList.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Please, select one or multiple phones to activate airplane mode for.");
@@ -1019,12 +1025,12 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void QueryApn_Click(object sender, RoutedEventArgs e)
         {
-            if (MCC.Text.Length < 2 || MNC.Text.Length < 2)
+            if (MCC.Text.Trim().Length < 2 || MNC.Text.Trim().Length < 2)
             {
                 MessageBox.Show("You must enter valid MCC and MNC.");
                 return;
             }
-            RefreshApnList((PhonesListAPN.SelectedItem as Phone).Index, MCC.Text, MNC.Text);
+            RefreshApnList((PhonesListAPN.SelectedItem as Phone).Index, MCC.Text.Trim(), MNC.Text.Trim());
         }
 
         /// <summary>
@@ -1040,7 +1046,7 @@ namespace InterfaceTestTool
             {
                 Process p = new Process();
                 ProcessStartInfo start = new ProcessStartInfo(
-                    "python.exe", $"addApn.py \"{(PhonesListAPN.SelectedItem as Phone).IMSI}\" \"{NameAdd.Text}\" \"{MCCAdd.Text}\" \"{MNCAdd.Text}\" \"{APNAdd.Text}\"");
+                    "python.exe", $"addApn.py \"{(PhonesListAPN.SelectedItem as Phone).IMSI}\" \"{NameAdd.Text.Trim()}\" \"{MCCAdd.Text.Trim()}\" \"{MNCAdd.Text.Trim()}\" \"{APNAdd.Text.Trim()}\"");
                 start.CreateNoWindow = true;
                 start.UseShellExecute = false;
                 p.StartInfo = start;
@@ -1053,7 +1059,7 @@ namespace InterfaceTestTool
             }
             Mouse.OverrideCursor = Cursors.Arrow;
             // Refresh the APN list to show the one added.
-            RefreshApnList((PhonesListAPN.SelectedItem as Phone).Index, MCCAdd.Text, MNCAdd.Text);
+            RefreshApnList((PhonesListAPN.SelectedItem as Phone).Index, MCCAdd.Text.Trim(), MNCAdd.Text.Trim());
         }
 
         /// <summary>
@@ -1123,7 +1129,7 @@ namespace InterfaceTestTool
                 MessageBox.Show(ex.Message);
             }
             // Refresh the list using last MCC/MNC.
-            var mccmnc = ApnText.Text.Split(new char[] { '(', ')' })[1];
+            var mccmnc = ApnText.Text.Trim().Split(new char[] { '(', ')' })[1];
             RefreshApnList((PhonesListAPN.SelectedItem as Phone).Index, mccmnc.Substring(0, 3), mccmnc.Substring(3));
         }
 
@@ -1138,11 +1144,22 @@ namespace InterfaceTestTool
                 ((TextBox)sender).SelectAll();
         }
 
+        /// <summary>
+        /// Occurs when the application closes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             File.Delete("apn.csv");
         }
 
+        /// <summary>
+        /// Gets the list of APNs for the selected phone in Phone A field
+        /// when the test is "Change APN"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void From_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (TestType.SelectedIndex == 7)
