@@ -1,5 +1,8 @@
 ﻿namespace InterfaceTestTool
 {
+    /// <summary>
+    /// Interface implemented by all the tests.
+    /// </summary>
     internal interface ITest
     {
         /// <summary>

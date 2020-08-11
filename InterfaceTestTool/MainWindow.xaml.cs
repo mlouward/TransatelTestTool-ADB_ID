@@ -16,12 +16,19 @@ namespace InterfaceTestTool
     /// </summary>
     public partial class MainWindow : Window
     {
+        // List of the the phones written in simInfos.csv
         private static List<Phone> validPhones = new List<Phone>();
+        // List of the tests written in testsToPerform.csv
         private static List<ITest> tests = new List<ITest>();
+        // List of the indexes of the phones in validPhones that are currently plugged in
         private static List<int> validIndexes = new List<int>();
+        // List of the indexes of rooted phones in validPhones
         private static List<int> rootedIndexes = new List<int>();
+        // List of the APNs for a specific phone and MCC/MNC
         private static List<APN> apnList = new List<APN>();
+        // List of tests used for Copy/Paste shortcut in the TestsList ListView
         private static List<ITest> testCopy = new List<ITest>();
+        // Used to not query the APNs if it has already been done for a phone.
         private static bool apnListChanged = false;
 
         public MainWindow()
@@ -29,16 +36,16 @@ namespace InterfaceTestTool
             InitializeComponent();
             // Working directory is main folder.
             Directory.SetCurrentDirectory(@"../../../");
-            // Get indices of phones in simInfos.csv
+            // Get phones in simInfos.csv
             validPhones = GetAllPhones(@"simInfos.csv");
-            validIndexes = validPhones.Select(p => p.Index).ToList();
+            // Gets phone's model, Android version and root status if phone is plugged in,
+            // and updates validPhones and validIndexes, as well as setting ItemsSource for
+            // the corresponding ListView/ComboBox
             UpdatePhoneList();
-            // Valid indexes are only for plugged in phones (Model != "").
-            validIndexes = validPhones.Where(p => !string.IsNullOrEmpty(p.Model)).Select(p => p.Index).ToList();
             rootedIndexes = validPhones.Where(p => p.IsRooted).Select(p => p.Index).ToList();
             // Only rooted phones are available for apn changes.
             PhonesListAPN.ItemsSource = validPhones.Where(p => p.IsRooted);
-            // Read test file and add tests to listview
+            // Read test file and add tests to listview and tests List
             GetTestsFromFile(@"testsToPerform.csv");
             TestsList.ItemsSource = tests;
             // Query APNs for the first valid phone
@@ -55,7 +62,7 @@ namespace InterfaceTestTool
             List<Phone> res = new List<Phone>();
             using (StreamReader sr = new StreamReader(path))
             {
-                sr.ReadLine(); // Ignore header
+                sr.ReadLine(); // Ignore header of simInfos.csv
                 while (!sr.EndOfStream)
                 {
                     string[] l = sr.ReadLine().Split(';');
@@ -77,11 +84,8 @@ namespace InterfaceTestTool
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    if (line == null || string.IsNullOrEmpty(line) || line == "\r\n")
-                    {
-                        MessageBox.Show($"Finished reading '{path}'");
-                        return;
-                    }
+                    if (line == null || string.IsNullOrEmpty(line) || line == "\r\n") return;
+
                     string[] l = line.Split(';');
                     switch (l[0].ToLower())
                     {
@@ -124,7 +128,6 @@ namespace InterfaceTestTool
                     }
                 }
             }
-            return;
         }
 
         /// <summary>
@@ -589,6 +592,7 @@ namespace InterfaceTestTool
                 MessageBox.Show(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+            // Valid indexes are only for plugged in phones (Model != "").
             validIndexes = validPhones.Where(p => !string.IsNullOrEmpty(p.Model)).Select(p => p.Index).ToList();
 
             // Update item sources
