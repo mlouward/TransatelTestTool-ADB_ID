@@ -20,7 +20,50 @@ This file stores the IMSI and MSISDN of up to 99 SIM cards. Do not go over this 
   
 This file stores all the current tests that will be run upon pressing "Launch tests". It is generated when pressing "Launch tests", based on the tests written in the interface.  
 
-Available commands:  
+Interface  
+----
+  
+* **Tests tab**  
+  
+This tab allows users to see which tests will be ran and in what order, as well as add tests with all their corresponding parameters.  
+  
+The parameters *Phone A*, *Delay after test (sec.)* and *Repetitions Number* are needed for every test.  
+*Phone A* is the phone from where the test is ran.  
+*Delay after test* is the time to wait after the test has been run, to run the next one.  
+*Repetitions Number* allows to repeat a certain test.  
+  
+The interface provides syntax checking for all the fields (Phone numbers, integers only fields,...)
+If no values are provided for Delay and Repetitions, the default values are 0 sec. and 1 repetition.  
+  
+Clicking "Add to List" will add the test to the list and write it to testsToPerform.csv.  
+  
+In the list of tests, you can select one or multiple tests and press the Del. key on the keyboard to delete tests.
+You can also copy/paste them in the list. (However, deleting a **copied** test will delete its first occurence in the list. (To fix))  
+  
+You can save the current list of tests to a csv file by clicking on "Save Test File".
+It will create a copy of testsToPerform.csv and save it in a separate folder (Saved Test Files).  
+You can also load these test files by clicking "Load Test File". If you select multiple saved files, it will load all the files in the same order as in File Explorer.  
+  
+Finally, clicking on "Launch tests" will run the Python script called `Test_Tool.py`. This script will read testsToPerform.csv and execute all the tests in order.  
+  
+* **Phones tab**  
+  
+This tab allows users to see all the SIM cards entered in simInfos.csv, as well as informations on the phones *if they are plugged in* (Android version, phone model, root status).  
+  
+It also allows adding phones to this list as long as there are less than 99 phones.  
+For rooted phones, you can also enable airplane mode for a certain duration from there (default is 3 seconds).  
+  
+If you select one or multiple phones in the list, you can press Ctrl+C to copy **the text** of the phone infos in Windows' clipboard.  
+  
+* **APN tab**  
+
+This tab only works for **rooted phones**.  
+  
+Selecting a phone in the list will query for the available APNs in this phone.  
+You can also add or delete APNs manually, and change the default APN.  
+  
+  
+Available tests:  
 ----
 (*note*: every command is case insensitive)  
 
@@ -70,7 +113,7 @@ Will disable WiFi and use mobile data.
 
 * **Airplane**  
   
-This test **only works for rooted phones**. Enabled airplane mode on the specified phone (rooted) for the duration entered by the user, 
+This test **only works for rooted phones**. Enables airplane mode on the specified phone (rooted) for the duration entered by the user, 
 and then disables it.  
   
 * **Change APN**  
@@ -78,47 +121,6 @@ and then disables it.
 This test **only works for rooted phones**. Allows to change the default APN for the selected phone, amongst the list of available APNs for the selected **rooted** phone (see APN tab).  
   
   
-Interface  
-----
-  
-* **Tests tab**  
-  
-This tab allows users to see which tests will be ran and in what order, as well as add tests with all their corresponding parameters.  
-The parameters *Phone A*, *Delay after test (sec.)* and *Repetitions Number* are needed for every test.
-*Phone A* is the phone from where the test is ran.  
-*Delay after test* is the time to wait after the test has been run, to run the next one.  
-*Repetitions Number* allows to repeat a certain test.  
-  
-The interface provides syntax checking for all the fields (Phone numbers, integers only fields,...)
-If no values are provided for Delay and Repetitions, the default values are 0 sec. and 1 repetition.  
-  
-Clicking "Add to List" will add the test to the list and write it to testsToPerform.csv.
-  
-In the list of tests, you can select one or multiple tests and press the Del. key on the keyboard to delete tests.
-You can also copy/paste them in the list. However, deleting a **copied** test will delete its first occurence in the list. (To fix)  
-  
-You can save the current list of tests to a csv file by clicking on "Save Test File".
-It will create a copy of testsToPerform.csv and save it in a separate folder (Saved Test Files).  
-You can also load these test files by clicking "Load Test File". If you select multiple saved files, it will load all the files in the same order as in File Explorer.  
-  
-Finally, clicking on "Launch tests" will run the Python script called `Test_Tool.py`. This script will read testsToPerform.csv and execute all the tests in order.  
-  
-* **Phones tab**  
-  
-This tab allows users to see all the SIM cards entered in simInfos.csv, as well as informations on the phones *if they are plugged in* (Android version, phone model, root status).  
-  
-It also allows adding phones to this list as long as there are less than 99 phones.  
-For rooted phones, you can also enable airplane mode for a certain duration from there (default is 3 seconds).  
-  
-If you select one or multiple phones in the list, you can press Ctrl+C to copy **the text** of the phone infos in Windows' clipboard.  
-  
-* **APN tab**  
-This tab only works for **rooted phones**.  
-  
-Selecting a phone in the list will query for the available APNs in this phone.  
-You can also add or delete APNs manually, and change the default APN.  
-
-
 
 
 
