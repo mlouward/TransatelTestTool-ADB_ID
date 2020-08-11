@@ -183,8 +183,9 @@ def data_routine(n, url=r"http://www.google.com", index=1):
         url: the url to open.
         index: the index of the phone to use in simInfos.csv
     """
-    # 1 second per request and 10 seconds to unlock phone and open browser.
-    to = int(n) + 10
+    # 2 seconds per request and 20 seconds to unlock phone and open browser.
+    to = 2 * int(n) + 20
+    url = '"' + url + '"'
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]
