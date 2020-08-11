@@ -42,7 +42,7 @@ namespace InterfaceTestTool
             GetTestsFromFile(@"testsToPerform.csv");
             TestsList.ItemsSource = tests;
             // Query APNs for the first valid phone
-            RefreshApnList(rootedIndexes[0], "208", "22");
+            if (rootedIndexes.Count > 0) RefreshApnList(rootedIndexes[0], "208", "22");
         }
 
         /// <summary>
@@ -1173,6 +1173,11 @@ namespace InterfaceTestTool
             {
                 RefreshApnList((From.SelectedItem as Phone).Index, "208", "22");
             }
+        }
+
+        private void RefreshPhoneA_Click(object sender, RoutedEventArgs e)
+        {
+            UpdatePhoneList();
         }
     }
 }

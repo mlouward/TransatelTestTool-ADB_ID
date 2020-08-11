@@ -33,9 +33,10 @@
                     <ColumnDefinition Width="1.2*" />
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Name="TestType" HorizontalAlignment="Center" VerticalAlignment="Center"
-                  Grid.Row="0" Grid.ColumnSpan="3" BorderBrush="#FF8BA0FF" Height="Auto"
-                  SelectionChanged="TestType_SelectionChanged" Width="Auto" TabIndex="1">
+                <ComboBox Name="TestType" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="#FF8BA0FF" Height="Auto"
+                  SelectionChanged="TestType_SelectionChanged" Width="Auto" TabIndex="1"
+                          Margin="40, 0">
                     <ComboBoxItem Content="MOC" />
                     <ComboBoxItem Content="MTC" />
                     <ComboBoxItem Content="SMS" />
@@ -45,7 +46,11 @@
                     <ComboBoxItem Content="Airplane" />
                     <ComboBoxItem Content="Change APN" />
                 </ComboBox>
-
+                <Button Name="RefreshPhoneA" Content="Refresh Phone A" Grid.ColumnSpan="2"
+                        Grid.Column="1" Style="{StaticResource BlueButton}" Width="130"
+                        HorizontalAlignment="Right" Margin="20, 0" TabIndex="1"
+                        Click="RefreshPhoneA_Click"/>
+ 
                 <DockPanel Margin="10" Grid.Row="1" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="Number of tests (packets for ping):" DockPanel.Dock="Top" />
                     <TextBox x:Name="NbTests" Height="25" DockPanel.Dock="Top" PreviewTextInput="Delay_PreviewTextInput"
