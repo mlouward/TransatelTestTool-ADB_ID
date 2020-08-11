@@ -85,3 +85,28 @@
 [10/08/2020-20:11:41] rtt min/avg/max/mdev = 24.026/30.137/36.399/3.945 ms
 [10/08/2020-20:11:41] Ping test successful. (PHONE: 0681384869, ADDRESS: www.google.com, NB: 8, SIZE: 24) 
 
+[11/08/2020-11:57:20] Ping test initiated. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 4, SIZE: 32) 
+[11/08/2020-11:57:23] 4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+[11/08/2020-11:57:23] rtt min/avg/max/mdev = 44.380/52.360/66.869/9.150 ms
+[11/08/2020-11:57:23] Ping test successful. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 4, SIZE: 32) 
+
+[11/08/2020-12:15:00] Ping test initiated. (PHONE: 0681384869, ADDRESS: 8.8.8.8, NB: 10, SIZE: 32) 
+[11/08/2020-12:15:09] 10 packets transmitted, 10 received, 0% packet loss, time 9021ms
+[11/08/2020-12:15:09] rtt min/avg/max/mdev = 21.710/31.861/47.353/7.376 ms
+[11/08/2020-12:15:09] Ping test successful. (PHONE: 0681384869, ADDRESS: 8.8.8.8, NB: 10, SIZE: 32) 
+
+[11/08/2020-12:15:21] Ping test initiated. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 10, SIZE: 32) 
+[11/08/2020-12:15:30] 10 packets transmitted, 10 received, 0% packet loss, time 9012ms
+[11/08/2020-12:15:30] rtt min/avg/max/mdev = 28.408/81.672/302.667/75.296 ms
+[11/08/2020-12:15:30] Ping test successful. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 10, SIZE: 32) 
+
+[11/08/2020-12:15:43] Ping test initiated. (PHONE: +33644517664, ADDRESS: 8.8.8.8, NB: 10, SIZE: 32) 
+[11/08/2020-12:15:53] 10 packets transmitted, 10 received, 0% packet loss, time 9013ms
+[11/08/2020-12:15:53] rtt min/avg/max/mdev = 24.078/61.514/143.105/48.040 ms
+[11/08/2020-12:15:53] Ping test successful. (PHONE: +33644517664, ADDRESS: 8.8.8.8, NB: 10, SIZE: 32) 
+
+[11/08/2020-12:17:46] Ping test initiated. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 4, SIZE: 32) 
+[11/08/2020-12:17:49] 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
+[11/08/2020-12:17:49] rtt min/avg/max/mdev = 39.949/106.147/252.221/86.046 ms
+[11/08/2020-12:17:49] Ping test successful. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 4, SIZE: 32) 
+

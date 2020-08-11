@@ -91,3 +91,14 @@
 [10/08/2020-16:10:03] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
 [10/08/2020-16:10:06] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
 
+[11/08/2020-11:57:50] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+[11/08/2020-11:57:50] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[11/08/2020-11:57:52] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+
+[11/08/2020-12:14:07] Data test initiated. (PHONE: true, URL: https://unsplash.com/photos/HkeRHJCUGN4/download?force, NB: +33644517664) 
+[11/08/2020-12:14:09] Data test successful. (PHONE: true, URL: https://unsplash.com/photos/HkeRHJCUGN4/download?force, NB: +33644517664) 
+
+[11/08/2020-12:18:13] Data test initiated. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+[11/08/2020-12:18:13] Browser opened. (PHONE: 0644503010, URL: http://www.google.com, NB: 1)  
+[11/08/2020-12:18:15] Data test successful. (PHONE: 0644503010, URL: http://www.google.com, NB: 1) 
+

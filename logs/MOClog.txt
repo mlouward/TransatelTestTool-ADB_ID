@@ -79,3 +79,11 @@
 [07/08/2020-16:33:59] Call ended. (FROM: 0644503010, TO: +33644517664, NB: 2, DURATION: 9sec.)  
 [07/08/2020-16:33:59] MOC process successful. Final call state: "Alerting" (FROM: 0644503010, TO: +33644517664, NB: 2, DURATION: 9sec.)
  
+[11/08/2020-11:56:36] Call started. (FROM: 0644503010, TO: 0681384869, NB: 1, DURATION: 15sec.)  
+[11/08/2020-11:56:52] Call ended. (FROM: 0644503010, TO: 0681384869, NB: 1, DURATION: 15sec.)  
+[11/08/2020-11:56:52] MOC process successful. Final call state: "Active" (FROM: 0644503010, TO: 0681384869, NB: 1, DURATION: 15sec.)
+ 
+[11/08/2020-12:12:07] Call started. (FROM: +33644517664, TO: 0681384869, NB: 1, DURATION: 12sec.)  
+[11/08/2020-12:12:20] Call ended. (FROM: +33644517664, TO: 0681384869, NB: 1, DURATION: 12sec.)  
+[11/08/2020-12:12:21] MOC process successful. Final call state: "Alerting" (FROM: +33644517664, TO: 0681384869, NB: 1, DURATION: 12sec.)
+ 

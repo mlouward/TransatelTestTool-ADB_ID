@@ -19,6 +19,7 @@ namespace InterfaceTestTool
         private static List<Phone> validPhones = new List<Phone>();
         private static List<ITest> tests = new List<ITest>();
         private static List<int> validIndexes = new List<int>();
+        private static List<int> rootedIndexes = new List<int>();
         private static List<APN> apnList = new List<APN>();
         private static List<ITest> testCopy = new List<ITest>();
         private static bool apnListChanged = false;
@@ -34,13 +35,14 @@ namespace InterfaceTestTool
             UpdatePhoneList();
             // Valid indexes are only for plugged in phones (Model != "").
             validIndexes = validPhones.Where(p => !string.IsNullOrEmpty(p.Model)).Select(p => p.Index).ToList();
+            rootedIndexes = validPhones.Where(p => p.IsRooted).Select(p => p.Index).ToList();
             // Only rooted phones are available for apn changes.
             PhonesListAPN.ItemsSource = validPhones.Where(p => p.IsRooted);
             // Read test file and add tests to listview
             GetTestsFromFile(@"testsToPerform.csv");
             TestsList.ItemsSource = tests;
             // Query APNs for the first valid phone
-            RefreshApnList(validIndexes[0], "208", "22");
+            RefreshApnList(rootedIndexes[0], "208", "22");
         }
 
         /// <summary>
@@ -155,7 +157,7 @@ namespace InterfaceTestTool
                         return false;
                     }
                     m = Regex.Match(To.Text.Trim(), @"^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
-                    if (!m.Success)
+                    if (To.Text.Trim().Length > 2 && !m.Success)
                     {
                         var q = MessageBox.Show("Phone B is not a valid phone number or index in the list. Would you like to continue?",
                                         "Wrong number",
@@ -224,7 +226,7 @@ namespace InterfaceTestTool
                         return false;
                     }
                     m = Regex.Match(To.Text.Trim(), @"^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
-                    if (!m.Success)
+                    if (To.Text.Trim().Length > 2 && !m.Success)
                     {
                         var q = MessageBox.Show("Phone B is not a valid phone number or index in the list. Would you like to continue?",
                                         "Wrong number",
@@ -694,7 +696,6 @@ namespace InterfaceTestTool
                 default:
                     return;
             }
-            MessageBox.Show("Test Added");
         }
 
         /// <summary>

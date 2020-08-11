@@ -63,3 +63,31 @@
 [10/08/2020-20:04:21] SMS Sent. (FROM: 0681384869, TO: 0681384869, NB: 1, TEXT: TestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItems) 
 [10/08/2020-20:04:21] SMS Sent. (FROM: 0681384869, TO: 0681384869, NB: 2, TEXT: TestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItemsTestsList.SelectedItems) 
 
+[11/08/2020-11:57:14] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 1, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+[11/08/2020-11:57:14] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 2, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+[11/08/2020-11:57:15] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 3, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+[11/08/2020-11:57:15] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 4, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+[11/08/2020-11:57:15] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 5, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+
+[11/08/2020-11:58:55] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 1, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+[11/08/2020-11:58:55] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 2, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+[11/08/2020-11:58:55] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 3, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+[11/08/2020-11:58:56] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 4, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+[11/08/2020-11:58:56] SMS Sent. (FROM: 0644503010, TO: 0644503010, NB: 5, TEXT: TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest) 
+
+[11/08/2020-12:13:36] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 1, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+[11/08/2020-12:13:36] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 2, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+[11/08/2020-12:13:36] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 3, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+
+[11/08/2020-12:13:42] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 1, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+[11/08/2020-12:13:42] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 2, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+[11/08/2020-12:13:42] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 3, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+
+[11/08/2020-12:13:48] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 1, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+[11/08/2020-12:13:48] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 2, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+[11/08/2020-12:13:48] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 3, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+
+[11/08/2020-12:13:54] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 1, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+[11/08/2020-12:13:54] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 2, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+[11/08/2020-12:13:54] SMS Sent. (FROM: +33644517664, TO: 0681384869, NB: 3, TEXT: AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAb) 
+

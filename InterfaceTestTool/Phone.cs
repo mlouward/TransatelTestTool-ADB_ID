@@ -16,12 +16,14 @@ namespace InterfaceTestTool
             Index = index;
             PhoneNumber = phoneNumber;
             IMSI = iMSI;
+            IsRooted = false;
         }
 
         public Phone(string phoneNumber, string iMSI)
         {
             PhoneNumber = phoneNumber;
             IMSI = iMSI;
+            IsRooted = false;
         }
 
         public override string ToString()
