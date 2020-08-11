@@ -22,7 +22,7 @@
             return $"moc;{Nb};{Duration};{From};{To};{Delay}";
         }
 
-        public override string ToString()
+        public sealed override string ToString()
         {
             return $"MOC: {Nb} tests, Duration: {Duration}sec., Phone A: {From}, Phone B: {To}, Delay: {Delay}sec.";
         }

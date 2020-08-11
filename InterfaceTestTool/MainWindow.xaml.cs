@@ -33,7 +33,7 @@ namespace InterfaceTestTool
             validIndexes = validPhones.Select(p => p.Index).ToList();
             UpdatePhoneList();
             // Valid indexes are only for plugged in phones (Model != "").
-            validIndexes = validPhones.Where(p => p.Model != "").Select(p => p.Index).ToList();
+            validIndexes = validPhones.Where(p => !string.IsNullOrEmpty(p.Model)).Select(p => p.Index).ToList();
             // Only rooted phones are available for apn changes.
             PhonesListAPN.ItemsSource = validPhones.Where(p => p.IsRooted);
             // Read test file and add tests to listview
@@ -48,7 +48,7 @@ namespace InterfaceTestTool
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private List<Phone> GetAllPhones(string path)
+        private static List<Phone> GetAllPhones(string path)
         {
             List<Phone> res = new List<Phone>();
             using (StreamReader sr = new StreamReader(path))
@@ -75,7 +75,7 @@ namespace InterfaceTestTool
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    if (line == null || line == "" || line == "\r\n")
+                    if (line == null || string.IsNullOrEmpty(line) || line == "\r\n")
                     {
                         MessageBox.Show($"Finished reading '{path}'");
                         return;
@@ -277,7 +277,7 @@ namespace InterfaceTestTool
                         return false;
                     }
 
-                    if (PacketSize.Text.Trim() == "") PacketSize.Text = "32";
+                    if (string.IsNullOrEmpty(PacketSize.Text.Trim())) PacketSize.Text = "32";
 
                     if (int.Parse(PacketSize.Text.Trim()) < 16)
                     {
@@ -361,7 +361,7 @@ namespace InterfaceTestTool
         /// Writes the tests in the list in parameter to the file 'testsToPerform.csv'
         /// </summary>
         /// <param name="t"></param>
-        private void WriteTests(List<ITest> t)
+        private static void WriteTests(List<ITest> t)
         {
             try
             {
@@ -587,12 +587,12 @@ namespace InterfaceTestTool
                 MessageBox.Show(ex.Message);
             }
             Mouse.OverrideCursor = Cursors.Arrow;
-            validIndexes = validPhones.Where(p => p.Model != "").Select(p => p.Index).ToList();
+            validIndexes = validPhones.Where(p => !string.IsNullOrEmpty(p.Model)).Select(p => p.Index).ToList();
 
             // Update item sources
             PhonesList.ItemsSource = validPhones;
             From.ItemsSource = null;
-            From.ItemsSource = validPhones.Where(p => p.Model != "");
+            From.ItemsSource = validPhones.Where(p => !string.IsNullOrEmpty(p.Model));
             From.SelectedIndex = 0;
             PhonesListAPN.ItemsSource = null;
             PhonesListAPN.ItemsSource = validPhones.Where(x => x.IsRooted);
@@ -606,8 +606,8 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (Delay.Text.Trim() == "") Delay.Text = "0"; // Default delay is 0 sec.
-            if (Repetitions.Text.Trim() == "") Repetitions.Text = "1"; // Default repetitions is 1.
+            if (string.IsNullOrEmpty(Delay.Text.Trim())) Delay.Text = "0"; // Default delay is 0 sec.
+            if (string.IsNullOrEmpty(Repetitions.Text.Trim())) Repetitions.Text = "1"; // Default repetitions is 1.
             bool b = int.TryParse(Repetitions.Text.Trim(), out int n);
             if (!b)
             {
@@ -969,7 +969,7 @@ namespace InterfaceTestTool
                     s += phone.ErrorString() + "\n";
                 }
             }
-            if (s != "")
+            if (string.IsNullOrEmpty(s))
             {
                 MessageBox.Show(s + "\nThese phones are not rooted, thus Airplane mode couldn't be used.");
             }

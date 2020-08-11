@@ -22,7 +22,7 @@
             return $"SMS;{Nb};{Text};{From};{To};{Delay}";
         }
 
-        public override string ToString()
+        public sealed override string ToString()
         {
             return $"SMS: {Nb} tests, Text: {Text}, Phone A: {From}, Phone B: {To}, Delay: {Delay}sec.";
         }

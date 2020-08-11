@@ -21,7 +21,7 @@
             return $"speedtest;{From};{Size};{Delay}";
         }
 
-        public override string ToString()
+        public sealed override string ToString()
         {
             return $"Speedtest: Phone A: {From}, Size: {Size}MB, Delay: {Delay}sec.";
         }

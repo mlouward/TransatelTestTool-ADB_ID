@@ -20,7 +20,7 @@
             return $"data;{Nb};{URL};{From};{Delay}";
         }
 
-        public override string ToString()
+        public sealed override string ToString()
         {
             return $"Data: {Nb} tests, URL: {URL}, Phone A: {From}, Delay: {Delay}sec.";
         }

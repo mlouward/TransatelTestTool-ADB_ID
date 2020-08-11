@@ -28,13 +28,13 @@ namespace InterfaceTestTool
         {
             // We don't display information if unavailable. (i.e. device unplugged.)
             string r = IsRooted ? " (rooted)" : "";
-            string v = Version == "" ? "" : $", Android {Version}";
-            string m = Model == "" ? "" : $", Model: {Model}";
+            string v = string.IsNullOrEmpty(Version) ? "" : $", Android {Version}";
+            string m = string.IsNullOrEmpty(Model) ? "" : $", Model: {Model}";
             return $"{Index}: n°: {PhoneNumber}, IMSI: {IMSI}{m}{v}{r}";
         }
         public string ErrorString()
         {
-            string m = Model == "" ? "" : $" ({Model}, Android {Version})";
+            string m = string.IsNullOrEmpty(Model) ? "" : $" ({Model}, Android {Version})";
             return $"n°: {PhoneNumber}, IMSI: {IMSI}{m}";
         }
         internal string WriteCsv()
