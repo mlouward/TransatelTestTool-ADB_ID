@@ -154,8 +154,8 @@
                 Click="Execute_Click" Margin="10, 0" Style="{StaticResource BlueButton}"
                 FontSize="20" TabIndex="15" />
 
-                <Button x:Name="Save" Content="Save Test File" Grid.Column="5" Grid.Row="12"
-                Click="Save_Click" Margin="5, 5, 10, 0" VerticalAlignment="Top"
+                <Button x:Name="Save" Content="Save Test File" Grid.Column="5" Grid.Row="10"
+                Click="Save_Click" Margin="5,0,10,40" VerticalAlignment="Bottom"
                 Style="{StaticResource BlueButton}" FontSize="18" TabIndex="16" />
 
                 <Button x:Name="Load" Content="Load Test File" Grid.Column="5" Grid.Row="12"

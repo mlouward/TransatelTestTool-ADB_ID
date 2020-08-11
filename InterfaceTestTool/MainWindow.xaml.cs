@@ -308,6 +308,11 @@ namespace InterfaceTestTool
                         MessageBox.Show("Phone Number is not in a valid format.");
                         return false;
                     }
+                    if (validIndexes.Count == 99)
+                    {
+                        MessageBox.Show("There are too many phones in the file. Please remove at least one sim card to add a new one.");
+                        return false;
+                    }
                     break;
 
                 case "Airplane":
@@ -339,7 +344,8 @@ namespace InterfaceTestTool
         }
 
         /// <summary>
-        /// Adds the test in parameter to the list of tests n times
+        /// Adds the test in parameter to the list of tests n times,
+        /// and writes them to the testsToPerform.csv file
         /// </summary>
         /// <param name="t">An ITest object to add. </param>
         /// <param name="n">The number of tests to add. </param>
