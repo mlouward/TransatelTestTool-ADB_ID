@@ -1,14 +1,24 @@
 @echo off
+cd platform-tools/
+setlocal enabledelayedexpansion
 
-cd platform-tools\
+REM For every phone, first get the sub ID for the 2 sim slots, then get the IMSI for both sims.
 FOR /F "tokens=1,2 USEBACKQ" %%a IN (`adb devices`) DO (
 	IF "%%b"=="device" (
-		for /f "usebackq" %%f in (`adb -s "%%a" shell "service call iphonesubinfo 8 i32 1 | toybox cut -d \"'\" -f2 | toybox grep -Eo '[0-9]' | toybox xargs | toybox sed 's/\ //g'"`) do (
+		adb -s "%%a" shell "dumpsys isub | grep 'sSlotIndexToSubId\['" > subid.txt
+		for /f "tokens=2 delims==" %%F in (subid.txt) do (
+			set "id1=!id2!"
+			set "id2=%%F"
+		)
+		for /f "usebackq" %%f in (`adb -s "%%a" shell "service call iphonesubinfo 8 i32 !id1! | toybox cut -d \"'\" -f2 | toybox grep -Eo '[0-9]' | toybox xargs | toybox sed 's/\ //g'"`) do (
 			echo %%f;%%a >> ..\imsiList.txt
 		)
-		for /f "usebackq" %%f in (`adb -s "%%a" shell "service call iphonesubinfo 8 i32 2 | toybox cut -d \"'\" -f2 | toybox grep -Eo '[0-9]' | toybox xargs | toybox sed 's/\ //g'"`) do (
+		for /f "usebackq" %%f in (`adb -s "%%a" shell "service call iphonesubinfo 8 i32 !id2! | toybox cut -d \"'\" -f2 | toybox grep -Eo '[0-9]' | toybox xargs | toybox sed 's/\ //g'"`) do (
 			echo %%f;%%a >> ..\imsiList.txt
 		)
 	)
 )
+
+del subid.txt
+endlocal
 cd ..
