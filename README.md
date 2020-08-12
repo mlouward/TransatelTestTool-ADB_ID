@@ -8,7 +8,7 @@ How to use:
 ----
 * *Prerequisites*:  
   
-All the phones plugged in must have [USB Debugging](https://developer.android.com/studio/debug/dev-options#enable) enabled, and no password (for the data and speed tests; swipe to unlock is also supported).  
+All the phones plugged in must have [USB Debugging](https://developer.android.com/studio/debug/dev-options#enable) enabled, and no password (for the data and speed tests; swipe to unlock is also supported). If plugged in for the first time, you must also authorize the USB debugging on the phone (tick "Always authorize this computer").
 
 Python 3.7+ must be installed and [added to Windows PATH](https://superuser.com/questions/143119/how-do-i-add-python-to-the-windows-path) (it can also be down at installation by checking "Add to Path")
   

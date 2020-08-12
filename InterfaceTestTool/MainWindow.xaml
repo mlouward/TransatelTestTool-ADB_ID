@@ -169,7 +169,7 @@
             </Grid>
         </TabItem>
 
-        <TabItem Header="    Phones    ">
+        <TabItem Header="    SIMs    ">
             <Grid Margin="0, 10, 0, 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height=".4*" />
@@ -212,7 +212,7 @@
                         Grid.Column="2" Style="{StaticResource BlueButton}"
                         FontSize="20" Margin="10" Click="RemovePhones_Click" />
 
-                <TextBlock Text="List of Phones:" Grid.Column="2" FontSize="22"
+                <TextBlock Text="List of SIMs:" Grid.Column="2" FontSize="22"
                            Margin="10, 0" VerticalAlignment="Bottom" />
 
                 <ListView x:Name="PhonesList" Grid.RowSpan="7" Grid.Column="2" KeyDown="PhonesList_KeyDown"

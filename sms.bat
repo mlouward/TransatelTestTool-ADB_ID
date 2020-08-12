@@ -11,5 +11,6 @@ echo Unable to send the SMS. Make sure that the correct phones are connected, an
 echo [!date!-!time:~0,8!] Unable to send SMS. (FROM: %3, TO: %2, NB: %4, TEXT: %5)>>..\logs\SMSlog.txt
 
 :End
+echo. >>..\logs\SMSlog.txt
 endlocal
 cd..

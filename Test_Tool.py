@@ -6,6 +6,9 @@ from datetime import datetime
 
 
 def check_adb():
+    """ Checks that the folder 'platform-tools' exists.
+    If not, it will download ADB from internet and unzip it.
+    """
     if not os.path.isdir("platform-tools"):
         subprocess.run(["getAdb.bat"])
 
@@ -27,7 +30,7 @@ def get_number_to_imsi(path="simInfos.csv", sep=';'):
         for line in f:
             l = line.rstrip().split(sep)
             if len(l) == 3:
-                number_to_imsi.update({l[1]:l[2]}) # (Dict are insertion ordered since Python 3.6)
+                number_to_imsi.update({l[1]:l[2]}) # (Dict are insertion ordered since Python 3.7)
     return number_to_imsi
 
 def get_imsi_to_id():
@@ -48,7 +51,7 @@ def get_imsi_to_id():
         return imsi_to_id
     except:
         print("No devices has been plugged in. The program will exit.", file=sys.stderr)
-        sys.exit(1)
+        return
 
 def get_dictionaries():
     """ Returns the dictionaries needed.
@@ -57,17 +60,6 @@ def get_dictionaries():
     imsi_to_id = get_imsi_to_id()
     #id_to_number = {imsi_to_id[v]:k for k, v in number_to_imsi.items() if v in imsi_to_id.keys()}
     return number_to_imsi, imsi_to_id
-
-def get_apn(index, numeric):
-    """ Gets the APN list for a phone.
-
-    Args:
-        index: The index of the phone to query APNs
-        numeric: The MCC + MNC code for which to query.
-    """
-    num = tuple(number_to_imsi.items())[int(index) - 1][0]
-    id = imsi_to_id[number_to_imsi[num]]
-    subprocess.run(["getApn.bat", id, str(numeric)])
 
 def moc_routine(n, call_duration, index_a, index_b):
     """ Performs MOC from phone A to B.
@@ -79,13 +71,13 @@ def moc_routine(n, call_duration, index_a, index_b):
         index_b: index of phone B in simInfos.csv, or a phone number to call.
     """
     print("\n[{}] Beginning MOC routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
-    to = int(n) * int(call_duration) + 20
+    to = int(n) * int(call_duration) + 20 # call_duration seconds per call plus 20 seconds margin
     try:
         num_a = tuple(number_to_imsi.items())[int(index_a) - 1][0]
     except:
         print("Selected phone is not plugged in")
     # If the argument is longer than 2 digits, it is a phone number and not an
-    # index, so we call this number.  Else,
+    # index, so we call this number. Else,
     # we assume it is the index of a phone
     if len(index_b) > 2:
         num_b = index_b
@@ -115,7 +107,7 @@ def mtc_routine(n, call_duration, index_a, index_b):
         index_b: the index of the phone called in simInfos.csv
     """
     print("\n[{}] Beginning MTC routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
-    to = int(n) * int(call_duration) + 20
+    to = int(n) * int(call_duration) + 20 # same as MTC
     num_a = tuple(number_to_imsi.items())[index_a - 1][0]
     num_b = tuple(number_to_imsi.items())[index_b - 1][0]
     try:
@@ -167,12 +159,6 @@ def sms_routine(n, text, index_a, index_b):
             with open("logs\\SMSlog.txt", "a") as f:
                 f.write("[{}] SMS routine unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, TEXT: {})\n\n".format(
                     str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num_a, num_b, n, text))
-    try:
-        with open("logs\\SMSlog.txt", 'a') as f:
-            f.write("\n")
-    except:
-        print("Log file not found.", file=sys.stderr)
-        return
 
 def data_routine(n, url=r"http://www.google.com", index=1):
     """Performs a data test with the desired phone, by opening the default browser
@@ -185,7 +171,7 @@ def data_routine(n, url=r"http://www.google.com", index=1):
     """
     # 2 seconds per request and 20 seconds to unlock phone and open browser.
     to = 2 * int(n) + 20
-    url = '"' + url + '"'
+    url = '"' + url + '"' # Add double quotes around the URL to avoid problems with adb
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]
@@ -199,19 +185,19 @@ def data_routine(n, url=r"http://www.google.com", index=1):
             f.write("[{}] Data test unsuccessful (process timed out) (PHONE: {}, URL: {})\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, url))
 
-def speedtest_routine(index, size='20'):
-    """ Performs a speedtest by downloading a 50MB file from phone A.
+def speedtest_routine(index, size):
+    """ Performs a speedtest by downloading a file of a given size from phone A.
 
     Args:
         index_a: the index of the phone to test in simInfos.csv
-        size: the size of the file to download. Must be one of (20, 50, 100)
+        size: the size of the file to download. Must be one of (10, 20, 50, 100)
     """
     try:
         assert size in ('10', '20', '50', '100')
     except:
         print("The file size is not compatible. Please use one of (10, 20, 50, 100).", file=sys.stderr)
         return
-    to = int(size) * 10 # (100Kio/s is the limit for timeout)
+    to = int(size) * 10 # (100kB/s is the limit for timeout)
     print("\n[{}] Beginning speedtest...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
@@ -225,6 +211,7 @@ def speedtest_routine(index, size='20'):
         with open("logs\\speedtestlog.txt", "a") as f:
             f.write("[{}] Speedtest unsuccessful (process timed out) (PHONE: {}, SIZE: {})\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, size))
+    # This part is used to calculate the average speed.
     format = "%d/%m/%Y-%H:%M:%S,%f"
     try:
         with open("platform-tools\\elapsed.txt") as f:
@@ -236,16 +223,22 @@ def speedtest_routine(index, size='20'):
         speed = int(size) / t
         os.remove("platform-tools\\elapsed.txt")
         print("[{}] Download complete. Average download speed: {}MB/s".format(
-            str(datetime.now().strftime("%H:%M:%S")), round(speed, 2))) 
+            str(datetime.now().strftime("%H:%M:%S")), round(speed, 2)))
+        try:
+            with open("logs\\speedtestlog.txt", 'a') as f:
+                f.write("Average speed: {}MB/sec.\n\n".format(round(speed, 2)))
+        except:
+            print("Log file not found.", file=sys.stderr)
+            return
     except IOError:
-        print("File not found. The program will be terminated. Please verify the plugged in devices.", file=sys.stderr)
-        sys.exit(2)
-    try:
-        with open("logs\\speedtestlog.txt", 'a') as f:
-            f.write("Average speed: {}MB/sec.\n\n".format(round(speed, 2)))
-    except:
-        print("Log file not found.", file=sys.stderr)
-        return
+        print("Elapsed time file not found. The test will be terminated. Please verify the plugged in devices.", file=sys.stderr)
+        try:
+            with open("logs\\speedtestlog.txt", 'a') as f:
+                f.write("Test unsuccesful: Elapsed time file not found.\n\n")
+        except:
+            print("Log file not found.", file=sys.stderr)
+            return
+        return 
 
 def ping_routine(index, address, n, size):
     """
@@ -257,7 +250,7 @@ def ping_routine(index, address, n, size):
         index: The index of the phone to use in simInfos.csv
         size: The size of the packets in bytes
     """
-    to = int(n) + 10
+    to = int(n) + 10 # 1 second per test and 10 seconds margin.
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]
@@ -281,7 +274,7 @@ def airplane_routine(index, duration):
         index: The index of the phone to use in simInfos.csv
         duration: The time to wait before deactivating airplane mode.
     """
-    to = int(duration) + 10
+    to = int(duration) + 10 # duration of the test and 10 seconds margin.
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]
@@ -303,7 +296,7 @@ def change_apn(index, apn_id):
         index: The index of the phone to use in simInfos.csv
         apn_id: the ID of the APN to set as default.
     """
-    to = 15
+    to = 15 # duration should be about 5 seconds, plus 10 seconds margin 
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]

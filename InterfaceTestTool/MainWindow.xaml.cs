@@ -1182,6 +1182,8 @@ namespace InterfaceTestTool
         private void RefreshPhoneA_Click(object sender, RoutedEventArgs e)
         {
             UpdatePhoneList();
+            Phone p = From.SelectedItem as Phone;
+            RefreshApnList(p.Index, "208", "22");
         }
     }
 }
