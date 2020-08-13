@@ -41,7 +41,7 @@ def get_imsi_to_id():
         os.remove("imsiList.txt")
         return imsi_to_id
     except:
-        print("No devices has been plugged in.")
+        print("No devices has been plugged in.", file=sys.stderr)
         return
 
 def get_dictionaries():
@@ -60,9 +60,9 @@ def check_root(index):
     """
     try:
         with open("rootList.txt", 'w') as f:
-            f.write("")
+            pass
     except:
-        print("rootList.txt not found")
+        print("rootList.txt not found", file=sys.stderr)
     # we use range for when the indexes of the phones are skipped
     # ([1, 2, 5] instead of [1, 2, 3] for example)
     for i in range(len(index)):

@@ -18,16 +18,22 @@ namespace InterfaceTestTool
     {
         // List of the the phones written in simInfos.csv
         private static List<Phone> validPhones = new List<Phone>();
+
         // List of the tests written in testsToPerform.csv
         private static List<ITest> tests = new List<ITest>();
+
         // List of the indexes of the phones in validPhones that are currently plugged in
         private static List<int> validIndexes = new List<int>();
+
         // List of the indexes of rooted phones in validPhones
         private static List<int> rootedIndexes = new List<int>();
+
         // List of the APNs for a specific phone and MCC/MNC
         private static List<APN> apnList = new List<APN>();
+
         // List of tests used for Copy/Paste shortcut in the TestsList ListView
         private static List<ITest> testCopy = new List<ITest>();
+
         // Used to not query the APNs if it has already been done for a phone.
         private static bool apnListChanged = false;
 
@@ -71,6 +77,65 @@ namespace InterfaceTestTool
                 }
             }
             return res;
+        }
+
+        /// <summary>
+        /// Uses validPhones to update the phone list, and gets the model/android version/root status
+        /// of the phones plugged in.
+        /// </summary>
+        private void UpdatePhoneList()
+        {
+            PhonesList.ItemsSource = null;
+            // Sort by index
+            validPhones.Sort();
+            // Refresh validIndexes.
+            validIndexes = validPhones.Select(p => p.Index).ToList();
+
+            string s = ""; // Indexes of all phones in simInfos.csv
+            foreach (var item in validIndexes) s += item.ToString() + " ";
+            try
+            {
+                ProcessStartInfo start = new ProcessStartInfo("python.exe", $"checkRoot.py {s.Trim()}")
+                {
+                    CreateNoWindow = true,
+                    UseShellExecute = false
+                };
+                Process p = new Process { StartInfo = start };
+                Mouse.OverrideCursor = Cursors.Wait;
+                p.Start();
+                p.WaitForExit();
+
+                using (StreamReader sr = new StreamReader("rootList.txt"))
+                {
+                    for (int i = 0; i < validPhones.Count; i++)
+                    {
+                        var l = sr.ReadLine().Split(';');
+                        if (l.Length > 1)
+                        {
+                            validPhones[i].Model = l[0];
+                            validPhones[i].Version = l[1];
+                            validPhones[i].IsRooted = bool.Parse(l[2]);
+                        }
+                    }
+                }
+                File.Delete("rootList.txt");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+            // Valid indexes are only for plugged in phones (Model != "").
+            validIndexes = validPhones.Where(p => !string.IsNullOrEmpty(p.Model)).Select(p => p.Index).ToList();
+
+            // Update item sources
+            PhonesList.ItemsSource = validPhones;
+            From.ItemsSource = null;
+            From.ItemsSource = validPhones.Where(p => !string.IsNullOrEmpty(p.Model));
+            From.SelectedIndex = 0;
+            PhonesListAPN.ItemsSource = null;
+            PhonesListAPN.ItemsSource = validPhones.Where(x => x.IsRooted);
+            PhonesListAPN.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -547,65 +612,6 @@ namespace InterfaceTestTool
         }
 
         /// <summary>
-        /// Uses validPhones to update the phone list, and gets the model/android version/root status
-        /// of the phones plugged in.
-        /// </summary>
-        private void UpdatePhoneList()
-        {
-            PhonesList.ItemsSource = null;
-            // Sort by index
-            validPhones.Sort();
-            // Refresh validIndexes.
-            validIndexes = validPhones.Select(p => p.Index).ToList();
-
-            string s = ""; // Indexes of all phones in simInfos.csv
-            foreach (var item in validIndexes) s += item.ToString() + " ";
-            try
-            {
-                ProcessStartInfo start = new ProcessStartInfo("python.exe", $"checkRoot.py {s.Trim()}")
-                {
-                    CreateNoWindow = true,
-                    UseShellExecute = false
-                };
-                Process p = new Process { StartInfo = start };
-                Mouse.OverrideCursor = Cursors.Wait;
-                p.Start();
-                p.WaitForExit();
-
-                using (StreamReader sr = new StreamReader("rootList.txt"))
-                {
-                    for (int i = 0; i < validPhones.Count; i++)
-                    {
-                        var l = sr.ReadLine().Split(';');
-                        if (l.Length > 1)
-                        {
-                            validPhones[i].Model = l[0];
-                            validPhones[i].Version = l[1];
-                            validPhones[i].IsRooted = bool.Parse(l[2]);
-                        }
-                    }
-                }
-                File.Delete("rootList.txt");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            Mouse.OverrideCursor = Cursors.Arrow;
-            // Valid indexes are only for plugged in phones (Model != "").
-            validIndexes = validPhones.Where(p => !string.IsNullOrEmpty(p.Model)).Select(p => p.Index).ToList();
-
-            // Update item sources
-            PhonesList.ItemsSource = validPhones;
-            From.ItemsSource = null;
-            From.ItemsSource = validPhones.Where(p => !string.IsNullOrEmpty(p.Model));
-            From.SelectedIndex = 0;
-            PhonesListAPN.ItemsSource = null;
-            PhonesListAPN.ItemsSource = validPhones.Where(x => x.IsRooted);
-            PhonesListAPN.SelectedIndex = 0;
-        }
-
-        /// <summary>
         /// Adds the test selected with the corresponding parameters to the list.
         /// </summary>
         /// <param name="sender"></param>
@@ -886,7 +892,6 @@ namespace InterfaceTestTool
             {
                 validPhones.Add(new Phone(PhoneNumber.Text.Trim(), Imsi.Text.Trim()));
                 WritePhones();
-                MessageBox.Show("Phone added");
             }
             return;
         }
@@ -907,7 +912,6 @@ namespace InterfaceTestTool
                     validPhones.Remove(phone);
                 }
                 WritePhones();
-                UpdatePhoneList();
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
@@ -1182,8 +1186,10 @@ namespace InterfaceTestTool
         private void RefreshPhoneA_Click(object sender, RoutedEventArgs e)
         {
             UpdatePhoneList();
-            Phone p = From.SelectedItem as Phone;
-            RefreshApnList(p.Index, "208", "22");
+            if (From.SelectedItem != null && (From.SelectedItem as Phone).IsRooted)
+            {
+                RefreshApnList((From.SelectedItem as Phone).Index, "208", "22");
+            }
         }
     }
 }

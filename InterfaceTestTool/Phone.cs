@@ -34,11 +34,13 @@ namespace InterfaceTestTool
             string m = string.IsNullOrEmpty(Model) ? "" : $", Model: {Model}";
             return $"{Index}: n°: {PhoneNumber}, IMSI: {IMSI}{m}{v}{r}";
         }
+
         public string ErrorString()
         {
             string m = string.IsNullOrEmpty(Model) ? "" : $" ({Model}, Android {Version})";
             return $"n°: {PhoneNumber}, IMSI: {IMSI}{m}";
         }
+
         internal string WriteCsv()
         {
             return $"{Index};{PhoneNumber};{IMSI}";
