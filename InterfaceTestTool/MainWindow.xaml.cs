@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -622,7 +623,9 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void Delay_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = IsTextAllowed(e.Text);
+            bool res = IsTextAllowed(e.Text);
+            if (!res) SystemSounds.Asterisk.Play();
+            e.Handled = !res;
         }
 
         /// <summary>
@@ -633,7 +636,7 @@ namespace InterfaceTestTool
         private bool IsTextAllowed(string text)
         {
             Regex regex = new Regex(@"[^0-9]");
-            return regex.IsMatch(text);
+            return !regex.IsMatch(text);
         }
 
         /// <summary>
