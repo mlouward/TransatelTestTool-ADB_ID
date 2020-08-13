@@ -117,6 +117,7 @@ namespace InterfaceTestTool
                             validPhones[i].IsRooted = bool.Parse(l[2]);
                             validPhones[i].SubIds[0] = int.TryParse(l[3], out int id1) ? id1 : -1;
                             validPhones[i].SubIds[1] = int.TryParse(l[4], out int id2) ? id2 : -1;
+                            validPhones[i].AdbId = l[5]; // We store ADB id to identify SIMs that are on the same phone.
                         }
                     }
                 }
@@ -221,11 +222,19 @@ namespace InterfaceTestTool
                                           "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
-                    if (To.Text.Trim().Length <= 2 && !validIndexes.Contains(int.Parse(To.Text.Trim())))
+                    if (To.Text.Trim().Length <= 2)
                     {
-                        MessageBox.Show($"{To.Text} is not a valid index for Phone B in 'simInfos.csv'",
-                                          "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
+                        if (!validIndexes.Contains(int.Parse(To.Text.Trim())))
+                        {
+                            MessageBox.Show($"{To.Text} is not a valid index for Phone B in 'simInfos.csv'",
+                                              "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return false;
+                        }
+                        if ((From.SelectedItem as Phone).AdbId == validPhones.Find(p => p.Index == int.Parse(To.Text.Trim())).AdbId)
+                        {
+                            MessageBox.Show("You cannot call a phone from itself (SIM A and B are in the same phone.)");
+                            return false;
+                        }
                     }
                     if ((From.SelectedItem as Phone).Index.ToString() == To.Text.Trim() || ((Phone)From.SelectedItem).PhoneNumber == To.Text.Trim())
                     {
@@ -261,6 +270,14 @@ namespace InterfaceTestTool
                     {
                         MessageBox.Show("Phone B must be the index of a phone.");
                         return false;
+                    }
+                    else
+                    {
+                        if ((From.SelectedItem as Phone).AdbId == validPhones.Find(p => p.Index == int.Parse(To.Text.Trim())).AdbId)
+                        {
+                            MessageBox.Show("You cannot call a phone from itself (SIM A and B are in the same phone.)");
+                            return false;
+                        }
                     }
                     if (!validIndexes.Contains(int.Parse(To.Text.Trim())))
                     {

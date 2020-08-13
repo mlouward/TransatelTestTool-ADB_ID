@@ -11,6 +11,7 @@ namespace InterfaceTestTool
         public bool IsRooted { get; set; }
         public string Version { get; set; }
         public string Model { get; set; }
+        public string AdbId { get; set; }
         public int[] SubIds { get; set; } = new int[2];
 
         public Phone(int index, string phoneNumber, string iMSI)

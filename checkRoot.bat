@@ -18,11 +18,11 @@ REM Test if phone is rooted or not
 adb -s %1 shell su -c "echo" && goto Root || goto NotRoot
 
 :NotRoot
-echo %model%;%version%;false;!id1!;!id2!>>../rootList.txt
+echo %model%;%version%;false;!id1!;!id2!;%1>>../rootList.txt
 goto End
 
 :Root
-echo %model%;%version%;true;!id1!;!id2!>>../rootList.txt
+echo %model%;%version%;true;!id1!;!id2!;%1>>../rootList.txt
 
 :End
 endlocal
