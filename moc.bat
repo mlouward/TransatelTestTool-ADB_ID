@@ -2,6 +2,10 @@
 cd platform-tools\
 setlocal enabledelayedexpansion
 
+REM Set default Sim card to use for calls
+adb -s %1 shell "settings put global multi_sim_voice_call %6" 
+timeout 5 >nul
+
 for /l %%F in (1, 1, %5) do (
 	REM Delay between two consecutive calls ^(in seconds^)
 	timeout 1 >nul
@@ -36,7 +40,7 @@ goto End
 
 :Error
 echo Call was unsuccessful, make sure phone A is correctly plugged in.
-echo [!date!-!time:~0,8!] Call unsuccesful. ^(FROM: %3, TO: %2, NB: %nb%, DURATION: %4sec.^)>>..\logs\MOClog.txt
+echo [!date!-!time:~0,8!] Call unsuccesful. ^(FROM: %3, TO: %2, NB: %5, DURATION: %4sec.^)>>..\logs\MOClog.txt
 
 :End
 endlocal

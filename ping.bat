@@ -1,9 +1,12 @@
-@echo off
+REM @echo off
 cd platform-tools\
 setlocal enabledelayedexpansion
 
+REM Set default Sim card to use for data
+adb -s %1 shell svc data disable & adb -s %1 shell "settings put global multi_sim_data_call %6" & timeout 1 > nul
+
 REM Disable WiFi and enable Data
-adb -s %1 shell svc data enable & adb -s %1 shell svc wifi disable && echo [!date!-!time:~0,8!] Ping test initiated. (PHONE: %3, ADDRESS: %2, NB: %4, SIZE: %5) >>..\logs\pinglog.txt
+adb -s %1 shell svc data enable & adb -s %1 shell svc wifi disable & timeout 5 > nul && echo [!date!-!time:~0,8!] Ping test initiated. (PHONE: %3, ADDRESS: %2, NB: %4, SIZE: %5) >>..\logs\pinglog.txt
 
 adb -s %1 shell "ping -c %4 -s %5 %2">pingResults.txt 2>pingError.txt && goto Success || goto Error
 

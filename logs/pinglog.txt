@@ -110,3 +110,86 @@
 [11/08/2020-12:17:49] rtt min/avg/max/mdev = 39.949/106.147/252.221/86.046 ms
 [11/08/2020-12:17:49] Ping test successful. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 4, SIZE: 32) 
 
+[12/08/2020-15:40:20] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 1, SIZE: 32) 
+[12/08/2020-15:40:25] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 1, SIZE: 32) 
+[12/08/2020-15:40:25] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 1, SIZE: 32) 
+
+[12/08/2020-15:40:30] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 1, SIZE: 32) 
+[12/08/2020-15:40:35] 1 packets transmitted, 1 received, 0% packet loss, time 0ms
+[12/08/2020-15:40:35] rtt min/avg/max/mdev = 39.476/39.476/39.476/0.000 ms
+[12/08/2020-15:40:35] Ping test successful. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 1, SIZE: 32) 
+
+[12/08/2020-15:40:53] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:41:02] 5 packets transmitted, 5 received, 0% packet loss, time 4010ms
+[12/08/2020-15:41:02] rtt min/avg/max/mdev = 26.223/49.389/97.165/25.532 ms
+[12/08/2020-15:41:02] Ping test successful. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:50:38] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:50:43] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:50:43] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:51:19] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:51:24] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:51:24] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:52:15] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:52:24] 5 packets transmitted, 5 received, 0% packet loss, time 4009ms
+[12/08/2020-15:52:24] rtt min/avg/max/mdev = 58.578/70.295/108.290/19.050 ms
+[12/08/2020-15:52:24] Ping test successful. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:54:28] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:54:33] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:54:33] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:55:02] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:55:11] 5 packets transmitted, 5 received, 0% packet loss, time 4008ms
+[12/08/2020-15:55:11] rtt min/avg/max/mdev = 42.102/52.819/64.480/8.455 ms
+[12/08/2020-15:55:11] Ping test successful. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:55:32] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:55:37] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:55:37] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:56:06] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:56:15] 5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+[12/08/2020-15:56:15] rtt min/avg/max/mdev = 45.232/57.234/82.577/13.307 ms
+[12/08/2020-15:56:15] Ping test successful. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:56:31] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:56:36] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:56:36] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:56:50] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:56:55] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:56:55] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:58:35] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:58:44] 5 packets transmitted, 5 received, 0% packet loss, time 4004ms
+[12/08/2020-15:58:44] rtt min/avg/max/mdev = 38.323/64.487/99.688/20.746 ms
+[12/08/2020-15:58:44] Ping test successful. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:58:50] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:58:55] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:58:55] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-15:59:13] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:59:18] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-15:59:18] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-16:01:31] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-16:01:31] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-16:01:31] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-16:01:44] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-16:01:48] 5 packets transmitted, 5 received, 0% packet loss, time 4004ms
+[12/08/2020-16:01:48] rtt min/avg/max/mdev = 27.038/44.277/88.777/22.698 ms
+[12/08/2020-16:01:48] Ping test successful. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-16:02:13] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-16:02:13] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-16:02:13] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+
+[12/08/2020-16:02:42] Ping test initiated. (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-16:02:42] connect: Network is unreachable (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+[12/08/2020-16:02:42] Ping test unsuccessful (PHONE: 060000000, ADDRESS: 8.8.8.8, NB: 5, SIZE: 32) 
+

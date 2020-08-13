@@ -1,6 +1,11 @@
 @echo off
 cd platform-tools\
 setlocal enabledelayedexpansion
+
+REM Set default Sim card to use for calls
+adb -s %1 shell "settings put global multi_sim_voice_call %7"
+
+
 REM Delay between two consecutive calls (in seconds)
 timeout 2 >nul
 adb -s %1 shell am start -a android.intent.action.CALL -d tel:%4 > nul && echo Calling "%4"... && echo. && echo [!date!-!time:~0,8!] Call started by %3. (FROM: %3, TO: %4, NB: %6, DURATION: %5sec.) >>..\logs\MTClog.txt || goto Error

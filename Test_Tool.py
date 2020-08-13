@@ -41,14 +41,20 @@ def get_imsi_to_id():
         IMSI To Id dictionary
     """
     subprocess.run(["getPhoneId.bat"])
-    imsi_to_id = dict() # IMSI and corresponding id
+    imsi_to_id = dict() # IMSI and corresponding ADB id
+    imsi_to_sub = dict() # IMSI and corresponding SubId
     try:
         with open("imsiList.txt") as f:
             for line in f:
                 l = line.rstrip().split(';')
                 imsi_to_id.update({l[0]:l[1]})
         os.remove("imsiList.txt")
-        return imsi_to_id
+        with open("imsiToSubId.txt") as f:
+            for line in f:
+                l = line.rstrip().split(';')
+                imsi_to_sub.update({l[0]:l[1]})
+        os.remove("imsiToSubId.txt")
+        return imsi_to_id, imsi_to_sub
     except:
         print("No devices has been plugged in. The program will exit.", file=sys.stderr)
         return
@@ -57,9 +63,9 @@ def get_dictionaries():
     """ Returns the dictionaries needed.
     """
     number_to_imsi = get_number_to_imsi()
-    imsi_to_id = get_imsi_to_id()
+    imsi_to_id, imsi_to_sub = get_imsi_to_id()
     #id_to_number = {imsi_to_id[v]:k for k, v in number_to_imsi.items() if v in imsi_to_id.keys()}
-    return number_to_imsi, imsi_to_id
+    return number_to_imsi, imsi_to_id, imsi_to_sub
 
 def moc_routine(n, call_duration, index_a, index_b):
     """ Performs MOC from phone A to B.
@@ -71,7 +77,7 @@ def moc_routine(n, call_duration, index_a, index_b):
         index_b: index of phone B in simInfos.csv, or a phone number to call.
     """
     print("\n[{}] Beginning MOC routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
-    to = int(n) * int(call_duration) + 20 # call_duration seconds per call plus 20 seconds margin
+    to = int(n) * (int(call_duration) + 1) +  + 25 # call_duration+1 seconds per call plus 25 seconds margin
     try:
         num_a = tuple(number_to_imsi.items())[int(index_a) - 1][0]
     except:
@@ -85,11 +91,12 @@ def moc_routine(n, call_duration, index_a, index_b):
         num_b = tuple(number_to_imsi.items())[int(index_b) - 1][0]
     try:
         id_a = imsi_to_id[number_to_imsi[num_a]]
+        sub_id = imsi_to_sub[number_to_imsi[num_a]]
     except:
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
     try:
-        subprocess.run(["moc.bat", id_a, num_b, num_a, call_duration, str(n)], timeout=to)
+        subprocess.run(["moc.bat", id_a, num_b, num_a, call_duration, str(n), sub_id], timeout=to)
     except:
         with open("logs\\MOClog.txt", "a") as f:
             f.write("[{}] Call unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, DURATION: {}sec.)\n\n".format(
@@ -112,13 +119,14 @@ def mtc_routine(n, call_duration, index_a, index_b):
     num_b = tuple(number_to_imsi.items())[index_b - 1][0]
     try:
         id_a = imsi_to_id[number_to_imsi[num_a]]
+        sub_id = imsi_to_sub[number_to_imsi[num_a]]
         id_b = imsi_to_id[number_to_imsi[num_b]]
     except:
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
     for i in range(n):
         try:
-            subprocess.run(["mtc.bat", id_a, id_b, num_a, num_b, call_duration, str(i + 1)], timeout=to)
+            subprocess.run(["mtc.bat", id_a, id_b, num_a, num_b, call_duration, str(i + 1), sub_id], timeout=to)
         except:
             with open("logs\\MTClog.txt", "a") as f:
                 f.write("[{}] Call unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, DURATION: {}sec.)\n\n".format(
@@ -149,12 +157,13 @@ def sms_routine(n, text, index_a, index_b):
         num_b = tuple(number_to_imsi.items())[int(index_b) - 1][0]
     try:
         id_a = imsi_to_id[number_to_imsi[num_a]]
+        sub_id = imsi_to_sub[number_to_imsi[num_a]]
     except:
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
     for i in range(n):
         try:
-            subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text], timeout=int(n))
+            subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text, sub_id], timeout=int(n))
         except:
             with open("logs\\SMSlog.txt", "a") as f:
                 f.write("[{}] SMS routine unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, TEXT: {})\n\n".format(
@@ -175,11 +184,12 @@ def data_routine(n, url=r"http://www.google.com", index=1):
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]
+        sub_id = imsi_to_sub[number_to_imsi[num]]
     except:
         print(f"Selected phone is not plugged in ({num})", file=sys.stderr)
         return
     try:
-        subprocess.run(["data.bat", id, url, num, str(n)], timeout=to)
+        subprocess.run(["data.bat", id, url, num, str(n), sub_id], timeout=to)
     except:
         with open("logs\\datalog.txt", "a") as f:
             f.write("[{}] Data test unsuccessful (process timed out) (PHONE: {}, URL: {})\n\n".format(
@@ -202,11 +212,12 @@ def speedtest_routine(index, size):
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]
+        sub_id = imsi_to_sub[number_to_imsi[num]]
     except:
         print(f"Selected phone is not plugged in ({num})", file=sys.stderr)
         return
     try:
-        subprocess.run(["speedtest.bat", id, num, size], timeout=to)
+        subprocess.run(["speedtest.bat", id, num, size, sub_id], timeout=to)
     except:
         with open("logs\\speedtestlog.txt", "a") as f:
             f.write("[{}] Speedtest unsuccessful (process timed out) (PHONE: {}, SIZE: {})\n\n".format(
@@ -254,12 +265,13 @@ def ping_routine(index, address, n, size):
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]
+        sub_id = imsi_to_sub[number_to_imsi[num]]
     except:
         print(f"Selected phone is not plugged in ({num})", file=sys.stderr)
         return
     print("\n[{}] Beginning Ping routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     try:
-        subprocess.run(["ping.bat", id, address, num, n, size], timeout=to)
+        subprocess.run(["ping.bat", id, address, num, n, size, sub_id], timeout=to)
     except:
         with open("logs\\pinglog.txt", "a") as f:
             f.write("[{}] Ping test unsuccessful (process timed out) (PHONE: {}, ADDRESS: {}, NB: {}, SIZE: {})\n\n".format(
@@ -323,6 +335,7 @@ def get_test_list(path="testsToPerform.csv", header=True):
         if header: f.readline()
         for i, line in enumerate(f):
             l = line.rstrip().split(';')
+            # Last element of a line is the sub ID to use for the test.
             if l[0].lower() == "moc":
                 moc_routine(l[1], l[2], l[3], l[4])
                 time.sleep(int(l[5]))
@@ -355,5 +368,5 @@ def get_test_list(path="testsToPerform.csv", header=True):
 
 if __name__ == '__main__':
     check_adb()
-    number_to_imsi, imsi_to_id = get_dictionaries()
+    number_to_imsi, imsi_to_id, imsi_to_sub = get_dictionaries()
     get_test_list(header=False)
