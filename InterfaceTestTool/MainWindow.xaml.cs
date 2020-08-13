@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Media;
+using System.Windows.Media.Animation;
+using System.Threading;
 
 namespace InterfaceTestTool
 {
@@ -597,7 +600,9 @@ namespace InterfaceTestTool
         /// <param name="e"></param>
         private void Delay_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = IsTextAllowed(e.Text);
+            bool res = IsTextAllowed(e.Text);
+            if (!res) SystemSounds.Asterisk.Play();
+            e.Handled = !res;
         }
 
         /// <summary>
@@ -608,7 +613,7 @@ namespace InterfaceTestTool
         private bool IsTextAllowed(string text)
         {
             Regex regex = new Regex(@"[^0-9]");
-            return regex.IsMatch(text);
+            return !regex.IsMatch(text);
         }
 
         /// <summary>
