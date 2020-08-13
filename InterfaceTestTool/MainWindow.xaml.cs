@@ -95,8 +95,8 @@ namespace InterfaceTestTool
             {
                 ProcessStartInfo start = new ProcessStartInfo("python.exe", $"checkRoot.py {s.Trim()}")
                 {
-                    CreateNoWindow = true,
-                    UseShellExecute = false,
+                    //CreateNoWindow = true,
+                    //UseShellExecute = false,
                     //RedirectStandardError = true
                 };
                 Process p = new Process { StartInfo = start };
@@ -121,6 +121,11 @@ namespace InterfaceTestTool
                     }
                 }
                 File.Delete("rootList.txt");
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("No SIM card has been found. Verify that the phones are correctly plugged in and " +
+                    "that the SIM cards are unlocked.");
             }
             catch (Exception ex)
             {

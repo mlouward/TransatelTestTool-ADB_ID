@@ -2,11 +2,7 @@
 cd platform-tools\
 setlocal enabledelayedexpansion
 
-REM Set default Sim card to use for sms
-adb -s %1 shell "settings put global multi_sim_sms %6"
-
-
-adb -s %1 shell "service call isms 7 i32 1 s16 "com.android.mms.service" s16 "%2" s16 "null" s16 "%5" s16 "null" s16 "null"" && echo [!date!-!time:~0,8!] SMS Sent. (FROM: %3, TO: %2, NB: %4, TEXT: %5)>>..\logs\SMSlog.txt || goto Error
+adb -s %1 shell "service call isms 7 i32 %6 s16 "com.android.mms.service" s16 "%2" s16 "null" s16 "%5" s16 "null" s16 "null"" && echo [!date!-!time:~0,8!] SMS Sent. (FROM: %3, TO: %2, NB: %4, TEXT: %5)>>..\logs\SMSlog.txt || goto Error
 
 goto End
 
