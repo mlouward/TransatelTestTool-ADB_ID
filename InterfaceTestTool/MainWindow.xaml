@@ -201,7 +201,7 @@
                     <TextBlock Text="Phone Number:" DockPanel.Dock="Top" />
                     <TextBox x:Name="PhoneNumber" Height="25" DockPanel.Dock="Top" GotKeyboardFocus="TextBox_GotKeyboardFocus"
                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center"
-                             TabIndex="2" />
+                             TabIndex="2" PreviewTextInput="Delay_PreviewTextInput"/>
                 </DockPanel>
 
                 <Button x:Name="AddPhone" Content="Add a SIM" Grid.Row="8"
