@@ -119,9 +119,9 @@ def mtc_routine(n, call_duration, index_a, index_b, prefix):
     except:
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
+    num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
     for i in range(n):
         try:
-            num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
             subprocess.run(["mtc.bat", id_a, id_b, num_a, num_b, call_duration, str(i + 1)], timeout=to)
         except:
             with open("logs\\MTClog.txt", "a") as f:
@@ -157,9 +157,9 @@ def sms_routine(n, text, index_a, index_b, prefix):
     except:
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
+    num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
     for i in range(n):
         try:
-            num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
             subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text], timeout=int(n))
         except:
             with open("logs\\SMSlog.txt", "a") as f:
