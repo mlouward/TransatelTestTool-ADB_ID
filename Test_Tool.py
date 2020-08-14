@@ -61,7 +61,7 @@ def get_dictionaries():
     #id_to_number = {imsi_to_id[v]:k for k, v in number_to_imsi.items() if v in imsi_to_id.keys()}
     return number_to_imsi, imsi_to_id
 
-def moc_routine(n, call_duration, index_a, index_b):
+def moc_routine(n, call_duration, index_a, index_b, prefix):
     """ Performs MOC from phone A to B.
 
     Args:
@@ -69,6 +69,7 @@ def moc_routine(n, call_duration, index_a, index_b):
         call_duration: The total duration, starting when phone A dials.
         index_a: index of phone A in simInfos.csv
         index_b: index of phone B in simInfos.csv, or a phone number to call.
+        prefix: The code that the phone call will use for phone B (International or national format).
     """
     print("\n[{}] Beginning MOC routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     to = int(n) * int(call_duration) + 20 # call_duration seconds per call plus 20 seconds margin
@@ -89,13 +90,14 @@ def moc_routine(n, call_duration, index_a, index_b):
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
     try:
+        num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
         subprocess.run(["moc.bat", id_a, num_b, num_a, call_duration, str(n)], timeout=to)
     except:
         with open("logs\\MOClog.txt", "a") as f:
             f.write("[{}] Call unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, DURATION: {}sec.)\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num_a, num_b, n, call_duration))
 
-def mtc_routine(n, call_duration, index_a, index_b):
+def mtc_routine(n, call_duration, index_a, index_b, prefix):
     """ Performs MTC between phones A and B. A calls B, B answers
     and A hangs up after detecting B has answered. 1 sec delay
     between consecutive calls and 1 second before picking up.
@@ -105,6 +107,7 @@ def mtc_routine(n, call_duration, index_a, index_b):
         call_duration: Duration of the call.
         index_a: the index of the phone calling in simInfos.csv
         index_b: the index of the phone called in simInfos.csv
+        prefix: The code that the phone call will use for phone B (International or national format).
     """
     print("\n[{}] Beginning MTC routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     to = int(n) * int(call_duration) + 20 # same as MTC
@@ -118,6 +121,7 @@ def mtc_routine(n, call_duration, index_a, index_b):
         return
     for i in range(n):
         try:
+            num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
             subprocess.run(["mtc.bat", id_a, id_b, num_a, num_b, call_duration, str(i + 1)], timeout=to)
         except:
             with open("logs\\MTClog.txt", "a") as f:
@@ -130,7 +134,7 @@ def mtc_routine(n, call_duration, index_a, index_b):
         print("Log file not found.", file=sys.stderr)
         return
 
-def sms_routine(n, text, index_a, index_b):
+def sms_routine(n, text, index_a, index_b, prefix):
     """ Sends SMS of varying length from phone A to B then from phone B to A.
     A and B are the only phones plugged in.
 
@@ -139,6 +143,7 @@ def sms_routine(n, text, index_a, index_b):
         text: the text to be sent via SMS.
         index_a: the index of the sender in simInfos.csv
         index_b: the index of the receiver in simInfos.csv, or a phone number to send to.
+        prefix: The code that the sms will use for phone B (International or national format).
     """
     print("\n[{}] Beginning SMS routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     num_a = tuple(number_to_imsi.items())[int(index_a) - 1][0]
@@ -154,6 +159,7 @@ def sms_routine(n, text, index_a, index_b):
         return
     for i in range(n):
         try:
+            num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
             subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text], timeout=int(n))
         except:
             with open("logs\\SMSlog.txt", "a") as f:
@@ -324,13 +330,13 @@ def get_test_list(path="testsToPerform.csv", header=True):
         for i, line in enumerate(f):
             l = line.rstrip().split(';')
             if l[0].lower() == "moc":
-                moc_routine(l[1], l[2], l[3], l[4])
+                moc_routine(l[1], l[2], l[3], l[4], l[6])
                 time.sleep(int(l[5]))
             elif l[0].lower() == "sms":
-                sms_routine(int(l[1]), l[2], l[3], l[4])
+                sms_routine(int(l[1]), l[2], l[3], l[4], l[6])
                 time.sleep(int(l[5]))
             elif l[0].lower() == "mtc":
-                mtc_routine(int(l[1]), l[2], int(l[3]), int(l[4]))
+                mtc_routine(int(l[1]), l[2], int(l[3]), int(l[4]), l[6])
                 time.sleep(int(l[5]))
             elif l[0].lower() == "data":
                 if l[2] == '': data_routine(int(l[1]), index=int(l[3]))

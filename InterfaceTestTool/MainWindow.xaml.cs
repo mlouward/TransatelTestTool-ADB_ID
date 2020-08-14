@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Media;
-using System.Windows.Media.Animation;
-using System.Threading;
 
 namespace InterfaceTestTool
 {
@@ -39,6 +37,20 @@ namespace InterfaceTestTool
 
         // Used to not query the APNs if it has already been done for a phone.
         private static bool apnListChanged = false;
+
+        // Used to correspond Type of number with the phone number prefix
+        public static Dictionary<int, string> indexToPrefix = new Dictionary<int, string>() {
+            {0, "+" },
+            {1, "00" },
+            {2, "0" },
+        };
+
+        // Used to correspond phone number code to Type of number
+        public static Dictionary<string, string> prefixToType = new Dictionary<string, string>() {
+            {"+" , "International (+)" },
+            {"00", "International (00)" },
+            {"0" , "National Format" },
+        };
 
         public MainWindow()
         {
@@ -149,6 +161,7 @@ namespace InterfaceTestTool
         {
             using (StreamReader sr = new StreamReader(path))
             {
+                string type;
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
@@ -158,15 +171,18 @@ namespace InterfaceTestTool
                     switch (l[0].ToLower())
                     {
                         case "moc":
-                            tests.Add(new MOC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), l[4], int.Parse(l[5])));
+                            prefixToType.TryGetValue(l[6], out type);
+                            tests.Add(new MOC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), l[4], int.Parse(l[5]), type));
                             break;
 
                         case "mtc":
-                            tests.Add(new MTC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), int.Parse(l[4]), int.Parse(l[5])));
+                            prefixToType.TryGetValue(l[6], out type);
+                            tests.Add(new MTC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), int.Parse(l[4]), int.Parse(l[5]), type));
                             break;
 
                         case "sms":
-                            tests.Add(new SMS(int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5])));
+                            prefixToType.TryGetValue(l[6], out type);
+                            tests.Add(new SMS(int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5]), type));
                             break;
 
                         case "data":
@@ -472,6 +488,7 @@ namespace InterfaceTestTool
                     URL.IsEnabled = false;
                     URL.Text = "";
                     Size.IsEnabled = false;
+                    Prefix.IsEnabled = true;
                     Size.SelectedIndex = -1;
                     APN.IsEnabled = false;
                     break;
@@ -482,6 +499,7 @@ namespace InterfaceTestTool
                     To.IsEnabled = true;
                     Message.IsEnabled = false;
                     Message.Text = "";
+                    Prefix.IsEnabled = true;
                     PacketSize.IsEnabled = false;
                     URL.IsEnabled = false;
                     URL.Text = "";
@@ -496,6 +514,7 @@ namespace InterfaceTestTool
                     Duration.Text = "";
                     To.IsEnabled = true;
                     Message.IsEnabled = true;
+                    Prefix.IsEnabled = true;
                     URL.IsEnabled = false;
                     PacketSize.IsEnabled = false;
                     URL.Text = "";
@@ -512,6 +531,7 @@ namespace InterfaceTestTool
                     To.Text = "";
                     Message.IsEnabled = false;
                     Message.Text = "";
+                    Prefix.IsEnabled = false;
                     URL.IsEnabled = true;
                     PacketSize.IsEnabled = false;
                     Size.IsEnabled = false;
@@ -528,6 +548,7 @@ namespace InterfaceTestTool
                     To.Text = "";
                     Message.IsEnabled = false;
                     Message.Text = "";
+                    Prefix.IsEnabled = false;
                     URL.IsEnabled = false;
                     URL.Text = "";
                     PacketSize.IsEnabled = false;
@@ -543,6 +564,7 @@ namespace InterfaceTestTool
                     To.Text = "";
                     Message.IsEnabled = false;
                     Message.Text = "";
+                    Prefix.IsEnabled = false;
                     URL.IsEnabled = true;
                     PacketSize.IsEnabled = true;
                     PacketSize.Text = "32";
@@ -559,6 +581,7 @@ namespace InterfaceTestTool
                     To.Text = "";
                     Message.IsEnabled = false;
                     Message.Text = "";
+                    Prefix.IsEnabled = false;
                     URL.IsEnabled = false;
                     URL.Text = "";
                     PacketSize.IsEnabled = false;
@@ -575,6 +598,7 @@ namespace InterfaceTestTool
                     To.Text = "";
                     Message.IsEnabled = false;
                     Message.Text = "";
+                    Prefix.IsEnabled = false;
                     URL.IsEnabled = false;
                     URL.Text = "";
                     PacketSize.IsEnabled = false;
@@ -646,7 +670,8 @@ namespace InterfaceTestTool
                 case 0:
                     if (ValidateForm("MOC"))
                     {
-                        AddTest(new MOC(int.Parse(NbTests.Text.Trim()), int.Parse(Duration.Text.Trim()), (From.SelectedItem as Phone).Index, To.Text.Trim(), d), n);
+                        indexToPrefix.TryGetValue(Prefix.SelectedIndex, out string type);
+                        AddTest(new MOC(int.Parse(NbTests.Text.Trim()), int.Parse(Duration.Text.Trim()), (From.SelectedItem as Phone).Index, To.Text.Trim(), d, type), n);
                         break;
                     }
                     return;
@@ -654,7 +679,8 @@ namespace InterfaceTestTool
                 case 1:
                     if (ValidateForm("MTC"))
                     {
-                        AddTest(new MTC(int.Parse(NbTests.Text.Trim()), int.Parse(Duration.Text.Trim()), (From.SelectedItem as Phone).Index, int.Parse(To.Text.Trim()), d), n);
+                        indexToPrefix.TryGetValue(Prefix.SelectedIndex, out string type);
+                        AddTest(new MTC(int.Parse(NbTests.Text.Trim()), int.Parse(Duration.Text.Trim()), (From.SelectedItem as Phone).Index, int.Parse(To.Text.Trim()), d, type), n);
                         break;
                     }
                     return;
@@ -662,7 +688,8 @@ namespace InterfaceTestTool
                 case 2:
                     if (ValidateForm("SMS"))
                     {
-                        AddTest(new SMS(int.Parse(NbTests.Text.Trim()), Message.Text.Trim(), (From.SelectedItem as Phone).Index, To.Text.Trim(), d), n);
+                        indexToPrefix.TryGetValue(Prefix.SelectedIndex, out string type);
+                        AddTest(new SMS(int.Parse(NbTests.Text.Trim()), Message.Text.Trim(), (From.SelectedItem as Phone).Index, To.Text.Trim(), d, type), n);
                         break;
                     }
                     return;
