@@ -152,12 +152,14 @@ def sms_routine(n, text, index_a, index_b, prefix):
         num_b = index_b
     else:
         num_b = tuple(number_to_imsi.items())[int(index_b) - 1][0]
+    # If length of num_b is less than 7, it is a shortcode. Do not apply prefix.
+    if len(num_b > 7):
+        num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
     try:
         id_a = imsi_to_id[number_to_imsi[num_a]]
     except:
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
-    num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
     for i in range(n):
         try:
             subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text], timeout=10 + int(n))
