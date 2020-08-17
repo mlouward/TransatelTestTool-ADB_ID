@@ -69,18 +69,18 @@ Available tests:
 
 * **MTC**  
   
-Performs MTC between phones A and B. A calls B, B answers and A hangs up after detecting B has answered + the time entered by the user.
+Performs an MTC between phones A and B. A calls B, B answers and A hangs up after detecting B has answered + the time entered by the user.
 1 sec delay between consecutive calls and before picking up. A and B must be plugged in **and written** in simInfos.csv.  
   
-(*note*: the user-chosen countdown begins **once phone B picks up the call**).  
+(*note*: the user-chosen duration begins **once phone B picks up the call**).  
 
 * **MOC**  
   
-Performs MOC from phone A to B. Phone A calls B, and after the time entered by the user, phone A hangs up.
+Performs an MOC from phone A to B. Phone A calls B, and after the time entered by the user, phone A hangs up.
 Phone A must be plugged in **and written** in simInfos.csv, Phone B can either be the index of a plugged **and written** in simInfos.csv phone or the
 phone number of an other phone, not necessarily plugged.  
   
-(*note*: the user-chosen countdown begins **when phone A starts dialing**).
+(*note*: the user-chosen duration begins **when phone A starts dialing**).
 
 *	**SMS**  
   
@@ -102,7 +102,7 @@ Will disable WiFi and use mobile data. The phone must **NOT** have a password fo
 Performs a speedtest by downloading a file from the specified phone and displaying the download speed in MBytes/sec. 
 Will disable WiFi and use mobile data. The phone must **NOT** have a password for this to work.  
   
-(*note*: The file size **must** be one of 10, 20, 50 or 100, else the test will not be run).
+(*note*: If you change the test file manually, the file size **must** be one of 10, 20, 50 or 100, else the test will not be run).
 
 * **Ping**  
   
