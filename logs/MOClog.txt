@@ -111,3 +111,21 @@
 [13/08/2020-12:44:23] Call ended. (FROM: 0681384869, TO: 0033674321112, NB: 1, DURATION: 20sec.)  
 [13/08/2020-12:44:24] MOC process successful. Final call state: "Active" (FROM: 0681384869, TO: 0033674321112, NB: 1, DURATION: 20sec.)
  
+[17/08/2020-12:40:36] Call started. (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)  
+[17/08/2020-12:49:32] Call started. (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)  
+[17/08/2020-12:50:15] Call unsuccessful (process timed out) (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)
+
+[17/08/2020-12:51:24] Call started. (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)  
+[17/08/2020-12:51:28] Call ended. (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)  
+[17/08/2020-12:51:30] Call unsuccessful (process timed out) (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)
+
+[17/08/2020-12:52:39] Call started. (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)  
+[17/08/2020-12:52:46] Call unsuccessful (process timed out) (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)
+
+[17/08/2020-12:52:56] Call started. (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)  
+[17/08/2020-12:52:59] Call unsuccessful (process timed out) (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)
+
+[17/08/2020-12:53:48] Call unsuccessful (process timed out) (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)
+
+[17/08/2020-12:54:07] Call unsuccessful (process timed out) (FROM: 33644503010, TO: 33681384869, NB: 1, DURATION: 20sec.)
+

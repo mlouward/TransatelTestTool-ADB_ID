@@ -3,7 +3,7 @@ cd platform-tools\
 setlocal enabledelayedexpansion
 
 REM Set default Sim card to use for data
-adb -s %1 shell svc data disable & adb -s %1 shell "settings put global multi_sim_data_call %6 && am broadcast -a android.intent.action.SUB_DEFAULT_CHANGED" & timeout 1 > nul
+adb -s %1 shell svc data disable & adb -s %1 shell "su -c 'settings put global multi_sim_data_call %6 && am broadcast -a android.intent.action.SUB_DEFAULT_CHANGED'" & timeout 1 > nul
 
 REM Disable WiFi and enable Data
 adb -s %1 shell svc data enable & adb -s %1 shell svc wifi disable & timeout 5 > nul && echo [!date!-!time:~0,8!] Ping test initiated. (PHONE: %3, ADDRESS: %2, NB: %4, SIZE: %5) >>..\logs\pinglog.txt

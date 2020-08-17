@@ -125,11 +125,14 @@ namespace InterfaceTestTool
                     for (int i = 0; i < validPhones.Count; i++)
                     {
                         var l = sr.ReadLine().Split(';');
-                        if (l.Length > 1)
+                        if (l.Length > 3)
                         {
                             validPhones[i].Model = l[0];
                             validPhones[i].Version = l[1];
                             validPhones[i].IsRooted = bool.Parse(l[2]);
+                            validPhones[i].SubIds[0] = int.Parse(l[3]);
+                            validPhones[i].SubIds[1] = int.Parse(l[4]);
+                            validPhones[i].AdbId = l[5];
                         }
                     }
                 }
@@ -243,6 +246,20 @@ namespace InterfaceTestTool
                         MessageBox.Show("Phone A and Phone B must be different.");
                         return false;
                     }
+                    if (To.Text.Trim().Length <= 2 && (From.SelectedItem as Phone).AdbId == validPhones.Find(p => p.Index == int.Parse(To.Text)).AdbId)
+                    {
+                        MessageBox.Show($"{(From.SelectedItem as Phone).PhoneNumber} and {validPhones.Find(p => p.Index == int.Parse(To.Text)).PhoneNumber} are in the same phone.");
+                        return false;
+                    }
+                    if (To.Text.Trim().Length > 2 && (From.SelectedItem as Phone).PhoneNumber == validPhones.Find(p => p.PhoneNumber == To.Text).PhoneNumber)
+                    {
+                        MessageBox.Show($"Phone A and Phone B must be different.");
+
+                    }
+                    if (To.Text.Trim().Length > 2 && (From.SelectedItem as Phone).AdbId == validPhones.Find(p => p.PhoneNumber == To.Text).AdbId)
+                    {
+                        MessageBox.Show($"{(From.SelectedItem as Phone).PhoneNumber} and {validPhones.Find(p => p.PhoneNumber == To.Text).PhoneNumber} are in the same phone.");
+                    }
                     m = Regex.Match(To.Text.Trim(), @"^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
                     if (To.Text.Trim().Length > 2 && !m.Success)
                     {
@@ -284,6 +301,11 @@ namespace InterfaceTestTool
                         MessageBox.Show("Phone A and Phone B must be different.");
                         return false;
                     }
+                    if ((From.SelectedItem as Phone).AdbId == validPhones.Find(p => p.Index == int.Parse(To.Text)).AdbId)
+                    {
+                        MessageBox.Show($"{(From.SelectedItem as Phone).PhoneNumber} and {validPhones.Find(p => p.Index == int.Parse(To.Text)).PhoneNumber} are in the same phone.");
+                        return false;
+                    }
                     break;
 
                 case "SMS":
@@ -319,6 +341,7 @@ namespace InterfaceTestTool
                                         "Wrong number",
                                         MessageBoxButton.YesNo,
                                         MessageBoxImage.Question);
+
                         if (q == MessageBoxResult.No) return false;
                     }
                     break;
