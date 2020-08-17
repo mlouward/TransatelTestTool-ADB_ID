@@ -1195,6 +1195,7 @@ namespace InterfaceTestTool
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             File.Delete("apn.csv");
+            File.Delete("imsiToSubId.txt");
         }
 
         /// <summary>
