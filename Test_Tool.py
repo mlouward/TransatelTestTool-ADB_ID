@@ -138,7 +138,7 @@ def mtc_routine(n, call_duration, index_a, index_b):
         print("Log file not found.", file=sys.stderr)
         return
 
-def sms_routine(n, text, index_a, index_b):
+def sms_routine(n, text, index_a, index_b, prefix):
     """ Sends SMS of varying length from phone A to B then from phone B to A.
     A and B are the only phones plugged in.
 
@@ -147,6 +147,7 @@ def sms_routine(n, text, index_a, index_b):
         text: the text to be sent via SMS.
         index_a: the index of the sender in simInfos.csv
         index_b: the index of the receiver in simInfos.csv, or a phone number to send to.
+        prefix: The code that the sms will use for phone B (International or national format).
     """
     print("\n[{}] Beginning SMS routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     num_a = tuple(number_to_imsi.items())[int(index_a) - 1][0]
@@ -155,15 +156,17 @@ def sms_routine(n, text, index_a, index_b):
         num_b = index_b
     else:
         num_b = tuple(number_to_imsi.items())[int(index_b) - 1][0]
+    # If length of num_b is less than 7, it is a shortcode. Do not apply prefix.
+    if len(num_b > 7):
+        num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
     try:
         id_a = imsi_to_id[number_to_imsi[num_a]]
-        sub_id = imsi_to_sub[number_to_imsi[num_a]]
     except:
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
     for i in range(n):
         try:
-            subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text, sub_id], timeout=int(n))
+            subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text], timeout=10 + int(n))
         except:
             with open("logs\\SMSlog.txt", "a") as f:
                 f.write("[{}] SMS routine unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, TEXT: {})\n\n".format(
