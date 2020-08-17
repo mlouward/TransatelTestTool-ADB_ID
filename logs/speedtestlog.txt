@@ -136,3 +136,11 @@ Average speed: 2.38MB/sec.
 [11/08/2020-12:18:07] Speedtest successful. (PHONE: 0644503010, SIZE: 10MB) 
 Average speed: 1.52MB/sec.
 
+[17/08/2020-15:18:19] Speedtest initiated. (PHONE: 33644503010, SIZE: 10MB)  
+[17/08/2020-15:18:29] Download started. (PHONE: 33644503010, SIZE: 10MB)
+[17/08/2020-15:18:34] File download finished. (PHONE: 33644503010, SIZE: 10MB) 
+[17/08/2020-15:18:34] File deleted from phone storage. (PHONE: 33644503010, SIZE: 10MB)   
+[17/08/2020-15:18:50] Cache deleted for Chrome. (PHONE: 33644503010, SIZE: 10MB)   
+[17/08/2020-15:18:53] Speedtest successful. (PHONE: 33644503010, SIZE: 10MB) 
+Average speed: 1.75MB/sec.
+

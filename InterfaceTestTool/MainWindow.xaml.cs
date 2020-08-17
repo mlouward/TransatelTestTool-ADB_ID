@@ -136,7 +136,7 @@ namespace InterfaceTestTool
                         }
                     }
                 }
-                //File.Delete("rootList.txt");
+                File.Delete("rootList.txt");
             }
             catch (Exception ex)
             {

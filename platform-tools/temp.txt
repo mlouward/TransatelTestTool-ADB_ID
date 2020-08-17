@@ -1,1 +1,0 @@
-  mForegroundCallState=0
