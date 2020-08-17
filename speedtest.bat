@@ -2,14 +2,8 @@
 cd platform-tools\
 setlocal enabledelayedexpansion
 
-REM Set default Sim card to use for data
-adb -s %1 shell svc data disable & adb -s %1 shell "settings put global multi_sim_data_call %4 && am broadcast -a android.intent.action.SUB_DEFAULT_CHANGED" & timeout 1 > nul
-
-REM Disable WiFi and enable Data
-adb -s %1 shell svc data enable & adb -s %1 shell svc wifi disable & timeout 5 > nul 
-
 REM Turn on screen and unlock if necessary. Disables WiFi to make sure we use mobile data.
-adb -s %1 shell input keyevent KEYCODE_WAKEUP & adb -s %1 shell input swipe 100 1000 100 0 & adb -s %1 shell input keyevent KEYCODE_MENU
+adb -s %1 shell input keyevent KEYCODE_WAKEUP & adb -s %1 shell input swipe 100 1000 100 0 & adb -s %1 shell input keyevent KEYCODE_MENU & adb -s %1 shell svc data enable & adb -s %1 shell svc wifi disable
 
 REM Download a file of given size
 adb -s %1 shell "am start -a android.intent.action.VIEW -d "http://ipv4.download.thinkbroadband.com/%3MB.zip"" && echo [!date!-!time:~0,8!] Speedtest initiated. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt || goto ErrorDownload
@@ -17,7 +11,7 @@ adb -s %1 shell "am start -a android.intent.action.VIEW -d "http://ipv4.download
 :Loop
 endlocal
 setlocal enabledelayedexpansion
-REM Get state of download (not 0 when download starts: state.txt is written when download starts)
+REM Get state of download (not 0 when download starts)
 adb -s %1 shell "dumpsys activity services | grep -i downloads" >state.txt
 for %%a in (state.txt) do (
 	if %%~za GTR 0 (
@@ -44,6 +38,7 @@ echo [!date!-!time:~0,8!] File download finished. (PHONE: %2, SIZE: %3MB) >>..\l
 del state.txt
 REM Delete the file
 adb -s %1 shell "rm /storage/self/primary/Download/%3MB.zip" >nul && echo [!date!-!time:~0,8!] File deleted from phone storage. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt  || goto ErrorDelete
+adb -s %1 shell "pm clear com.android.chrome" >nul && echo [!date!-!time:~0,8!] Cache deleted for Chrome. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt  || goto ErrorDelete
 
 REM Turn off screen
 adb -s %1 shell input keyevent KEYCODE_WAKEUP & adb -s %1 shell input keyevent KEYCODE_POWER
@@ -56,7 +51,7 @@ echo [!date!-!time:~0,8!] Could not start the download. (PHONE: %2, SIZE: %3MB) 
 goto End
 
 :ErrorDelete
-echo Unable to delete the downloaded file. Please manually delete the folder `%3MB.zip` in your phone's download folder.
+echo Unable to delete the downloaded file/clear cache. Please manually delete the folder `%3MB.zip` in your phone's download folder, and clear Chrome's cache.
 echo [!date!-!time:~0,8!] Could not delete the downloaded file from phone storage. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt
 
 :End
