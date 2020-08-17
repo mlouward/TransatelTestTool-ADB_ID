@@ -7,24 +7,27 @@
         public int From { get; set; }
         public string To { get; set; }
         public int Delay { get; set; }
+        public string Prefix { get; set; }
 
-        public SMS(int nb, string text, int from, string to, int delay)
+        public SMS(int nb, string text, int from, string to, int delay, string prefix)
         {
             Nb = nb;
             Text = text;
             From = from;
             To = to;
             Delay = delay;
+            Prefix = prefix;
         }
 
         public string WriteCsv()
         {
-            return $"SMS;{Nb};{Text};{From};{To};{Delay}";
+            return $"SMS;{Nb};{Text};{From};{To};{Delay};{Prefix}";
         }
 
         public sealed override string ToString()
         {
-            return $"SMS: {Nb} tests, Text: {Text}, Phone A: {From}, Phone B: {To}, Delay: {Delay}sec.";
+            var p = MainWindow.prefixToType.TryGetValue(Prefix, out string prf) ? prf : Prefix;
+            return $"SMS: {Nb} tests, Text: {Text}, Phone A: {From}, Phone B: {To} ({p}), Delay: {Delay}sec.";
         }
     }
 }

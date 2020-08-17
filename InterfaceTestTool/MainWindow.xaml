@@ -17,6 +17,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="1.6*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -50,7 +51,7 @@
                         Grid.Column="1" Style="{StaticResource BlueButton}" Width="130"
                         HorizontalAlignment="Right" Margin="20, 0" TabIndex="1"
                         Click="RefreshPhoneA_Click"/>
- 
+
                 <DockPanel Margin="10" Grid.Row="1" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="Number of tests (packets for ping):" DockPanel.Dock="Top" />
                     <TextBox x:Name="NbTests" Height="25" DockPanel.Dock="Top" PreviewTextInput="Delay_PreviewTextInput"
@@ -64,31 +65,41 @@
                 </DockPanel>
 
                 <DockPanel Margin="10" Grid.Row="3" LastChildFill="True" Grid.ColumnSpan="3">
-                    <TextBlock Text="SIM A:" DockPanel.Dock="Top" />
+                    <TextBlock Text="Phone A:" DockPanel.Dock="Top" />
                     <ComboBox x:Name="From" Height="25" DockPanel.Dock="Top" SelectedIndex="0"
                               Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="4" SelectionChanged="From_SelectionChanged" />
                 </DockPanel>
 
                 <DockPanel Margin="10" Grid.Row="4" LastChildFill="True" Grid.ColumnSpan="3">
-                    <TextBlock Text="SIM B:" DockPanel.Dock="Top" />
+                    <TextBlock Text="Phone B:" DockPanel.Dock="Top" />
                     <TextBox x:Name="To" Height="25" DockPanel.Dock="Top" GotKeyboardFocus="TextBox_GotKeyboardFocus"
                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="5" />
                 </DockPanel>
 
                 <DockPanel Margin="10" Grid.Row="5" LastChildFill="True" Grid.ColumnSpan="3">
+                    <TextBlock Text="Type of number:" DockPanel.Dock="Top" />
+                    <ComboBox x:Name="Prefix" Height="25" DockPanel.Dock="Top"
+                             Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="5">
+                        <ComboBoxItem Content="International (+)" />
+                        <ComboBoxItem Content="International (00)" />
+                        <ComboBoxItem Content="National Format" />
+                    </ComboBox>
+                </DockPanel>
+
+                <DockPanel Margin="10" Grid.Row="6" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="Text (for SMS):" DockPanel.Dock="Top" />
                     <TextBox x:Name="Message" Height="Auto" DockPanel.Dock="Top" AcceptsReturn="False"
                      TextWrapping="Wrap" Width="Auto" Margin="10" VerticalContentAlignment="Top" GotKeyboardFocus="TextBox_GotKeyboardFocus"
                      TabIndex="6" ScrollViewer.VerticalScrollBarVisibility="Auto" />
                 </DockPanel>
 
-                <DockPanel Margin="10" Grid.Row="6" LastChildFill="True" Grid.ColumnSpan="3">
+                <DockPanel Margin="10" Grid.Row="7" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="URL/IP Address (for Data/Ping):" DockPanel.Dock="Top" />
                     <TextBox x:Name="URL" Height="25" DockPanel.Dock="Top" GotKeyboardFocus="TextBox_GotKeyboardFocus"
                      Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" TabIndex="7" />
                 </DockPanel>
 
-                <DockPanel Margin="10" Grid.Row="7" LastChildFill="True" Grid.ColumnSpan="3">
+                <DockPanel Margin="10" Grid.Row="8" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="File Size (Speedtest) | Packet size (Ping):" DockPanel.Dock="Top" />
                     <Grid Margin="10, 0" DockPanel.Dock="Top">
                         <Grid.ColumnDefinitions>
@@ -108,7 +119,7 @@
                     </Grid>
                 </DockPanel>
 
-                <DockPanel Margin="10" Grid.Row="8" LastChildFill="True" Grid.ColumnSpan="3">
+                <DockPanel Margin="10" Grid.Row="9" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="Delay after test (sec.) | Repetitions Number" DockPanel.Dock="Top" />
                     <Grid Margin="10, 0" DockPanel.Dock="Top">
                         <Grid.ColumnDefinitions>
@@ -124,7 +135,7 @@
                     </Grid>
                 </DockPanel>
 
-                <DockPanel Margin="10" Grid.Row="9" LastChildFill="True" Grid.ColumnSpan="3">
+                <DockPanel Margin="10" Grid.Row="10" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="APN ID (see APN tab):" DockPanel.Dock="Top" />
                     <ComboBox x:Name="APN" Height="25" DockPanel.Dock="Top" TabIndex="4"
                               Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" />
@@ -137,7 +148,7 @@
                 <TextBlock Text="List of tests" Grid.Column="3" Margin="10,0"
                    FontSize="22" VerticalAlignment="Center" />
 
-                <ListView Grid.RowSpan="9" Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="1"
+                <ListView Grid.RowSpan="10" Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="1"
                           Margin="10" Name="TestsList" SelectionMode="Extended" KeyDown="TestsList_KeyDown"
                           ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <ListView.ItemTemplate>
@@ -159,7 +170,7 @@
                 Click="Execute_Click" Margin="10, 0" Style="{StaticResource BlueButton}"
                 FontSize="20" TabIndex="15" />
 
-                <Button x:Name="Save" Content="Save Test File" Grid.Column="5" Grid.Row="10"
+                <Button x:Name="Save" Content="Save Test File" Grid.Column="5" Grid.Row="11"
                 Click="Save_Click" Margin="5,0,10,40" VerticalAlignment="Bottom"
                 Style="{StaticResource BlueButton}" FontSize="18" TabIndex="16" />
 
@@ -201,10 +212,10 @@
                     <TextBlock Text="Phone Number:" DockPanel.Dock="Top" />
                     <TextBox x:Name="PhoneNumber" Height="25" DockPanel.Dock="Top" GotKeyboardFocus="TextBox_GotKeyboardFocus"
                              Width="Auto" Margin="10, 0" VerticalContentAlignment="Center"
-                             TabIndex="2" PreviewTextInput="Delay_PreviewTextInput"/>
+                             TabIndex="2" PreviewTextInput="Delay_PreviewTextInput" />
                 </DockPanel>
 
-                <Button x:Name="AddPhone" Content="Add a SIM" Grid.Row="8"
+                <Button x:Name="AddPhone" Content="Add a Phone" Grid.Row="8"
                         Margin="10" Style="{StaticResource BlueButton}" TabIndex="3"
                         FontSize="20" Click="AddPhone_Click" Grid.ColumnSpan="2" />
 
