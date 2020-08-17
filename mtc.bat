@@ -3,7 +3,7 @@ cd platform-tools\
 setlocal enabledelayedexpansion
 
 REM Set default Sim card to use for calls
-adb -s %1 shell "settings put global multi_sim_voice_call %7 && am broadcast -a android.intent.action.SUB_DEFAULT_CHANGED"
+adb -s %1 shell su -c "settings put global multi_sim_voice_call %7 && am broadcast -a android.intent.action.SUB_DEFAULT_CHANGED"
 
 
 REM Delay between two consecutive calls (in seconds)
