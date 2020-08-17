@@ -160,7 +160,7 @@ def sms_routine(n, text, index_a, index_b, prefix):
     num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
     for i in range(n):
         try:
-            subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text], timeout=int(n))
+            subprocess.run(["sms.bat", id_a, num_b, num_a, str(i + 1), text], timeout=10 + int(n))
         except:
             with open("logs\\SMSlog.txt", "a") as f:
                 f.write("[{}] SMS routine unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, TEXT: {})\n\n".format(

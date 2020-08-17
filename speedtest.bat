@@ -38,6 +38,7 @@ echo [!date!-!time:~0,8!] File download finished. (PHONE: %2, SIZE: %3MB) >>..\l
 del state.txt
 REM Delete the file
 adb -s %1 shell "rm /storage/self/primary/Download/%3MB.zip" >nul && echo [!date!-!time:~0,8!] File deleted from phone storage. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt  || goto ErrorDelete
+adb -s %1 shell "pm clear com.android.chrome" >nul && echo [!date!-!time:~0,8!] Cache deleted for Chrome. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt  || goto ErrorDelete
 
 REM Turn off screen
 adb -s %1 shell input keyevent KEYCODE_WAKEUP & adb -s %1 shell input keyevent KEYCODE_POWER
@@ -50,7 +51,7 @@ echo [!date!-!time:~0,8!] Could not start the download. (PHONE: %2, SIZE: %3MB) 
 goto End
 
 :ErrorDelete
-echo Unable to delete the downloaded file. Please manually delete the folder `%3MB.zip` in your phone's download folder.
+echo Unable to delete the downloaded file/clear cache. Please manually delete the folder `%3MB.zip` in your phone's download folder, and clear Chrome's cache.
 echo [!date!-!time:~0,8!] Could not delete the downloaded file from phone storage. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt
 
 :End

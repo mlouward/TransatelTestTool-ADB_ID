@@ -1,3 +1,7 @@
 ping;2;1;8.8.8.8;4;32
 speedtest;2;10;1
 data;1;http://www.google.com;2;1
+changeapn;2;128;mobiledata;mobiledata;5
+airplane;2;8;0
+speedtest;2;20;0
+changeapn;2;4206;apnTest;netgprs.com;0
