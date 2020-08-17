@@ -13,7 +13,7 @@ adb -s %1 shell am start -a android.intent.action.CALL -d tel:%4 > nul && echo C
 		set /a s=%%H
 		if !s!==1 (
 			REM Delay before answering
-			timeout 1 >nul
+			timeout %5 >nul
 			REM B number answers incoming call
 			adb -s %2 shell input keyevent KEYCODE_CALL >nul && echo Call answered. && echo. && echo [!date!-!time:~0,8!] Call answered by %4. ^(FROM: %3, TO: %4, NB: %6, DURATION: %5sec.^) >>..\logs\MTClog.txt || goto ErrorB
 			goto ExLoopMtc
@@ -23,7 +23,7 @@ adb -s %1 shell am start -a android.intent.action.CALL -d tel:%4 > nul && echo C
 	del state.txt
 	del temp.txt
 	REM Call duration
-	timeout %5
+	timeout 10 > nul
 	REM Get call state on phone A
 	adb -s %1 shell "dumpsys telephony.registry | grep -i foregroundcallstate" >temp.txt || goto ErrorA
 	findstr /n "=" temp.txt | findstr "1:">temp2.txt
