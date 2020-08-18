@@ -38,7 +38,9 @@ echo [!date!-!time:~0,8!] File download finished. (PHONE: %2, SIZE: %3MB) >>..\l
 del state.txt
 REM Delete the file
 adb -s %1 shell "rm /storage/self/primary/Download/%3MB.zip" >nul && echo [!date!-!time:~0,8!] File deleted from phone storage. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt  || goto ErrorDelete
-adb -s %1 shell "pm clear com.android.chrome" >nul && echo [!date!-!time:~0,8!] Cache deleted for Chrome. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt  || goto ErrorDelete
+
+REM Can not clear cache because it clears all user data (needs human intervention to allow access to files).
+REM adb -s %1 shell "pm clear com.android.chrome" >nul && echo [!date!-!time:~0,8!] Cache deleted for Chrome. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt  || goto ErrorDelete
 
 REM Turn off screen
 adb -s %1 shell input keyevent KEYCODE_WAKEUP & adb -s %1 shell input keyevent KEYCODE_POWER
