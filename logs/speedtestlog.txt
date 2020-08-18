@@ -153,3 +153,73 @@ Average speed: 0.82MB/sec.
 Average speed: 1.3MB/sec.
 
 [17/08/2020-16:40:20] Speedtest initiated. (PHONE: 33644503010, SIZE: 50MB)  
+[18/08/2020-15:59:46] Speedtest initiated. (PHONE: 33644503010, SIZE: 10MB)  
+[18/08/2020-15:59:46] Download started. (PHONE: 33644503010, SIZE: 10MB)
+[18/08/2020-16:00:08] File download finished. (PHONE: 33644503010, SIZE: 10MB) 
+[18/08/2020-16:00:09] File deleted from phone storage. (PHONE: 33644503010, SIZE: 10MB)   
+[18/08/2020-16:00:11] Speedtest successful. (PHONE: 33644503010, SIZE: 10MB) 
+Average speed: 0.45MB/sec.
+
+[18/08/2020-16:00:20] Speedtest initiated. (PHONE: 33644503010, SIZE: 20MB)  
+[18/08/2020-16:00:21] Download started. (PHONE: 33644503010, SIZE: 20MB)
+[18/08/2020-16:00:31] File download finished. (PHONE: 33644503010, SIZE: 20MB) 
+[18/08/2020-16:00:32] File deleted from phone storage. (PHONE: 33644503010, SIZE: 20MB)   
+[18/08/2020-16:00:33] Speedtest successful. (PHONE: 33644503010, SIZE: 20MB) 
+Average speed: 1.93MB/sec.
+
+[18/08/2020-16:00:42] Speedtest initiated. (PHONE: 33644503010, SIZE: 50MB)  
+[18/08/2020-16:00:43] Download started. (PHONE: 33644503010, SIZE: 50MB)
+[18/08/2020-16:01:07] File download finished. (PHONE: 33644503010, SIZE: 50MB) 
+[18/08/2020-16:01:07] File deleted from phone storage. (PHONE: 33644503010, SIZE: 50MB)   
+[18/08/2020-16:01:09] Speedtest successful. (PHONE: 33644503010, SIZE: 50MB) 
+Average speed: 2.07MB/sec.
+
+[18/08/2020-16:01:18] Speedtest initiated. (PHONE: 33644503010, SIZE: 100MB)  
+[18/08/2020-16:01:19] Download started. (PHONE: 33644503010, SIZE: 100MB)
+[18/08/2020-16:01:56] File download finished. (PHONE: 33644503010, SIZE: 100MB) 
+[18/08/2020-16:01:56] File deleted from phone storage. (PHONE: 33644503010, SIZE: 100MB)   
+[18/08/2020-16:01:58] Speedtest successful. (PHONE: 33644503010, SIZE: 100MB) 
+Average speed: 2.64MB/sec.
+
+[18/08/2020-16:02:12] Speedtest initiated. (PHONE: 33644503010, SIZE: 10MB)  
+[18/08/2020-16:02:13] Download started. (PHONE: 33644503010, SIZE: 10MB)
+[18/08/2020-16:02:16] File download finished. (PHONE: 33644503010, SIZE: 10MB) 
+[18/08/2020-16:02:17] File deleted from phone storage. (PHONE: 33644503010, SIZE: 10MB)   
+[18/08/2020-16:02:19] Speedtest successful. (PHONE: 33644503010, SIZE: 10MB) 
+Average speed: 2.63MB/sec.
+
+[18/08/2020-16:02:28] Speedtest initiated. (PHONE: 33644503010, SIZE: 20MB)  
+[18/08/2020-16:02:28] Download started. (PHONE: 33644503010, SIZE: 20MB)
+[18/08/2020-16:02:35] File download finished. (PHONE: 33644503010, SIZE: 20MB) 
+[18/08/2020-16:02:35] File deleted from phone storage. (PHONE: 33644503010, SIZE: 20MB)   
+[18/08/2020-16:02:37] Speedtest successful. (PHONE: 33644503010, SIZE: 20MB) 
+Average speed: 3.1MB/sec.
+
+[18/08/2020-16:02:46] Speedtest initiated. (PHONE: 33644503010, SIZE: 50MB)  
+[18/08/2020-16:02:46] Download started. (PHONE: 33644503010, SIZE: 50MB)
+[18/08/2020-16:03:02] File download finished. (PHONE: 33644503010, SIZE: 50MB) 
+[18/08/2020-16:03:02] File deleted from phone storage. (PHONE: 33644503010, SIZE: 50MB)   
+[18/08/2020-16:03:04] Speedtest successful. (PHONE: 33644503010, SIZE: 50MB) 
+Average speed: 3.21MB/sec.
+
+[18/08/2020-16:03:13] Speedtest initiated. (PHONE: 33644503010, SIZE: 100MB)  
+[18/08/2020-16:03:14] Download started. (PHONE: 33644503010, SIZE: 100MB)
+[18/08/2020-16:03:59] File download finished. (PHONE: 33644503010, SIZE: 100MB) 
+[18/08/2020-16:03:59] File deleted from phone storage. (PHONE: 33644503010, SIZE: 100MB)   
+[18/08/2020-16:04:01] Speedtest successful. (PHONE: 33644503010, SIZE: 100MB) 
+Average speed: 2.21MB/sec.
+
+[18/08/2020-16:13:13] Speedtest initiated. (PHONE: 33644503010, SIZE: 10MB)  
+[18/08/2020-16:13:23] Download started. (PHONE: 33644503010, SIZE: 10MB)
+[18/08/2020-16:13:44] File download finished. (PHONE: 33644503010, SIZE: 10MB) 
+[18/08/2020-16:13:44] File deleted from phone storage. (PHONE: 33644503010, SIZE: 10MB)   
+[18/08/2020-16:13:46] Speedtest successful. (PHONE: 33644503010, SIZE: 10MB) 
+Average speed: 0.48MB/sec.
+
+[18/08/2020-16:13:55] Speedtest initiated. (PHONE: 33644503010, SIZE: 20MB)  
+[18/08/2020-16:13:55] Download started. (PHONE: 33644503010, SIZE: 20MB)
+[18/08/2020-16:14:13] File download finished. (PHONE: 33644503010, SIZE: 20MB) 
+[18/08/2020-16:14:13] File deleted from phone storage. (PHONE: 33644503010, SIZE: 20MB)   
+[18/08/2020-16:14:15] Speedtest successful. (PHONE: 33644503010, SIZE: 20MB) 
+Average speed: 1.13MB/sec.
+
