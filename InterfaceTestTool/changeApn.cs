@@ -1,5 +1,8 @@
-﻿namespace InterfaceTestTool
+﻿using System;
+
+namespace InterfaceTestTool
 {
+    [Serializable]
     internal class ChangeApn : ITest
     {
         public int From { get; set; }

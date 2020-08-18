@@ -1,5 +1,8 @@
-﻿namespace InterfaceTestTool
+﻿using System;
+
+namespace InterfaceTestTool
 {
+    [Serializable]
     public class SMS : ITest
     {
         public int Nb { get; set; }

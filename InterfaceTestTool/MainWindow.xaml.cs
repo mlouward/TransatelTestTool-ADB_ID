@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,13 +45,6 @@ namespace InterfaceTestTool
             {0, "+" },
             {1, "00" },
             {2, "0" },
-        };
-
-        // Used to correspond phone number code to Type of number
-        public static Dictionary<string, string> prefixToType = new Dictionary<string, string>() {
-            {"+" , "International (+)" },
-            {"00", "International (00)" },
-            {"0" , "National Format" },
         };
 
         public MainWindow()
@@ -171,18 +166,15 @@ namespace InterfaceTestTool
                     switch (l[0].ToLower())
                     {
                         case "moc":
-                            prefixToType.TryGetValue(l[6], out type);
-                            tests.Add(new MOC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), l[4], int.Parse(l[5]), type));
+                            tests.Add(new MOC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), l[4], int.Parse(l[5]), l[6]));
                             break;
 
                         case "mtc":
-                            prefixToType.TryGetValue(l[6], out type);
-                            tests.Add(new MTC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), int.Parse(l[4]), int.Parse(l[5]), type));
+                            tests.Add(new MTC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), int.Parse(l[4]), int.Parse(l[5]), l[6]));
                             break;
 
                         case "sms":
-                            prefixToType.TryGetValue(l[6], out type);
-                            tests.Add(new SMS(int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5]), type));
+                            tests.Add(new SMS(int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5]), l[6]));
                             break;
 
                         case "data":
@@ -793,7 +785,7 @@ namespace InterfaceTestTool
                 testCopy.Clear();
                 foreach (var item in TestsList.SelectedItems)
                 {
-                    testCopy.Add(item as ITest);
+                    testCopy.Add(Clone(item as ITest));
                     s += (item as ITest).ToString() + "\n";
                 }
                 //testCopy = TestsList.SelectedItems as List<ITest>;
@@ -810,6 +802,25 @@ namespace InterfaceTestTool
                         AddTest(test, 1);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Cloning method for deep copy of objects via Serialization.
+        /// (Used to copy-paste tests).
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static T Clone<T>(T source)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new MemoryStream();
+            using (stream)
+            {
+                formatter.Serialize(stream, source);
+                stream.Seek(0, SeekOrigin.Begin);
+                return (T)formatter.Deserialize(stream);
             }
         }
 

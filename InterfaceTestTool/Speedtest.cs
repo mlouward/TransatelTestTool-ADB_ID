@@ -1,5 +1,8 @@
-﻿namespace InterfaceTestTool
+﻿using System;
+
+namespace InterfaceTestTool
 {
+    [Serializable]
     public class Speedtest : ITest
     {
         public int From { get; set; }
