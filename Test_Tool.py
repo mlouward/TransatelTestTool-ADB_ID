@@ -41,7 +41,7 @@ def get_imsi_to_id():
         IMSI To Id dictionary
     """
     subprocess.run(["getPhoneId.bat"])
-    imsi_to_id = dict() # IMSI and corresponding id
+    imsi_to_id = dict()  # IMSI and corresponding id
     try:
         with open("imsiList.txt") as f:
             for line in f:
@@ -58,7 +58,7 @@ def get_dictionaries():
     """
     number_to_imsi = get_number_to_imsi()
     imsi_to_id = get_imsi_to_id()
-    #id_to_number = {imsi_to_id[v]:k for k, v in number_to_imsi.items() if v in imsi_to_id.keys()}
+    # id_to_number = {imsi_to_id[v]:k for k, v in number_to_imsi.items() if v in imsi_to_id.keys()}
     return number_to_imsi, imsi_to_id
 
 def moc_routine(n, call_duration, index_a, index_b, prefix):
@@ -69,7 +69,7 @@ def moc_routine(n, call_duration, index_a, index_b, prefix):
         call_duration: The total duration, starting when phone A dials.
         index_a: index of phone A in simInfos.csv
         index_b: index of phone B in simInfos.csv, or a phone number to call.
-        prefix: The code that the phone call will use for phone B (International or national format).
+        prefix: The code used for phone B (International or national format).
     """
     print("\n[{}] Beginning MOC routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
     to = int(n) * int(call_duration) + 20 # call_duration seconds per call plus 20 seconds margin
@@ -90,7 +90,7 @@ def moc_routine(n, call_duration, index_a, index_b, prefix):
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
     try:
-        num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
+        num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b
         subprocess.run(["moc.bat", id_a, num_b, num_a, call_duration, str(n)], timeout=to)
     except:
         with open("logs\\MOClog.txt", "a") as f:
@@ -119,7 +119,7 @@ def mtc_routine(n, call_duration, index_a, index_b, prefix):
     except:
         print(f"Selected phone is not plugged in ({num_a})", file=sys.stderr)
         return
-    num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
+    num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b
     for i in range(n):
         try:
             subprocess.run(["mtc.bat", id_a, id_b, num_a, num_b, call_duration, str(i + 1)], timeout=to)
@@ -154,7 +154,7 @@ def sms_routine(n, text, index_a, index_b, prefix):
         num_b = tuple(number_to_imsi.items())[int(index_b) - 1][0]
     # If length of num_b is less than 7, it is a shortcode. Do not apply prefix.
     if len(num_b > 7):
-        num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
+        num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b
     try:
         id_a = imsi_to_id[number_to_imsi[num_a]]
     except:
@@ -246,7 +246,7 @@ def speedtest_routine(index, size):
         except:
             print("Log file not found.", file=sys.stderr)
             return
-        return 
+        return
 
 def ping_routine(index, address, n, size):
     """
@@ -275,7 +275,7 @@ def ping_routine(index, address, n, size):
 
 def airplane_routine(index, duration):
     """
-    Activates airplane mode for the phone (needs root) and disables it 
+    Activates airplane mode for the phone (needs root) and disables it
     after the specified duration.
 
     Args:
@@ -296,7 +296,7 @@ def airplane_routine(index, duration):
         with open("logs\\airplanelog.txt", "a") as f:
             f.write("[{}] Airplane test unsuccessful (process timed out) (PHONE: {}, DURATION: {})\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, duration))
-   
+
 def change_apn(index, apn_id):
     """ Changes the default APN (for rooted devices).
 
@@ -304,7 +304,7 @@ def change_apn(index, apn_id):
         index: The index of the phone to use in simInfos.csv
         apn_id: the ID of the APN to set as default.
     """
-    to = 15 # duration should be about 5 seconds, plus 10 seconds margin 
+    to = 15 # duration should be about 5 seconds, plus 10 seconds margin
     num = tuple(number_to_imsi.items())[index - 1][0]
     try:
         id = imsi_to_id[number_to_imsi[num]]
@@ -315,20 +315,18 @@ def change_apn(index, apn_id):
     try:
         subprocess.run(["setDefaultApn.bat", id, apn_id, num], timeout=to)
     except:
-         with open("logs\\APNlog.txt", "a") as f:
+        with open("logs\\APNlog.txt", "a") as f:
             f.write("[{}] APN change unsuccessful (process timed out) (PHONE: {}, APN ID: {})\n\n".format(
                 str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num, apn_id))
 
-def get_test_list(path="testsToPerform.csv", header=True):
+def get_test_list(path="testsToPerform.csv"):
     """ Performs different tests according to a list defined by the user.
 
     Args:
         path: List of the file containing the tests to do (in order)
-        header: whether the test file has a header or not.
     """
     print("[{}] Reading test file...".format(str(datetime.now().strftime("%H:%M:%S"))))
     with open(path) as f:
-        if header: f.readline()
         for i, line in enumerate(f):
             l = line.rstrip().split(';')
             if l[0].lower() == "moc":
@@ -341,7 +339,8 @@ def get_test_list(path="testsToPerform.csv", header=True):
                 mtc_routine(int(l[1]), l[2], int(l[3]), int(l[4]), l[6])
                 time.sleep(int(l[5]))
             elif l[0].lower() == "data":
-                if l[2] == '': data_routine(int(l[1]), index=int(l[3]))
+                if l[2] == '':
+                    data_routine(int(l[1]), index=int(l[3]))
                 else: data_routine(int(l[1]), l[2], int(l[3]))
                 time.sleep(int(l[4]))
             elif l[0].lower() == "speedtest":
@@ -361,7 +360,8 @@ def get_test_list(path="testsToPerform.csv", header=True):
     print("\nTests are over.")
     return True
 
+
 if __name__ == '__main__':
     check_adb()
     number_to_imsi, imsi_to_id = get_dictionaries()
-    get_test_list(header=False)
+    get_test_list()
