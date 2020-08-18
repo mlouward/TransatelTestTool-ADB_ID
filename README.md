@@ -72,7 +72,7 @@ Available tests:
 Performs an MTC between phones A and B. A calls B, B answers after the time entered in the Duration field, and A hangs up after detecting B has answered + 10 seconds.  
 1 sec delay between consecutive calls. A and B must be plugged in **and written** in simInfos.csv.  
   
-(*note*: the user-chosen duration begins **once phone B picks up the call**).  
+(*note*: the user-chosen duration ends **once phone B picks up the call**).  
 
 * **MOC**  
   
