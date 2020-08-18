@@ -789,12 +789,15 @@ namespace InterfaceTestTool
 
             if (e.Key == Key.C && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
+                string s = "";
                 testCopy.Clear();
                 foreach (var item in TestsList.SelectedItems)
                 {
                     testCopy.Add(item as ITest);
+                    s += (item as ITest).ToString() + "\n";
                 }
                 //testCopy = TestsList.SelectedItems as List<ITest>;
+                Clipboard.SetText(s);
                 return;
             }
 
