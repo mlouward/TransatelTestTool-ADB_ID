@@ -46,6 +46,13 @@ namespace InterfaceTestTool
             {1, "00" },
             {2, "0" },
         };
+        
+        // Used to correspond phone number code to Type of number
+        public static Dictionary<string, string> prefixToType = new Dictionary<string, string>() {
+            {"+" , "International (+)" },
+            {"00", "International (00)" },
+            {"0" , "National Format" },
+        };
 
         public MainWindow()
         {
