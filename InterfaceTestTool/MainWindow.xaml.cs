@@ -137,6 +137,10 @@ namespace InterfaceTestTool
                 }
                 File.Delete("rootList.txt");
             }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("No phone has been detected. Plug a phone and press 'Refresh Phone A' button.");
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
