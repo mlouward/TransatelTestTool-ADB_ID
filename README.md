@@ -38,7 +38,7 @@ If no values are provided for Delay and Repetitions, the default values are 0 se
 Clicking "Add to List" will add the test to the list and write it to testsToPerform.csv.  
   
 In the list of tests, you can select one or multiple tests and press the Del. key on the keyboard to delete tests.
-You can also copy/paste them in the list. (However, deleting a **copied** test will delete its first occurence in the list. (To fix))  
+You can also Ctrl+C/Ctrl+V them in the list, and get the literal list of the tests you have copied (identical to Phones tab).   
   
 You can save the current list of tests to a csv file by clicking on "Save Test File".
 It will create a copy of testsToPerform.csv and save it in a separate folder (Saved Test Files).  
