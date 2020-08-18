@@ -1,5 +1,8 @@
-﻿namespace InterfaceTestTool
+﻿using System;
+
+namespace InterfaceTestTool
 {
+    [Serializable]
     internal class ChangeApn : ITest
     {
         public int From { get; set; }
@@ -17,6 +20,7 @@
         {
             return $"changeapn;{From};{Apn.Id};{Apn.Name};{Apn.Apn};{Delay}";
         }
+
         public override string ToString()
         {
             return $"Set {Apn.Apn} ({Apn.Id}) as default APN for {From}, Delay: {Delay}";

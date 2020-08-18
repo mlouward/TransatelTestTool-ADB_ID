@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterfaceTestTool
 {
+    [Serializable]
     internal class Airplane : ITest
     {
         public int From { get; set; }

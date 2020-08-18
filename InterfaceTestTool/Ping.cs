@@ -1,5 +1,8 @@
-﻿namespace InterfaceTestTool
+﻿using System;
+
+namespace InterfaceTestTool
 {
+    [Serializable]
     internal class Ping : ITest
     {
         public int From { get; set; }

@@ -50,7 +50,7 @@
                 <Button Name="RefreshPhoneA" Content="Refresh Phone A" Grid.ColumnSpan="2"
                         Grid.Column="1" Style="{StaticResource BlueButton}" Width="130"
                         HorizontalAlignment="Right" Margin="20, 0" TabIndex="1"
-                        Click="RefreshPhoneA_Click"/>
+                        Click="RefreshPhoneA_Click" />
 
                 <DockPanel Margin="10" Grid.Row="1" LastChildFill="True" Grid.ColumnSpan="3">
                     <TextBlock Text="Number of tests (packets for ping):" DockPanel.Dock="Top" />
