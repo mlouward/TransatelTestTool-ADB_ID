@@ -7,28 +7,25 @@ adb -s %1 shell am start -a android.intent.action.CALL -d tel:%4 > nul && echo C
 :LoopMTC
 	endlocal
 	adb -s %2 shell "dumpsys telephony.registry | grep mCallState" >state.txt || goto ErrorB
-	findstr /n "=" state.txt | findstr "1:" >temp.txt
 	setlocal enabledelayedexpansion
-	FOR /F "tokens=2 delims==" %%H IN (temp.txt) DO (
+	FOR /F "tokens=2 usebackq delims==" %%H IN (`findstr /n "=" state.txt | findstr "1:"`) DO (
 		set /a s=%%H
 		if !s!==1 (
 			REM Delay before answering
 			timeout %5 >nul
 			REM B number answers incoming call
-			adb -s %2 shell input keyevent KEYCODE_CALL >nul && echo Call answered. && echo. && echo [!date!-!time:~0,8!] Call answered by %4. ^(FROM: %3, TO: %4, NB: %6, DURATION: %5sec.^) >>..\logs\MTClog.txt || goto ErrorB
+			adb -s %2 shell input keyevent KEYCODE_CALL >nul && echo Call answered. && echo [!date!-!time:~0,8!] Call answered by %4. ^(FROM: %3, TO: %4, NB: %6, DURATION: %5sec.^) >>..\logs\MTClog.txt || goto ErrorB
 			goto ExLoopMtc
 		) else (goto LoopMTC)
 	)
 :ExLoopMtc
 	del state.txt
-	del temp.txt
-	REM Call duration
+	REM Call duration 10 secs
 	timeout 10 > nul
 	REM Get call state on phone A
 	adb -s %1 shell "dumpsys telephony.registry | grep -i foregroundcallstate" >temp.txt || goto ErrorA
-	findstr /n "=" temp.txt | findstr "1:">temp2.txt
 	REM If call is active (%%G == 1), we hang up from phone A.
-	for /f "tokens=2 delims==" %%G in (temp2.txt) do (
+	for /f "tokens=2 usebackq delims==" %%G in (`findstr /n "=" temp.txt ^| findstr "1:"`) do (
 		if "%%G"=="1" (
 			adb -s %1 shell input keyevent KEYCODE_ENDCALL && echo Call ended. && echo [!date!-!time:~0,8!] Call terminated by %3. ^(FROM: %3, TO: %4, NB: %6, DURATION: %5sec.^) >>..\logs\MTClog.txt || goto ErrorA
 		)
@@ -60,4 +57,5 @@ echo [!date!-!time:~0,8!] Phone B could not answer. (FROM: %3, TO: %4, NB: %6, D
 
 :End
 endlocal
+echo.>> ..\logs\MTClog.txt
 cd ..

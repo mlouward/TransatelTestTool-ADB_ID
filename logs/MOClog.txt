@@ -107,3 +107,19 @@
 [14/08/2020-11:46:20] Call ended. (FROM: 33644503010, TO: 0033681384869, NB: 1, DURATION: 16sec.)  
 [14/08/2020-11:46:21] MOC process successful. Final call state: "Active" (FROM: 33644503010, TO: 0033681384869, NB: 1, DURATION: 16sec.)
  
+[19/08/2020-11:59:05] Call started. (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)  
+[19/08/2020-11:59:08] Call ended. (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)  
+[19/08/2020-11:59:08] MOC process successful. Final call state: "Dialing" (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)
+ 
+[19/08/2020-12:32:50] Call started. (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)  
+[19/08/2020-12:32:53] Call ended. (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)  
+[19/08/2020-12:32:53] MOC process successful. Final call state: "Dialing" (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)
+ 
+[19/08/2020-12:33:13] Call started. (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)  
+[19/08/2020-12:33:16] Call ended. (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)  
+[19/08/2020-12:33:16] MOC process successful. Final call state: "Dialing" (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)
+ 
+[19/08/2020-12:33:55] Call started. (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)  
+[19/08/2020-12:33:58] Call ended. (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)  
+[19/08/2020-12:33:58] MOC process successful. Final call state: "Dialing" (FROM: 33681384869, TO: +33644503010, NB: 1, DURATION: 2sec.)
+ 

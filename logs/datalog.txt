@@ -108,3 +108,13 @@
 [11/08/2020-13:48:13] Browser opened. (PHONE: +33644517664, URL: \"https://unsplash.com/photos/HkeRHJCUGN4/download?force=true\", NB: 3)  
 [11/08/2020-13:48:17] Data test successful. (PHONE: +33644517664, URL: \"https://unsplash.com/photos/HkeRHJCUGN4/download?force=true\", NB: 3) 
 
+[19/08/2020-12:34:25] Data test initiated. (PHONE: 33681384869, URL: \"http://www.google.com\", NB: 2) 
+[19/08/2020-12:34:25] Browser opened. (PHONE: 33681384869, URL: \"http://www.google.com\", NB: 1)  
+[19/08/2020-12:34:27] Browser opened. (PHONE: 33681384869, URL: \"http://www.google.com\", NB: 2)  
+[19/08/2020-12:34:30] Data test successful. (PHONE: 33681384869, URL: \"http://www.google.com\", NB: 2) 
+
+[19/08/2020-12:34:37] Data test initiated. (PHONE: 33681384869, URL: \"http://www.soundcloud.com\", NB: 2) 
+[19/08/2020-12:34:37] Browser opened. (PHONE: 33681384869, URL: \"http://www.soundcloud.com\", NB: 1)  
+[19/08/2020-12:34:39] Browser opened. (PHONE: 33681384869, URL: \"http://www.soundcloud.com\", NB: 2)  
+[19/08/2020-12:34:42] Data test successful. (PHONE: 33681384869, URL: \"http://www.soundcloud.com\", NB: 2) 
+

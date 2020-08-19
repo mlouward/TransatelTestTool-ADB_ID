@@ -17,8 +17,8 @@ for /l %%F in (1, 1, %5) do (
 	REM End the call
 	adb -s %1 shell input keyevent KEYCODE_ENDCALL && echo [!date!-!time:~0,8!] Call ended. ^(FROM: %3, TO: %2, NB: %%F, DURATION: %4sec.^) >>..\logs\MOClog.txt || goto Error
 	REM Logs
-	findstr /n "=" temp.txt | findstr "1:">temp2.txt
-	for /f "tokens=2 delims==" %%h in (temp2.txt) do (
+	for /f "tokens=2 usebackq delims==" %%h in (`findstr /n "=" temp.txt ^| findstr "1:"`) do (
+		echo %%h
 		if "%%h"=="1" (set "state=Active")
 		if "%%h"=="2" (set "state=OnHold")
 		if "%%h"=="3" (set "state=Dialing")
@@ -27,7 +27,6 @@ for /l %%F in (1, 1, %5) do (
 		if "%%h"=="8" (set "state=Disconnecting")
 	)
 	del temp.txt
-	del temp2.txt
 	REM Log : Date/LoopNb/From/To/State
 	echo [!date!-!time:~0,8!] MOC process successful. Final call state: "!state!" ^(FROM: %3, TO: %2, NB: %%F, DURATION: %4sec.^)>>..\logs\MOClog.txt
 	echo [%time:~0,8%] MOC process successful.

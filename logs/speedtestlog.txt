@@ -223,3 +223,9 @@ Average speed: 0.48MB/sec.
 [18/08/2020-16:14:15] Speedtest successful. (PHONE: 33644503010, SIZE: 20MB) 
 Average speed: 1.13MB/sec.
 
+[19/08/2020-12:34:47] Speedtest initiated. (PHONE: 33681384869, SIZE: 20MB)  
+[19/08/2020-12:34:56] Download started. (PHONE: 33681384869, SIZE: 20MB)
+[19/08/2020-12:35:03] File download finished. (PHONE: 33681384869, SIZE: 20MB) 
+[19/08/2020-12:35:03] Could not delete the downloaded file from phone storage. (PHONE: 33681384869, SIZE: 20MB) 
+Average speed: 2.6MB/sec.
+

@@ -15,8 +15,8 @@ REM Get state of download (not 0 when download starts)
 adb -s %1 shell "dumpsys activity services | grep -i downloads" >state.txt
 for %%a in (state.txt) do (
 	if %%~za GTR 0 (
+		echo !date!-!time:~0,11! > elapsed.txt
 		echo Downloading... && echo [!date!-!time:~0,8!] Download started. ^(PHONE: %2, SIZE: %3MB^)>>..\logs\speedtestlog.txt
-		echo %date%-%time:~0,11% > elapsed.txt
 		goto Loop2
 	)
 )
@@ -28,12 +28,11 @@ setlocal enabledelayedexpansion
 REM Get state of download (0 if finished)
 adb -s %1 shell "dumpsys activity services | grep -i downloads" >state.txt
 for %%a in (state.txt) do (
-	if not %%~za GTR 0 (goto ExLoop)
+	if not %%~za GTR 0 (echo !date!-!time:~0,11! >>elapsed.txt & goto ExLoop)
 )
 goto Loop2
 
 :ExLoop
-echo %date%-%time:~0,11% >>elapsed.txt
 echo [!date!-!time:~0,8!] File download finished. (PHONE: %2, SIZE: %3MB) >>..\logs\speedtestlog.txt
 del state.txt
 REM Delete the file

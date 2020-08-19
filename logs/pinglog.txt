@@ -110,3 +110,8 @@
 [11/08/2020-12:17:49] rtt min/avg/max/mdev = 39.949/106.147/252.221/86.046 ms
 [11/08/2020-12:17:49] Ping test successful. (PHONE: 0644503010, ADDRESS: 8.8.8.8, NB: 4, SIZE: 32) 
 
+[19/08/2020-12:35:07] Ping test initiated. (PHONE: 33681384869, ADDRESS: 1.1.1.1, NB: 10, SIZE: 32) 
+[19/08/2020-12:35:16] 10 packets transmitted, 10 received, 0% packet loss, time 9018ms
+[19/08/2020-12:35:16] rtt min/avg/max/mdev = 20.822/32.607/49.043/9.179 ms
+[19/08/2020-12:35:16] Ping test successful. (PHONE: 33681384869, ADDRESS: 1.1.1.1, NB: 10, SIZE: 32) 
+

@@ -5,8 +5,7 @@ setlocal enabledelayedexpansion
 REM For every phone, first get the sub ID for the 2 sim slots, then get the IMSI for both sims.
 FOR /F "skip=1 tokens=1,2 USEBACKQ" %%a IN (`adb devices`) DO (
 	IF "%%b"=="device" (
-		adb -s "%%a" shell "dumpsys isub | grep 'sSlotIndexToSubId\['" > subid.txt
-		for /f "tokens=2 delims==" %%F in (subid.txt) do (
+		for /f "tokens=2 usebackq delims==" %%F in (`adb -s "%%a" shell "dumpsys isub | grep 'sSlotIndexToSubId\['"`) do (
 			set "id1=!id2!"
 			set "id2=%%F"
 		)
@@ -19,6 +18,5 @@ FOR /F "skip=1 tokens=1,2 USEBACKQ" %%a IN (`adb devices`) DO (
 	)
 )
 
-del subid.txt
 endlocal
 cd ..
