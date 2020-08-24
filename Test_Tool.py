@@ -1,9 +1,9 @@
-import subprocess
-import os
-import sys
-import time
-from datetime import datetime
+import subprocess, os, sys, time
+from datetime import datetime, timedelta
+import mysql.connector
 
+
+TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 def check_adb():
     """ Checks that the folder 'platform-tools' exists.
@@ -150,13 +150,14 @@ def sms_routine(n, text, index_a, index_b, prefix):
         prefix: The code that the sms will use for phone B (International or national format).
     """
     print("\n[{}] Beginning SMS routine...\n".format(str(datetime.now().strftime("%H:%M:%S"))))
-    to = 10 + int(n)
+    to = 10
     num_a = tuple(number_to_imsi.items())[int(index_a) - 1][0]
     text = text.replace('"', "\\'")
     if len(index_b) > 2:
         num_b = index_b
     else:
         num_b = tuple(number_to_imsi.items())[int(index_b) - 1][0]
+    msisdn = num_b
     # If length of num_b is less than 7, it is a shortcode. Do not apply prefix.
     if len(num_b) > 7:
         num_b = prefix + num_b[2:] if prefix == "0" else prefix + num_b 
@@ -173,6 +174,7 @@ def sms_routine(n, text, index_a, index_b, prefix):
             with open("logs\\SMSlog.txt", "a") as f:
                 f.write("[{}] SMS routine unsuccessful (process timed out) (FROM: {}, TO: {}, NB: {}, TEXT: {})\n\n".format(
                     str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")), num_a, num_b, n, text))
+    return msisdn
 
 def data_routine(n, url=r"http://www.google.com", index=1):
     """Performs a data test with the desired phone, by opening the default browser
@@ -345,7 +347,11 @@ def get_test_list(path="testsToPerform.csv", header=True):
                 moc_routine(l[1], l[2], l[3], l[4])
                 time.sleep(int(l[5]))
             elif l[0].lower() == "sms":
-                sms_routine(int(l[1]), l[2], l[3], l[4], l[6])
+                start = datetime.strftime(datetime.utcnow(), TIME_FORMAT)
+                msisdn = sms_routine(int(l[1]), l[2], l[3], l[4], l[6])
+                end = datetime.strftime(datetime.utcnow() + timedelta(seconds=10), TIME_FORMAT)
+                with open("sms_to_check.csv", "a+") as f:
+                    f.write(f"{start};{end};{msisdn};\n")
                 time.sleep(int(l[5]))
             elif l[0].lower() == "mtc":
                 mtc_routine(int(l[1]), l[2], int(l[3]), int(l[4]))
@@ -369,9 +375,53 @@ def get_test_list(path="testsToPerform.csv", header=True):
             else:
                 print("\n'{}' is not a valid test (line {}).".format(l[0], i + 1))
     print("\nTests are over.")
+    
+    # In this part, we check the database to see if SMSs have been correctly sent.
+    with open("sms_to_check.csv", "r+") as f:
+        lines = f.readlines()
+        result = []
+        # Go through the list backwards to delete items without skipping elements.
+        for i in range(len(lines) - 1, -1, -1):
+            params = lines[i].split(';')
+            request = ("SELECT EventTime,MSISDN,IMSI,SubsStatus,Mvno,Cos,SrvType,"
+                      "OriginatingAddress,DestinationAddress,Zone,Duration FROM"
+                      " telecom_cdr_trex.trex_sms_v2 where EventTime between"
+                     f" '{params[0]}' and '{params[1]}' and MSISDN='{params[2]}'")
+            try:
+                mo_cursor = db_mo.cursor()
+                mo_cursor.execute(request)
+                mo_result = mo_cursor.fetchall()
+                if len(mo_result) > 0:
+                    del(lines[i]) # Request returns non-empty list -> delete it from file.
+                    result += mo_result
+            except (mysql.connector.errors.InterfaceError, mysql.connector.errors.OperationalError):
+                print("Error when accessing database. Make sure the connection is"
+                      " working (IP: {db_mo.server_host})")
+            except:
+                print("Unexpected error:", sys.exc_info()[0])
+        mo_cursor.close()
+        # Re-write file without the lines that have been treated.
+        f.seek(0)
+        f.truncate()
+        f.writelines(lines)
+    # Write the results of the query to a log file.
+    with open("logs\\SMSdatabaselog.csv", "a+") as f:
+        # Use reversed to read the list in chronological order.
+        for x in reversed(result):
+            # Convert all results into a string, then print them as a 
+            # comma-separated string in the CSV log file.
+            f.write(','.join(list(map(str, x))) + "\n")
+    print("\nTests are over.")
     return True
 
+
 if __name__ == '__main__':
+    db_mo = mysql.connector.connect(
+        host="10.255.1.204",
+        user="xdr_ro",
+        password="xdr_ro",
+    )
     check_adb()
     number_to_imsi, imsi_to_id, imsi_to_sub = get_dictionaries()
     get_test_list(header=False)
+    db_mo.close()
