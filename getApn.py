@@ -60,7 +60,7 @@ def get_apn(index, numeric):
     """
     num = tuple(number_to_imsi.items())[int(index) - 1][0]
     id = imsi_to_id[number_to_imsi[num]]
-    subprocess.run(["getApn.bat", id, str(numeric)])
+    subprocess.run(["getApn.bat", id, numeric])
 
 if __name__ == "__main__":
     number_to_imsi, imsi_to_id = get_dictionaries()

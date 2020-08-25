@@ -1083,6 +1083,10 @@ namespace InterfaceTestTool
                 MessageBox.Show($"{mcc}{mnc} is not a valid code, or has not been found in the phone. Add it manually and try again." +
                     $" (Could not find 'apn.csv')");
             }
+            catch (FormatException ex)
+            {
+                MessageBox.Show($"This SIM card (index: {index}) does not display its APNs.");
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
