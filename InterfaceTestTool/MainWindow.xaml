@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InterfaceTestTool" WindowStartupLocation="CenterScreen"
         mc:Ignorable="d" FontSize="15" FontFamily="{StaticResource Roboto}" FontWeight="Medium"
         Title="Test Tool" MinHeight="850" MinWidth="1100" Height="850" Width="1100"
-        Closing="Window_Closing">
+        Closing="Window_Closing" Icon="Resources/icon.png" >
 
     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TabItem Header="    Tests    ">
@@ -136,7 +136,7 @@
                 </DockPanel>
 
                 <DockPanel Margin="10" Grid.Row="10" LastChildFill="True" Grid.ColumnSpan="3">
-                    <TextBlock Text="APN ID (see APN tab):" DockPanel.Dock="Top" />
+                    <TextBlock Text="APN:" DockPanel.Dock="Top" />
                     <ComboBox x:Name="APN" Height="25" DockPanel.Dock="Top" TabIndex="4"
                               Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" />
                 </DockPanel>

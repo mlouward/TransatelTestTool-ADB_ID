@@ -5,13 +5,6 @@ import mysql.connector
 
 TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 
-def check_adb():
-    """ Checks that the folder 'platform-tools' exists.
-    If not, it will download ADB from internet and unzip it.
-    """
-    if not os.path.isdir("platform-tools"):
-        subprocess.run(["getAdb.bat"])
-
 def get_number_to_imsi(path="simInfos.csv", sep=';'):
     """ Reads the file with sim infos and creates a dictionary
     with numbers as key and imsis as values for all the phones in the file.
@@ -409,7 +402,6 @@ if __name__ == '__main__':
         user="xdr_ro",
         password="xdr_ro",
     )
-    check_adb()
     number_to_imsi, imsi_to_id = get_dictionaries()
     get_test_list()
     db_mo.close()

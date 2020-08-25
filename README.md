@@ -18,8 +18,8 @@ This file stores the IMSI and MSISDN of up to 99 SIM cards. Do not go over this 
 
 * *testsToPerform.csv*:  
   
-This file stores all the current tests that will be run upon pressing "Launch tests". It is generated when pressing "Launch tests", based on the tests written in the interface.  
-
+This file stores all the current tests that will be run upon pressing "Launch tests".  
+  
 Interface  
 ----
   

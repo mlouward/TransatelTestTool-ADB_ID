@@ -57,8 +57,29 @@ namespace InterfaceTestTool
         public MainWindow()
         {
             InitializeComponent();
-            // Working directory is main folder.
-            Directory.SetCurrentDirectory(@"../../../");
+            // Check for ADB.
+            if (!Directory.Exists("platform-tools"))
+            {
+                try
+                {
+                    ProcessStartInfo start = new ProcessStartInfo("getAdb.bat")
+                    {
+                        UseShellExecute = true,
+                    };
+                    Process p = new Process { StartInfo = start };
+                    p.Start();
+                    p.WaitForExit();
+                }
+                catch (FileNotFoundException)
+                {
+                    MessageBox.Show("Could not find getAdb.bat");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            Mouse.OverrideCursor = Cursors.Wait;
             // Get phones in simInfos.csv
             validPhones = GetAllPhones(@"simInfos.csv");
             // Gets phone's model, Android version and root status if phone is plugged in,
@@ -73,6 +94,7 @@ namespace InterfaceTestTool
             TestsList.ItemsSource = tests;
             // Query APNs for the first valid phone
             if (rootedIndexes.Count > 0) RefreshApnList(rootedIndexes[0], "208", "22");
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
 
         /// <summary>
@@ -246,10 +268,11 @@ namespace InterfaceTestTool
                         MessageBox.Show("Phone A and Phone B must be different.");
                         return false;
                     }
-                    m = Regex.Match(To.Text.Trim(), @"^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
+                    m = Regex.Match(To.Text.Trim(), @"^([1-9]{1,3})([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
                     if (To.Text.Trim().Length > 2 && !m.Success)
                     {
-                        var q = MessageBox.Show("Phone B is not a valid phone number or index in the list. Would you like to continue?",
+                        var q = MessageBox.Show("Phone B is not a valid phone number or index in the list " +
+                                        "(Valid phone numbers start with a country code). Would you like to continue?",
                                         "Wrong number",
                                         MessageBoxButton.YesNo,
                                         MessageBoxImage.Question);
@@ -315,10 +338,11 @@ namespace InterfaceTestTool
                         MessageBox.Show($"The message is empty. Your message can not be sent.");
                         return false;
                     }
-                    m = Regex.Match(To.Text.Trim(), @"^(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
+                    m = Regex.Match(To.Text.Trim(), @"^([1-9]{1,3})([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)$");
                     if (To.Text.Trim().Length > 2 && !m.Success)
                     {
-                        var q = MessageBox.Show("Phone B is not a valid phone number or index in the list. Would you like to continue?",
+                        var q = MessageBox.Show("Phone B is not a valid phone number or index in the list " +
+                                        "(Valid phone numbers start with a country code). Would you like to continue?",
                                         "Wrong number",
                                         MessageBoxButton.YesNo,
                                         MessageBoxImage.Question);
