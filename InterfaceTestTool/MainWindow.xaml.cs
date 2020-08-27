@@ -1,6 +1,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -70,13 +71,12 @@ namespace InterfaceTestTool
                     p.Start();
                     p.WaitForExit();
                 }
-                catch (FileNotFoundException)
-                {
-                    MessageBox.Show("Could not find getAdb.bat");
-                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    if (ex is FileNotFoundException || ex is Win32Exception)
+                        MessageBox.Show($"Could not find getAdb.bat in {Directory.GetCurrentDirectory()}");
+                    else
+                        MessageBox.Show($"{ex.GetType()}: {ex.Message}");
                 }
             }
             Mouse.OverrideCursor = Cursors.Wait;
@@ -105,15 +105,25 @@ namespace InterfaceTestTool
         private static List<Phone> GetAllPhones(string path)
         {
             List<Phone> res = new List<Phone>();
-            using (StreamReader sr = new StreamReader(path))
+            try
             {
-                sr.ReadLine(); // Ignore header of simInfos.csv
-                while (!sr.EndOfStream)
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    string[] l = sr.ReadLine().Split(';');
-                    if (l.Length > 2)
-                        res.Add(new Phone(int.Parse(l[0]), l[1], l[2]));
+                    sr.ReadLine(); // Ignore header of simInfos.csv
+                    while (!sr.EndOfStream)
+                    {
+                        string[] l = sr.ReadLine().Split(';');
+                        if (l.Length > 2)
+                            res.Add(new Phone(int.Parse(l[0]), l[1], l[2]));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                if (ex is FileNotFoundException || ex is Win32Exception)
+                    MessageBox.Show($"Could not find {path} in {Directory.GetCurrentDirectory()}");
+                else
+                    MessageBox.Show($"{ex.GetType()}: {ex.Message}");
             }
             return res;
         }
@@ -159,13 +169,13 @@ namespace InterfaceTestTool
                 }
                 File.Delete("rootList.txt");
             }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show("No phone has been detected. Plug a phone and press 'Refresh Phone A' button.");
-            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex is FileNotFoundException || ex is Win32Exception)
+                    MessageBox.Show("No phone has been detected. Plug a phone with a valid SIM card " +
+                        "and press 'Refresh Phone A' button.");
+                else
+                    MessageBox.Show($"{ex.GetType()}: {ex.Message}");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
             // Valid indexes are only for plugged in phones (Model != "").
@@ -187,55 +197,65 @@ namespace InterfaceTestTool
         /// <param name="path"></param>
         private void GetTestsFromFile(string path)
         {
-            using (StreamReader sr = new StreamReader(path))
+            try
             {
-                string type;
-                while (!sr.EndOfStream)
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    string line = sr.ReadLine();
-                    if (line == null || string.IsNullOrEmpty(line) || line == "\r\n") return;
-
-                    string[] l = line.Split(';');
-                    switch (l[0].ToLower())
+                    string type;
+                    while (!sr.EndOfStream)
                     {
-                        case "moc":
-                            tests.Add(new MOC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), l[4], int.Parse(l[5]), l[6]));
-                            break;
+                        string line = sr.ReadLine();
+                        if (line == null || string.IsNullOrEmpty(line) || line == "\r\n") return;
 
-                        case "mtc":
-                            tests.Add(new MTC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), int.Parse(l[4]), int.Parse(l[5]), l[6]));
-                            break;
+                        string[] l = line.Split(';');
+                        switch (l[0].ToLower())
+                        {
+                            case "moc":
+                                tests.Add(new MOC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), l[4], int.Parse(l[5]), l[6]));
+                                break;
 
-                        case "sms":
-                            tests.Add(new SMS(int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5]), l[6]));
-                            break;
+                            case "mtc":
+                                tests.Add(new MTC(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3]), int.Parse(l[4]), int.Parse(l[5]), l[6]));
+                                break;
 
-                        case "data":
-                            tests.Add(new Data(int.Parse(l[1]), l[2], int.Parse(l[3]), int.Parse(l[4])));
-                            break;
+                            case "sms":
+                                tests.Add(new SMS(int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5]), l[6]));
+                                break;
 
-                        case "speedtest":
-                            tests.Add(new Speedtest(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3])));
-                            break;
+                            case "data":
+                                tests.Add(new Data(int.Parse(l[1]), l[2], int.Parse(l[3]), int.Parse(l[4])));
+                                break;
 
-                        case "ping":
-                            tests.Add(new Ping(int.Parse(l[1]), int.Parse(l[2]), l[3], int.Parse(l[4]), int.Parse(l[5])));
-                            break;
+                            case "speedtest":
+                                tests.Add(new Speedtest(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3])));
+                                break;
 
-                        case "airplane":
-                            tests.Add(new Airplane(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3])));
-                            break;
+                            case "ping":
+                                tests.Add(new Ping(int.Parse(l[1]), int.Parse(l[2]), l[3], int.Parse(l[4]), int.Parse(l[5])));
+                                break;
 
-                        case "changeapn":
-                            tests.Add(new ChangeApn(int.Parse(l[1]), new APN(int.Parse(l[2]), l[3], l[4]), int.Parse(l[5])));
-                            break;
+                            case "airplane":
+                                tests.Add(new Airplane(int.Parse(l[1]), int.Parse(l[2]), int.Parse(l[3])));
+                                break;
 
-                        default:
-                            // To add a test, add a 'case' before default.
-                            MessageBox.Show($"Unrecognized test '{l[0]}'.");
-                            break;
+                            case "changeapn":
+                                tests.Add(new ChangeApn(int.Parse(l[1]), new APN(int.Parse(l[2]), l[3], l[4]), int.Parse(l[5])));
+                                break;
+
+                            default:
+                                // To add a test, add a 'case' before default.
+                                MessageBox.Show($"Unrecognized test '{l[0]}'.");
+                                break;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                if (ex is FileNotFoundException)
+                    MessageBox.Show($"Could not find {path} in {Directory.GetCurrentDirectory()}");
+                else
+                    MessageBox.Show($"{ex.GetType()}: {ex.Message}");
             }
         }
 
@@ -439,7 +459,7 @@ namespace InterfaceTestTool
                     }
                     if (!(From.SelectedItem as Phone).IsRooted)
                     {
-                        MessageBox.Show("Only rooted phones can use airplane mode.");
+                        MessageBox.Show("Only rooted phones can use flight mode.");
                         return false;
                     }
                     break;
@@ -491,7 +511,7 @@ namespace InterfaceTestTool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"{ex.GetType()}: {ex.Message}");
             }
         }
 
@@ -1051,7 +1071,7 @@ namespace InterfaceTestTool
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show($"{ex.GetType()}: {ex.Message}");
                     }
                 }
                 else
@@ -1113,7 +1133,7 @@ namespace InterfaceTestTool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"{ex.GetType()}: {ex.Message}");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
         }
@@ -1155,7 +1175,7 @@ namespace InterfaceTestTool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"{ex.GetType()}: {ex.Message}");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
             // Refresh the APN list to show the one added.
@@ -1190,7 +1210,7 @@ namespace InterfaceTestTool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"{ex.GetType()}: {ex.Message}");
             }
             // Refresh the list
             QueryApn_Click(sender, e);
@@ -1226,7 +1246,7 @@ namespace InterfaceTestTool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"{ex.GetType()}: {ex.Message}");
             }
             // Refresh the list using last MCC/MNC.
             var mccmnc = ApnText.Text.Trim().Split(new char[] { '(', ')' })[1];

@@ -23,7 +23,7 @@ namespace InterfaceTestTool
 
         public override string ToString()
         {
-            return $"Airplane: {Duration}sec., Delay: {Delay}sec.";
+            return $"Flight: {Duration}sec., Delay: {Delay}sec.";
         }
     }
 }

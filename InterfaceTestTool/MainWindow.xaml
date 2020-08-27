@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InterfaceTestTool" WindowStartupLocation="CenterScreen"
         mc:Ignorable="d" FontSize="15" FontFamily="{StaticResource Roboto}" FontWeight="Medium"
         Title="Test Tool" MinHeight="850" MinWidth="1100" Height="850" Width="1100"
-        Closing="Window_Closing" Icon="Resources/icon.png" >
+        Closing="Window_Closing" Icon="icon.ico" >
 
     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TabItem Header="    Tests    ">
@@ -44,7 +44,7 @@
                     <ComboBoxItem Content="Data" />
                     <ComboBoxItem Content="Speedtest" />
                     <ComboBoxItem Content="Ping" />
-                    <ComboBoxItem Content="Airplane" />
+                    <ComboBoxItem Content="Flight" />
                     <ComboBoxItem Content="Change APN" />
                 </ComboBox>
                 <Button Name="RefreshPhoneA" Content="Refresh Phone A" Grid.ColumnSpan="2"
@@ -215,7 +215,7 @@
                              TabIndex="2" PreviewTextInput="Delay_PreviewTextInput" />
                 </DockPanel>
 
-                <Button x:Name="AddPhone" Content="Add a Phone" Grid.Row="8"
+                <Button x:Name="AddPhone" Content="Add a SIM" Grid.Row="8"
                         Margin="10" Style="{StaticResource BlueButton}" TabIndex="3"
                         FontSize="20" Click="AddPhone_Click" Grid.ColumnSpan="2" />
 
@@ -231,12 +231,12 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Auto" TabIndex="4" />
 
                 <DockPanel Grid.Column="3" Grid.Row="8" Margin="10" LastChildFill="True">
-                    <TextBlock Text="Airplane Mode Duration:" DockPanel.Dock="Top" />
+                    <TextBlock Text="Flight Mode Duration:" DockPanel.Dock="Top" />
                     <TextBox x:Name="AirplaneDuration" Height="25" DockPanel.Dock="Top" PreviewTextInput="Delay_PreviewTextInput"
                      Width="Auto" Margin="10, 0" VerticalContentAlignment="Center" GotKeyboardFocus="TextBox_GotKeyboardFocus"
                      MaxLength="15" TabIndex="5" Text="3" />
                 </DockPanel>
-                <Button x:Name="Airplane" Content="Airplane Mode" Grid.Column="4" FontSize="20"
+                <Button x:Name="Airplane" Content="Flight Mode" Grid.Column="4" FontSize="20"
                         Grid.Row="8" Margin="10" Style="{StaticResource BlueButton}" Click="Airplane_Click" />
             </Grid>
         </TabItem>
