@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceTestTool", "InterfaceTestTool.csproj", "{7335722C-0729-424E-9F83-A027E6EC8CC6}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Test Tool", "..\Test Tool\Test Tool.vdproj", "{44FB4981-B976-497B-B1AC-04071E9A1011}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Test Tool", "..\Test Tool\Test Tool.vdproj", "{BB528598-B9D2-454E-AA21-77E9C00D9639}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{7335722C-0729-424E-9F83-A027E6EC8CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7335722C-0729-424E-9F83-A027E6EC8CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7335722C-0729-424E-9F83-A027E6EC8CC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44FB4981-B976-497B-B1AC-04071E9A1011}.Debug|Any CPU.ActiveCfg = Debug
-		{44FB4981-B976-497B-B1AC-04071E9A1011}.Release|Any CPU.ActiveCfg = Release
+		{BB528598-B9D2-454E-AA21-77E9C00D9639}.Debug|Any CPU.ActiveCfg = Debug
+		{BB528598-B9D2-454E-AA21-77E9C00D9639}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
