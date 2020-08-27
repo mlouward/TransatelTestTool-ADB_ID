@@ -175,7 +175,8 @@ namespace InterfaceTestTool
                     MessageBox.Show("No phone has been detected. Plug a phone with a valid SIM card " +
                         "and press 'Refresh Phone A' button.");
                 else
-                    MessageBox.Show($"{ex.GetType()}: {ex.Message}");
+                    MessageBox.Show($"{ex.GetType()}: {ex.Message}.\n(Make sure Python is correctly " +
+                        $"installed and added to your %PATH%.");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
             // Valid indexes are only for plugged in phones (Model != "").
