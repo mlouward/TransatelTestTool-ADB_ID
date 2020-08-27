@@ -52,7 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2CA9622FE8DFC306C2F47068E57EF6E0"
-        "OwnerKey" = "8:_2FF7FFD623514434B0B6F79C418DFED4"
+        "OwnerKey" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -63,13 +63,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2FF7FFD623514434B0B6F79C418DFED4"
+        "MsmKey" = "8:_365DD2418CD340468F9B57058DABB8A2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_365DD2418CD340468F9B57058DABB8A2"
+        "MsmKey" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -262,13 +262,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2FF7FFD623514434B0B6F79C418DFED4"
+        "OwnerKey" = "8:_2CA9622FE8DFC306C2F47068E57EF6E0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2CA9622FE8DFC306C2F47068E57EF6E0"
+        "OwnerKey" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -296,6 +296,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -320,6 +328,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -1262,7 +1278,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Test Tool"
         "ProductCode" = "8:{3C056336-0E63-4834-97A3-398708F4310A}"
-        "PackageCode" = "8:{930675EE-888A-4F19-809D-27612C438DC4}"
+        "PackageCode" = "8:{B16C6BED-2A37-413B-8BC5-1085EFFAE495}"
         "UpgradeCode" = "8:{9AD4A024-980B-4015-BB14-95D5F5B88806}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -1382,29 +1398,29 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_78B2422171F34BAABDB443A2365902ED"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_191621C666094A75B34E1A87DCD7CD5F"
             {
             "Name" = "8:Test Tool"
             "Arguments" = "8:"
-            "Description" = "8:Shortcut to Test Tool"
+            "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_2FF7FFD623514434B0B6F79C418DFED4"
+            "Target" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
             "Folder" = "8:_E465BF9D92CD4C14B8B52E6BBFA2B230"
             "WorkingFolder" = "8:_B4A80F5ACE49474586EEE445C8F24ED9"
             "Icon" = "8:_CA1BC42DC05A46DD9E09CF7115814277"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A06FDA412E0D41CF97D0F815F8810DEF"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_65565A58DB094072BF312E507FC54982"
             {
             "Name" = "8:Test Tool"
             "Arguments" = "8:"
-            "Description" = "8:Shortcut to Test Tool"
+            "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_2FF7FFD623514434B0B6F79C418DFED4"
+            "Target" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
             "Folder" = "8:_3B7CC5974229414AB117CDC0E1E48F64"
             "WorkingFolder" = "8:_B4A80F5ACE49474586EEE445C8F24ED9"
             "Icon" = "8:_CA1BC42DC05A46DD9E09CF7115814277"
@@ -1809,7 +1825,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2FF7FFD623514434B0B6F79C418DFED4"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4255C92BA4C545468E3FF1D652F5D12F"
             {
             "SourcePath" = "8:..\\InterfaceTestTool\\obj\\Release\\InterfaceTestTool.exe"
             "TargetName" = "8:"

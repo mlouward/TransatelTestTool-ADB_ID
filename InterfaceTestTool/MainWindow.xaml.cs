@@ -57,6 +57,7 @@ namespace InterfaceTestTool
 
         public MainWindow()
         {
+            Directory.SetCurrentDirectory(@"..\..\..");
             InitializeComponent();
             // Check for ADB.
             if (!Directory.Exists("platform-tools"))
@@ -469,6 +470,11 @@ namespace InterfaceTestTool
                     if (!(From.SelectedItem as Phone).IsRooted)
                     {
                         MessageBox.Show("Only rooted phones can change default APN.");
+                        return false;
+                    }
+                    if (APN.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Please select an APN. If no APN is showing, make sure the phone is rooted");
                         return false;
                     }
                     break;
