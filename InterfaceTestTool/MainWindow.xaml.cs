@@ -439,7 +439,7 @@ namespace InterfaceTestTool
                     }
                     if (!(From.SelectedItem as Phone).IsRooted)
                     {
-                        MessageBox.Show("Only rooted phones can use airplane mode.");
+                        MessageBox.Show("Only rooted phones can use flight mode.");
                         return false;
                     }
                     break;

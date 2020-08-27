@@ -359,49 +359,57 @@ def get_test_list(path="testsToPerform.csv"):
 
     # In this part, we check the database to see if SMSs have been correctly sent.
     with open("sms_to_check.csv", "r+") as f:
-        lines = f.readlines()
-        result = []
-        # Go through the list backwards to delete items without skipping elements.
-        for i in range(len(lines) - 1, -1, -1):
-            params = lines[i].split(';')
-            request = ("SELECT EventTime,MSISDN,IMSI,SubsStatus,Mvno,Cos,SrvType,"
-                      "OriginatingAddress,DestinationAddress,Zone,Duration FROM"
-                      " telecom_cdr_trex.trex_sms_v2 where EventTime between"
-                     f" '{params[0]}' and '{params[1]}' and MSISDN='{params[2]}'")
-            try:
-                mo_cursor = db_mo.cursor()
-                mo_cursor.execute(request)
-                mo_result = mo_cursor.fetchall()
-                if len(mo_result) > 0:
-                    del(lines[i]) # Request returns non-empty list -> delete it from file.
-                    result += mo_result
-            except (mysql.connector.errors.InterfaceError, mysql.connector.errors.OperationalError):
-                print("Error when accessing database. Make sure the connection is"
-                      " working (IP: {db_mo.server_host})")
-            except:
-                print("Unexpected error:", sys.exc_info()[0])
-        mo_cursor.close()
-        # Re-write file without the lines that have been treated.
-        f.seek(0)
-        f.truncate()
-        f.writelines(lines)
-    # Write the results of the query to a log file.
-    with open("logs\\SMSdatabaselog.csv", "a+") as f:
-        # Use reversed to read the list in chronological order.
-        for x in reversed(result):
-            # Convert all results into a string, then print them as a 
-            # comma-separated string in the CSV log file.
-            f.write(','.join(list(map(str, x))) + "\n")
-    print("\nTests are over.")
-    return True
+        first_char = f.read(1)
+        #Check if not empty
+        if first_char:
+            f.seek(0)
+            db_mo = mysql.connector.connect(
+                host="10.255.1.204",
+                user="xdr_ro",
+                password="xdr_ro",
+            )
+            lines = f.readlines()
+            result = []
+            # Go through the list backwards to delete items without skipping elements.
+            for i in range(len(lines) - 1, -1, -1):
+                params = lines[i].split(';')
+                request = ("SELECT EventTime,MSISDN,IMSI,SubsStatus,Mvno,Cos,SrvType,"
+                          "OriginatingAddress,DestinationAddress,Zone,Duration FROM"
+                          " telecom_cdr_trex.trex_sms_v2 where EventTime between"
+                         f" '{params[0]}' and '{params[1]}' and MSISDN='{params[2]}'")
+                try:
+                    mo_cursor = db_mo.cursor()
+                    mo_cursor.execute(request)
+                    mo_result = mo_cursor.fetchall()
+                    request_time = datetime.strptime(params[0], TIME_FORMAT)
+                    if len(mo_result) > 0:
+                        del(lines[i]) # Request returns non-empty list -> delete it from file.
+                        result += mo_result
+                    # if request is in file for more than 3 days, we delete it
+                    elif (datetime.utcnow() - request_time) > 3:
+                        del(lines[i])
+                        result += [request_time, f"Unable to find CDR entry for SMS at {request_time} (UTC time)."]
+                except (mysql.connector.errors.InterfaceError, mysql.connector.errors.OperationalError):
+                    print("Error when accessing database. Make sure the connection is"
+                          " working (IP: {db_mo.server_host})")
+                except:
+                    print("Unexpected error when connecting to the database:", sys.exc_info()[0])
+            mo_cursor.close()
+            db_mo.close()
+            # Re-write file without the lines that have been treated.
+            f.seek(0)
+            f.truncate()
+            f.writelines(lines)
+            # Write the results of the query to a log file.
+            with open("logs\\SMSdatabaselog.csv", "a+") as f:
+                # Use reversed to read the list in chronological order.
+                for x in reversed(result):
+                    # Convert all results into a string, then print them as a 
+                    # comma-separated string in the CSV log file.
+                    f.write(','.join(list(map(str, x))) + "\n")
+            print("\nTests are over.")
 
 
 if __name__ == '__main__':
-    db_mo = mysql.connector.connect(
-        host="10.255.1.204",
-        user="xdr_ro",
-        password="xdr_ro",
-    )
     number_to_imsi, imsi_to_id = get_dictionaries()
     get_test_list()
-    db_mo.close()
