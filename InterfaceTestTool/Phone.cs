@@ -10,14 +10,7 @@ namespace InterfaceTestTool
         public bool IsRooted { get; set; }
         public string Version { get; set; }
         public string Model { get; set; }
-
-        public Phone(int index, string phoneNumber, string iMSI)
-        {
-            Index = index;
-            PhoneNumber = phoneNumber;
-            IMSI = iMSI;
-            IsRooted = false;
-        }
+        public string PhoneName { get; set; }
 
         public Phone(string phoneNumber, string iMSI)
         {
@@ -26,13 +19,24 @@ namespace InterfaceTestTool
             IsRooted = false;
         }
 
+        public Phone(int index, string phoneNumber, string iMSI) : this(phoneNumber, iMSI)
+        {
+            Index = index;
+        }
+
+        public Phone(int index, string phoneNumber, string iMSI, string phoneName) : this(index, phoneNumber, iMSI)
+        {
+            PhoneName = phoneName;
+        }
+
         public override string ToString()
         {
             // We don't display information if unavailable. (i.e. device unplugged.)
             string r = IsRooted ? " (rooted)" : "";
-            string v = string.IsNullOrEmpty(Version) ? "" : $", Android {Version}";
-            string m = string.IsNullOrEmpty(Model) ? "" : $", Model: {Model}";
-            return $"{Index}: n°: {PhoneNumber}, IMSI: {IMSI}{m}{v}{r}";
+            string version = string.IsNullOrEmpty(Version) ? "" : $", Android {Version}";
+            string model = string.IsNullOrEmpty(Model) ? "" : $", Model: {Model}";
+            string name = string.IsNullOrEmpty(PhoneName) ? "" : $"{PhoneName}, ";
+            return $"{Index}: {name}n°: {PhoneNumber}, IMSI: {IMSI}{model}{version}{r}";
         }
 
         public string ErrorString()
@@ -43,7 +47,7 @@ namespace InterfaceTestTool
 
         internal string WriteCsv()
         {
-            return $"{Index};{PhoneNumber};{IMSI}";
+            return $"{Index};{PhoneNumber};{IMSI};{PhoneName}";
         }
 
         public int CompareTo(object obj)

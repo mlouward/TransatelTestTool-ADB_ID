@@ -215,6 +215,13 @@
                              TabIndex="2" PreviewTextInput="Delay_PreviewTextInput" />
                 </DockPanel>
 
+                <DockPanel Margin="10" Grid.Row="3" LastChildFill="True" Grid.ColumnSpan="2">
+                    <TextBlock Text="Phone Name: (optional)" DockPanel.Dock="Top" />
+                    <TextBox x:Name="PhoneNameTxt" Height="25" DockPanel.Dock="Top" GotKeyboardFocus="TextBox_GotKeyboardFocus"
+                             Width="Auto" Margin="10, 0" VerticalContentAlignment="Center"
+                             TabIndex="2"/>
+                </DockPanel>
+
                 <Button x:Name="AddPhone" Content="Add a SIM" Grid.Row="8"
                         Margin="10" Style="{StaticResource BlueButton}" TabIndex="3"
                         FontSize="20" Click="AddPhone_Click" Grid.ColumnSpan="2" />

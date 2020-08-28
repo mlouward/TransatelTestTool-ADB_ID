@@ -27,6 +27,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_12CB553C92D54117AF8CD7948214C234"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_13E65E9EA7BB4EA6BE2563526A18201E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -52,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2CA9622FE8DFC306C2F47068E57EF6E0"
-        "OwnerKey" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
+        "OwnerKey" = "8:_12CB553C92D54117AF8CD7948214C234"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,12 +70,6 @@
         "Entry"
         {
         "MsmKey" = "8:_365DD2418CD340468F9B57058DABB8A2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -268,7 +268,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
+        "OwnerKey" = "8:_12CB553C92D54117AF8CD7948214C234"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1398,7 +1398,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_191621C666094A75B34E1A87DCD7CD5F"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_880930EC3AC0460C9CFABFFFF21B43A8"
             {
             "Name" = "8:Test Tool"
             "Arguments" = "8:"
@@ -1406,13 +1406,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
-            "Folder" = "8:_E465BF9D92CD4C14B8B52E6BBFA2B230"
+            "Target" = "8:_12CB553C92D54117AF8CD7948214C234"
+            "Folder" = "8:_3B7CC5974229414AB117CDC0E1E48F64"
             "WorkingFolder" = "8:_B4A80F5ACE49474586EEE445C8F24ED9"
             "Icon" = "8:_CA1BC42DC05A46DD9E09CF7115814277"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_65565A58DB094072BF312E507FC54982"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_994BCB1726F24ED98D925944312E4F65"
             {
             "Name" = "8:Test Tool"
             "Arguments" = "8:"
@@ -1420,8 +1420,8 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_4255C92BA4C545468E3FF1D652F5D12F"
-            "Folder" = "8:_3B7CC5974229414AB117CDC0E1E48F64"
+            "Target" = "8:_12CB553C92D54117AF8CD7948214C234"
+            "Folder" = "8:_E465BF9D92CD4C14B8B52E6BBFA2B230"
             "WorkingFolder" = "8:_B4A80F5ACE49474586EEE445C8F24ED9"
             "Icon" = "8:_CA1BC42DC05A46DD9E09CF7115814277"
             "Feature" = "8:"
@@ -1825,7 +1825,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4255C92BA4C545468E3FF1D652F5D12F"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_12CB553C92D54117AF8CD7948214C234"
             {
             "SourcePath" = "8:..\\InterfaceTestTool\\obj\\Release\\InterfaceTestTool.exe"
             "TargetName" = "8:"
