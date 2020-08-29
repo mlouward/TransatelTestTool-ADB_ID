@@ -176,11 +176,13 @@ namespace InterfaceTestTool
             catch (Exception ex)
             {
                 if (ex is FileNotFoundException || ex is Win32Exception)
-                    MessageBox.Show("No phone has been detected. Plug a phone with a valid SIM card " +
-                        "and press 'Refresh Phone A' button.");
+                    MessageBox.Show("No phone has been detected. Plug a phone with a valid SIM card" +
+                        " and press 'Refresh Phone A' button.");
+                else if (ex is NullReferenceException)
+                    MessageBox.Show("Can not access to rootList.txt. Try restarting the program.");
                 else
-                    MessageBox.Show($"{ex.GetType()}: {ex.Message}.\n(Make sure Python is correctly " +
-                        $"installed and added to your %PATH%.");
+                    MessageBox.Show($"{ex.GetType()}: {ex.Message}.\n(Make sure Python is correctly" +
+                        " installed and added to your %PATH%.");
             }
             Mouse.OverrideCursor = Cursors.Arrow;
             // Valid indexes are only for plugged in phones (Model != "").
@@ -981,7 +983,7 @@ namespace InterfaceTestTool
             using (StreamWriter sw = new StreamWriter("simInfos.csv", false))
             {
                 // Header
-                sw.WriteLine("Index;PhoneNumber;IMSI");
+                sw.WriteLine("Index;PhoneNumber;IMSI;Name");
                 for (int i = 0; i < validPhones.Count; i++)
                 {
                     validPhones[i].Index = i + 1; // Index starting at 1.
@@ -1001,7 +1003,7 @@ namespace InterfaceTestTool
         {
             if (ValidateForm("AddPhone"))
             {
-                string name = PhoneNameTxt.Text.Trim() + " ";
+                string name = PhoneNameTxt.Text.Trim();
                 validPhones.Add(new Phone(PhoneNumber.Text.Trim(), Imsi.Text.Trim(), name));
                 WritePhones();
             }
@@ -1138,7 +1140,7 @@ namespace InterfaceTestTool
                 MessageBox.Show($"{mcc}{mnc} is not a valid code, or has not been found in the phone. Add it manually and try again." +
                     $" (Could not find 'apn.csv')");
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
                 MessageBox.Show($"This SIM card (index: {index}) does not display its APNs.");
             }

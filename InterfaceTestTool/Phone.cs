@@ -24,6 +24,11 @@ namespace InterfaceTestTool
             Index = index;
         }
 
+        public Phone(string phoneNumber, string iMSI, string phoneName) : this(phoneNumber, iMSI)
+        {
+            PhoneName = phoneName;
+        }
+
         public Phone(int index, string phoneNumber, string iMSI, string phoneName) : this(index, phoneNumber, iMSI)
         {
             PhoneName = phoneName;
