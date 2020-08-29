@@ -20,7 +20,7 @@ def get_number_to_imsi(path="simInfos.csv", sep=';'):
         f.readline() # used to ignore header of csv.
         for line in f:
             l = line.rstrip().split(sep)
-            if len(l) == 3:
+            if len(l) > 2:
                 number_to_imsi.update({l[1]:l[2]}) # Dict are insertion ordered since Python 3.6
     return number_to_imsi
 
@@ -71,7 +71,7 @@ def check_root(index):
             id = imsi_to_id[number_to_imsi[num]]
             subprocess.run(["checkRoot.bat", id])
         except: # Triggers when a phone is not plugged in.
-            with open("rootList.txt", 'a') as f:
+            with open("rootList.txt", 'a+') as f:
                 f.write(";;false\n")
             
 if __name__ == "__main__":
