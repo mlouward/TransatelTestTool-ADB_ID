@@ -12,8 +12,10 @@ FOR /F "skip=1 tokens=1,2 USEBACKQ" %%a IN (`adb devices`) DO (
 		for /f "usebackq" %%f in (`adb -s "%%a" shell "service call iphonesubinfo 8 i32 !id1! | toybox cut -d \"'\" -f2 | toybox grep -Eo '[0-9]' | toybox xargs | toybox sed 's/\ //g'"`) do (
 			echo %%f;%%a >> ..\imsiList.txt
 		)
-		for /f "usebackq" %%f in (`adb -s "%%a" shell "service call iphonesubinfo 8 i32 !id2! | toybox cut -d \"'\" -f2 | toybox grep -Eo '[0-9]' | toybox xargs | toybox sed 's/\ //g'"`) do (
-			echo %%f;%%a >> ..\imsiList.txt
+		if defined id2 (
+			for /f "usebackq" %%f in (`adb -s "%%a" shell "service call iphonesubinfo 8 i32 !id2! | toybox cut -d \"'\" -f2 | toybox grep -Eo '[0-9]' | toybox xargs | toybox sed 's/\ //g'"`) do (
+				echo %%f;%%a >> ..\imsiList.txt
+			)
 		)
 	)
 )
