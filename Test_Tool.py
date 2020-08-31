@@ -22,7 +22,7 @@ def get_number_to_imsi(path="simInfos.csv", sep=';'):
         f.readline() # used to ignore header of csv.
         for line in f:
             l = line.rstrip().split(sep)
-            if len(l) == 3:
+            if len(l) > 2:
                 number_to_imsi.update({l[1]:l[2]}) # (Dict are insertion ordered since Python 3.7)
     return number_to_imsi
 
@@ -70,6 +70,7 @@ def moc_routine(n, call_duration, index_a, index_b, prefix):
         num_a = tuple(number_to_imsi.items())[int(index_a) - 1][0]
     except:
         print("Selected phone is not plugged in")
+        return
     # If the argument is longer than 2 digits, it is a phone number and not an
     # index, so we call this number. Else,
     # we assume it is the index of a phone
