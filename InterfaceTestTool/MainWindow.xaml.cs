@@ -57,7 +57,6 @@ namespace InterfaceTestTool
 
         public MainWindow()
         {
-            Directory.SetCurrentDirectory(@"..\..\..");
             InitializeComponent();
             // Check for ADB.
             if (!Directory.Exists("platform-tools"))
